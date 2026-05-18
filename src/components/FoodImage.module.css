@@ -1,0 +1,60 @@
+.wrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 4px;
+  background: var(--color-cream-dark);
+  isolation: isolate;
+}
+
+.square { aspect-ratio: 1 / 1; }
+.portrait { aspect-ratio: 4 / 5; }
+.landscape { aspect-ratio: 3 / 2; }
+.tall { aspect-ratio: 3 / 4; }
+
+.peach { background: linear-gradient(135deg, #F5D5B8 0%, #E8B894 100%); }
+.caramel { background: linear-gradient(135deg, #E5C19A 0%, #B8895E 100%); }
+.mocha { background: linear-gradient(135deg, #C9A689 0%, #8A6244 100%); }
+.rose { background: linear-gradient(135deg, #F2C7C2 0%, #D89690 100%); }
+.cream { background: linear-gradient(135deg, #F5E9D3 0%, #E0C9A4 100%); }
+.cocoa { background: linear-gradient(135deg, #8A5A3C 0%, #4A2A1A 100%); }
+.pistachio { background: linear-gradient(135deg, #CFD7A8 0%, #9AAB6B 100%); }
+.berry { background: linear-gradient(135deg, #C5A7B8 0%, #7A4A66 100%); }
+
+.grain {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(44, 26, 14, 0.06) 1px, transparent 1px);
+  background-size: 4px 4px;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.dotA, .dotB {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(20px);
+  opacity: 0.4;
+  pointer-events: none;
+}
+.dotA {
+  width: 50%; height: 50%;
+  top: -10%; left: -10%;
+  background: rgba(255, 252, 245, 0.5);
+}
+.dotB {
+  width: 40%; height: 40%;
+  bottom: -10%; right: -5%;
+  background: rgba(44, 26, 14, 0.18);
+}
+
+.label {
+  position: absolute;
+  bottom: 12px;
+  left: 14px;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(44, 26, 14, 0.55);
+  font-weight: 500;
+}
