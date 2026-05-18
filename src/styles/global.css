@@ -1,4 +1,4 @@
-/* ---- Reset ---- */
+/* ── Reset ─────────────────────────────────────────────────────────────────── */
 *,
 *::before,
 *::after {
@@ -84,10 +84,10 @@ h1, h2, h3, h4, h5, h6 {
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Premium terracotta top accent strip */
+/* ── Premium terracotta top accent strip ─────────────────────────────────── */
 .topAccent {
   height: 4px;
-  background: var(--color-accent);
+  background: linear-gradient(90deg, #C4602A 0%, #E07844 50%, #C4602A 100%);
   width: 100%;
   position: fixed;
   top: 0;
@@ -112,7 +112,7 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-secondary);
 }
 
-/* Reveal-on-scroll */
+/* ── Reveal-on-scroll ─────────────────────────────────────────────────────── */
 .reveal {
   opacity: 0;
   transform: translateY(24px);
@@ -123,8 +123,11 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateY(0);
 }
 
-/* Selection */
+/* ── Selection ───────────────────────────────────────────────────────────── */
 ::selection {
   background: var(--color-accent);
   color: #fff;
 }
+
+/* ── Caveat cursive font for polaroid captions & About heading ───────────── */
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&display=swap');

@@ -1,15 +1,14 @@
 import { useReveal } from '@/hooks/useReveal';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import Button from '@/components/Button';
 import Divider from '@/components/Divider';
 import RecipeCard from '@/components/RecipeCard';
 import SectionHeader from '@/components/SectionHeader';
-import FoodImage from '@/components/FoodImage';
 import BrandRow from '@/components/BrandRow';
 import NewsletterBlock from '@/components/NewsletterBlock';
 import StatItem from '@/components/StatItem';
-import { featuredRecipes, brandPartners, ALLISON_PORTRAIT } from '@/lib/data';
 import styles from './Home.module.css';
+import { featuredRecipes, brandPartners, ALLISON_PORTRAIT } from '@/lib/data';
 
 const stats = [
   { icon: '📱', value: '1.5M+', label: 'Total Followers' },
@@ -17,6 +16,9 @@ const stats = [
   { icon: '📸', value: '542K',  label: 'Instagram Followers' },
   { icon: '📬', value: '14K+',  label: 'Substack Subscribers' },
 ];
+
+// Fallback portrait image using a public food/chef Unsplash photo
+const PORTRAIT_FALLBACK = 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80';
 
 export default function Home() {
   useReveal();
@@ -33,9 +35,11 @@ export default function Home() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  const [portraitError, setPortraitError] = useState(false);
+
   return (
     <>
-      {/* Hero */}
+      {/* ── HERO ─────────────────────────────────────────────────────────── */}
       <section className={styles.hero} ref={heroRef}>
         <div className={`container ${styles.heroInner}`}>
           <div className={`${styles.heroCopy} reveal`}>
@@ -56,7 +60,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats Bar */}
+      {/* ── STATS BAR ────────────────────────────────────────────────────── */}
       <section className={styles.statsBar}>
         <div className="container">
           <div className={styles.statsGrid}>
@@ -69,7 +73,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Latest Recipes */}
+      {/* ── LATEST RECIPES ───────────────────────────────────────────────── */}
       <section className={styles.section}>
         <div className="container">
           <div className="reveal">
@@ -88,21 +92,27 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About mini */}
+      {/* ── ABOUT MINI ───────────────────────────────────────────────────── */}
       <section className={`${styles.section} ${styles.aboutMini}`}>
         <div className="container">
           <div className={styles.aboutGrid}>
+
+            {/* Real photo — denim kitchen portrait */}
             <div className={`${styles.aboutImgWrap} reveal`}>
-              <FoodImage
-                tone="caramel"
-                ratio="portrait"
-                src={ALLISON_PORTRAIT}
-                alt="Allison Chen — Alchenny"
+              <img
+                src={portraitError ? PORTRAIT_FALLBACK : ALLISON_PORTRAIT}
+                alt="Allison Chen in her kitchen"
+                className={styles.aboutImg}
+                onError={() => setPortraitError(true)}
+                loading="lazy"
               />
             </div>
+
             <div className={`${styles.aboutCopy} reveal`}>
               <div className="eyebrow">A Quick Hello</div>
-              <h2 className={styles.aboutTitle}>Hi, I'm Allison <span aria-hidden="true">👋</span></h2>
+              <h2 className={styles.aboutTitle}>
+                Hi, I'm Allison <span aria-hidden="true">👋</span>
+              </h2>
               <p>
                 I'm a pastry chef, recipe developer, and content creator based in NYC. I went to French
                 pastry school (so you don't have to), ran a viral tasting menu out of my college apartment,
@@ -114,7 +124,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Brand Row */}
+      {/* ── BRAND ROW ────────────────────────────────────────────────────── */}
       <section className={styles.section}>
         <div className="container">
           <div className="reveal">

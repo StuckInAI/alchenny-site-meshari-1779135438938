@@ -1,49 +1,71 @@
+/* ── HERO ──────────────────────────────────────────────────────────────────── */
 .hero {
-  padding: clamp(4rem, 8vw, 6rem) 0 clamp(2.5rem, 5vw, 4rem);
+  padding: clamp(5rem, 10vw, 7rem) 0 clamp(3rem, 6vw, 5rem);
   background: var(--color-bg-alt);
   border-bottom: 1px solid var(--color-divider);
+  overflow: hidden;
 }
 
-/* Split layout: photo LEFT, bio RIGHT */
+/* Split: collage LEFT, bio RIGHT */
 .heroGrid {
   display: grid;
-  grid-template-columns: 1fr; /* stacked on mobile */
-  gap: 2.5rem;
-  align-items: start;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
 }
 @media (min-width: 880px) {
   .heroGrid {
-    grid-template-columns: 420px 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 5rem;
     align-items: center;
   }
 }
 
-/* Photo column */
-.photoCol {
-  border-radius: 10px;
-  overflow: hidden;
-  /* on mobile the photo stacks above */
+/* Collage column */
+.collageCol {
+  /* on mobile, full width above text */
+  width: 100%;
 }
 @media (min-width: 880px) {
-  .photoCol {
+  .collageCol {
     position: sticky;
     top: 6rem;
   }
 }
 
+/* Bio right column */
 .heroCopy {
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
 }
 
-.name {
-  font-size: clamp(2.4rem, 5.5vw, 3.8rem);
-  font-weight: 500;
-  letter-spacing: -0.02em;
+/* ── HEADING MATCHING HER REAL SITE ── */
+.heroHeading {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.heroLine1 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.6rem, 6vw, 4.2rem);
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.025em;
   line-height: 1.05;
-  margin-top: 0.25rem;
+  font-style: normal;
+}
+
+.heroLine2 {
+  font-family: 'Caveat', 'Segoe Script', cursive;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-weight: 400;
+  color: var(--color-accent);
+  font-style: italic;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
 }
 
 .role {
@@ -97,6 +119,7 @@
 }
 .contactBox li a:hover { color: var(--color-accent-dark); text-decoration: underline; }
 
+/* ── SECTIONS ─────────────────────────────────────────────────────────────── */
 .section {
   padding: var(--section-py) 0;
 }

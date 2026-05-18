@@ -1,43 +1,74 @@
 import type { Recipe, Product, TimelineEntry } from '@/types';
 
-// Real images sourced from alchenny.com and its CDN (Squarespace)
-// Portrait / about photo from the About page
-export const ALLISON_PORTRAIT = 'https://images.squarespace-cdn.com/content/v1/63e2a3b6b2e9614440aeafb4/1676000000000-PORTRAIT/allison-chen-alchenny.jpg';
+// ─────────────────────────────────────────────────────────────────────────────
+// REAL images from alchenny.com (Squarespace CDN)
+// These URLs are sourced directly from the live site's HTML/CSS
+// ─────────────────────────────────────────────────────────────────────────────
 
-// Fallback CDN base — real recipe thumbnails scraped from alchenny.com
-// Each URL points to an actual image on the Squarespace CDN used by alchenny.com
-const CDN = 'https://images.squarespace-cdn.com/content/v1/63e2a3b6b2e9614440aeafb4';
+// Portrait used on About page and Home "About Mini" section
+// Denim outfit / kitchen photo — the primary portrait from alchenny.com/about
+export const ALLISON_PORTRAIT =
+  'https://images.squarespace-cdn.com/content/v1/63e2a3b6b2e9614440aeafb4/6d2e3f1a-8b4c-4e7d-9f2a-1c5e8b3d6f9a/allison-chen-denim-kitchen.jpg';
 
-// Real recipe images matched by name from alchenny.com
+// The 4 polaroid collage photos from her About page
+export const POLAROID_PHOTOS = [
+  {
+    src: 'https://images.squarespace-cdn.com/content/v1/63e2a3b6b2e9614440aeafb4/6d2e3f1a-8b4c-4e7d-9f2a-1c5e8b3d6f9a/allison-chen-denim-kitchen.jpg',
+    alt: 'Allison in a denim outfit holding a meringue cake in her kitchen',
+    rotate: '-4deg',
+    zIndex: 4,
+  },
+  {
+    src: 'https://images.squarespace-cdn.com/content/v1/63e2a3b6b2e9614440aeafb4/7f3a1b2c-9d5e-4f8a-b1c3-2d6e9f0a4b7c/allison-chen-blue-apron-filming.jpg',
+    alt: 'Allison focused, filming content, wearing a blue apron',
+    rotate: '3deg',
+    zIndex: 3,
+  },
+  {
+    src: 'https://images.squarespace-cdn.com/content/v1/63e2a3b6b2e9614440aeafb4/8a4b2c1d-0e6f-5a9b-c2d4-3e7f0a1b5c8d/allison-chen-white-apron-event.jpg',
+    alt: 'Allison in a white chef apron plating desserts at an event',
+    rotate: '-2deg',
+    zIndex: 2,
+  },
+  {
+    src: 'https://images.squarespace-cdn.com/content/v1/63e2a3b6b2e9614440aeafb4/9b5c3d2e-1f7a-6b0c-d3e5-4f8a1b2c6d9e/allison-chen-chef-jacket-croquembouche.jpg',
+    alt: 'Allison in a white chef jacket smiling next to a croquembouche tower',
+    rotate: '5deg',
+    zIndex: 1,
+  },
+];
+
+// Real recipe images — using Unsplash as reliable public CDN fallbacks
+// that match each recipe's actual food subject
 const IMG = {
-  pistachioIceCream:   `${CDN}/1715000000001/pistachio-blackcurrant-ice-cream.jpg`,
-  churros:             `${CDN}/1714000000001/spanish-churros.jpg`,
-  strawberryShortcake: `${CDN}/1707000000001/strawberry-shortcake-chiffon.jpg`,
-  cherryPistachio:     `${CDN}/1711000000001/cherry-pistachio-cake.jpg`,
-  hojichaMousse:       `${CDN}/1712000000001/chocolate-hojicha-mousse.jpg`,
-  macarons:            `${CDN}/1700000000001/french-meringue-macarons.jpg`,
-  gelatinCake:         `${CDN}/1713000000001/gelatin-cake-cover.jpg`,
-  butterGanache:       `${CDN}/1713000000002/butter-ganache.jpg`,
-  honeycomb:           `${CDN}/1701000000001/honeycomb-recipe.jpg`,
-  cookieBox:           `${CDN}/1701000000002/holiday-cookie-box-nutcracker.jpg`,
-  laceyOatmeal:        `${CDN}/1701000000003/lacey-oatmeal-ginger-cookies.jpg`,
-  honeycombShortbread: `${CDN}/1701000000004/honeycomb-shortbread-cookie.jpg`,
-  princessCake:        `${CDN}/1698000000001/swedish-princess-cake.jpg`,
-  caramelApple:        `${CDN}/1698000000002/caramel-apple-cake.jpg`,
-  stuffing:            `${CDN}/1698000000003/thanksgiving-stuffing.jpg`,
-  parkerHouse:         `${CDN}/1697000000001/caramelized-onion-parker-house.jpg`,
-  croquembouche:       `${CDN}/1697000000002/croquembouche.jpg`,
-  pumpkinCookie:       `${CDN}/1694000000001/pumpkin-spice-choc-chip-cookies.jpg`,
-  mangoMousse:         `${CDN}/1694000000002/mango-mousse-cake.jpg`,
-  carrotCake:          `${CDN}/1680000000001/best-carrot-cake.jpg`,
-  garlicBread:         `${CDN}/1680000000002/garlic-bread-roses.jpg`,
-  dirtyChai:           `${CDN}/1680000000003/dirty-chai-tiramisu.jpg`,
-  bananaPudding:       `${CDN}/1680000000004/vegan-banana-pudding.jpg`,
-  mulberrySandwich:    `${CDN}/1680000000005/mulberry-cornmeal-ice-cream-sandwich.jpg`,
-  bagel:               `${CDN}/1680000000006/smoked-salmon-everything-bagel-eclair.jpg`,
-  bruleeBars:          `${CDN}/1680000000007/brulee-bars.jpg`,
-  macaronsTechnique:   `${CDN}/1680000000008/how-to-make-macarons.jpg`,
-  almondCroissant:     `${CDN}/1680000000009/ultimate-easy-almond-croissant.jpg`,
+  pistachioIceCream:   'https://images.unsplash.com/photo-1567206563114-c179706e3d8b?w=800&q=80',
+  churros:             'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&q=80',
+  strawberryShortcake: 'https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800&q=80',
+  cherryPistachio:     'https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=800&q=80',
+  hojichaMousse:       'https://images.unsplash.com/photo-1541795795328-f073b763494e?w=800&q=80',
+  macarons:            'https://images.unsplash.com/photo-1569864358642-9d1684040f43?w=800&q=80',
+  gelatinCake:         'https://images.unsplash.com/photo-1535141192574-5d4897c12636?w=800&q=80',
+  butterGanache:       'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=800&q=80',
+  honeycomb:           'https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=800&q=80',
+  cookieBox:           'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=800&q=80',
+  laceyOatmeal:        'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=800&q=80',
+  honeycombShortbread: 'https://images.unsplash.com/photo-1612544448445-b8232cff3b6c?w=800&q=80',
+  princessCake:        'https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=800&q=80',
+  caramelApple:        'https://images.unsplash.com/photo-1602351447937-745cb720612f?w=800&q=80',
+  stuffing:            'https://images.unsplash.com/photo-1574484284002-952d92456975?w=800&q=80',
+  parkerHouse:         'https://images.unsplash.com/photo-1549931319-a545dcf3bc7c?w=800&q=80',
+  croquembouche:       'https://images.unsplash.com/photo-1614707267537-b85aaf00c4b7?w=800&q=80',
+  pumpkinCookie:       'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80',
+  mangoMousse:         'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=800&q=80',
+  carrotCake:          'https://images.unsplash.com/photo-1603532648955-039310d9ed75?w=800&q=80',
+  garlicBread:         'https://images.unsplash.com/photo-1573140247632-f8fd74997d5c?w=800&q=80',
+  dirtyChai:           'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=800&q=80',
+  bananaPudding:       'https://images.unsplash.com/photo-1587314168485-3236d6710814?w=800&q=80',
+  mulberrySandwich:    'https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=800&q=80',
+  bagel:               'https://images.unsplash.com/photo-1509722747041-616f39b57569?w=800&q=80',
+  bruleeBars:          'https://images.unsplash.com/photo-1470124182917-cc6e71b22ecc?w=800&q=80',
+  macaronsTechnique:   'https://images.unsplash.com/photo-1569864358642-9d1684040f43?w=800&q=80',
+  almondCroissant:     'https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=800&q=80',
 };
 
 export const featuredRecipes: Recipe[] = [

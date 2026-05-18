@@ -33,8 +33,9 @@ export default function Header() {
   return (
     <header className={clsx(styles.header, scrolled && styles.scrolled)}>
       <div className={clsx('container', styles.inner)}>
+        {/* Logo — matches her real site: alchenny 🥐 */}
         <Link to="/" className={styles.logo} onClick={() => setOpen(false)}>
-          alchenny <span aria-hidden="true">🍪</span>
+          alchenny <span aria-hidden="true">🥐</span>
         </Link>
 
         <nav className={styles.desktopNav} aria-label="Primary">

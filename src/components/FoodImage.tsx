@@ -17,7 +17,7 @@ const toneMap: Record<Tone, { bg: string; fg: string; emoji: string }> = {
 };
 
 const ratioMap: Record<Ratio, string> = {
-  landscape: '75%',
+  landscape: '68%',
   portrait:  '125%',
   square:    '100%',
   tall:      '140%',
@@ -53,6 +53,7 @@ export default function FoodImage({ tone = 'caramel', ratio = 'landscape', class
         ) : (
           <>
             <span className={styles.emoji} aria-hidden="true">{t.emoji}</span>
+            <span className={styles.emojiLabel}>{alt || 'Food photo'}</span>
             <div className={styles.grain} />
           </>
         )}

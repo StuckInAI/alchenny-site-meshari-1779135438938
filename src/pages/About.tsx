@@ -1,8 +1,8 @@
 import { useReveal } from '@/hooks/useReveal';
-import FoodImage from '@/components/FoodImage';
+import PolaroidCollage from '@/components/PolaroidCollage';
 import SectionHeader from '@/components/SectionHeader';
 import BrandRow from '@/components/BrandRow';
-import { timeline, funFacts, ALLISON_PORTRAIT } from '@/lib/data';
+import { timeline, funFacts } from '@/lib/data';
 import styles from './About.module.css';
 
 const brands = ['Microsoft', 'Instacart', 'KitchenAid', 'Pique', 'Very Cool Ice Cream', 'Kitsby', 'Brûlée Bars'];
@@ -11,27 +11,28 @@ export default function About() {
   useReveal();
   return (
     <>
+      {/* ── HERO ─────────────────────────────────────────────────────────── */}
       <section className={styles.hero}>
         <div className="container">
           <div className={styles.heroGrid}>
-            {/* Photo LEFT */}
-            <div className={`${styles.photoCol} reveal`}>
-              <FoodImage
-                tone="caramel"
-                ratio="tall"
-                src={ALLISON_PORTRAIT}
-                alt="Allison Chen — pastry chef and content creator"
-              />
+
+            {/* Polaroid collage LEFT */}
+            <div className={`${styles.collageCol} reveal`}>
+              <PolaroidCollage />
             </div>
 
             {/* Bio RIGHT */}
             <div className={`${styles.heroCopy} reveal`}>
-              <div className="eyebrow">Meet The Pastry Chef</div>
-              <h1 className={styles.name}>Allison Chen</h1>
+              <h1 className={styles.heroHeading}>
+                <span className={styles.heroLine1}>Hi, I'm Allison.</span>
+                <span className={styles.heroLine2}>Welcome.</span>
+              </h1>
+
               <p className={styles.role}>Pastry Chef · Recipe Developer · Content Creator</p>
               <div className={styles.locTag}>
                 <span aria-hidden="true">📍</span> Based in New York City
               </div>
+
               <div className={styles.contactBox}>
                 <div className="eyebrow">Contact</div>
                 <ul>
@@ -45,6 +46,7 @@ export default function About() {
         </div>
       </section>
 
+      {/* ── BIO ──────────────────────────────────────────────────────────── */}
       <section className={styles.section}>
         <div className="container">
           <div className="reveal">
@@ -52,25 +54,37 @@ export default function About() {
           </div>
           <div className={`${styles.bio} reveal`}>
             <p>
-              Allison Chen is a pastry chef, recipe developer, and content creator based in New York City. Born August 21, 2002, she grew up in a food-oriented household where cooking and baking with family were a constant. That passion followed her to Duke University, where she began studying in 2020.
+              Allison Chen is a pastry chef, recipe developer, and content creator based in New York City.
+              Born August 21, 2002, she grew up in a food-oriented household where cooking and baking with
+              family were a constant. That passion followed her to Duke University, where she began studying in 2020.
             </p>
             <p>
-              In 2022, she studied at the National School of Pastry in France — one of the world's most prestigious culinary programs — bringing home techniques in croissants, macarons, choux, croquembouche, and classic French patisserie.
+              In 2022, she studied at the National School of Pastry in France — one of the world's most
+              prestigious culinary programs — bringing home techniques in croissants, macarons, choux,
+              croquembouche, and classic French patisserie.
             </p>
             <p>
-              While still in college, she co-created <em>[Stage]</em>, a viral apartment tasting menu she ran with friends that took off on social media. She also sold cookies from her parents' home, operated <em>4fold bakery</em>, and launched Alchenny LLC — her official brand and content business.
+              While still in college, she co-created <em>[Stage]</em>, a viral apartment tasting menu she
+              ran with friends that took off on social media. She also sold cookies from her parents' home,
+              operated <em>4fold bakery</em>, and launched Alchenny LLC — her official brand and content business.
             </p>
             <p>
-              Through Alchenny, she shares original recipes rooted in classic pastry technique, playful storytelling, and an approachable love of dessert. Her content blends her French pastry background with her Asian American upbringing — think macarons alongside mochi-inspired flavors, croissants alongside carrot cake.
+              Through Alchenny, she shares original recipes rooted in classic pastry technique, playful
+              storytelling, and an approachable love of dessert. Her content blends her French pastry background
+              with her Asian American upbringing — think macarons alongside mochi-inspired flavors, croissants
+              alongside carrot cake.
             </p>
             <p>
-              She is the Chief Baking Officer at <a href="https://kitsby.com" target="_blank" rel="noreferrer">Kitsby</a>, a baking community and studio in NYC. She also opened a baking studio in 2025 and hosts events, classes, and pop-up drops there.
+              She is the Chief Baking Officer at{' '}
+              <a href="https://kitsby.com" target="_blank" rel="noreferrer">Kitsby</a>, a baking community
+              and studio in NYC. She also opened a baking studio in 2025 and hosts events, classes, and
+              pop-up drops there.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Timeline */}
+      {/* ── TIMELINE ─────────────────────────────────────────────────────── */}
       <section className={`${styles.section} ${styles.timelineSection}`}>
         <div className="container">
           <div className="reveal">
@@ -92,7 +106,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* Fun Facts */}
+      {/* ── FUN FACTS ────────────────────────────────────────────────────── */}
       <section className={styles.section}>
         <div className="container">
           <div className="reveal">
@@ -109,7 +123,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* Brand Collabs */}
+      {/* ── BRAND COLLABS ────────────────────────────────────────────────── */}
       <section className={`${styles.section} ${styles.brandSection}`}>
         <div className="container">
           <div className="reveal">
