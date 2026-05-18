@@ -1,7 +1,8 @@
 import { useReveal } from '@/hooks/useReveal';
 import PageHero from '@/components/PageHero';
+import SectionHeader from '@/components/SectionHeader';
 import FoodImage from '@/components/FoodImage';
-import Button from '@/components/Button';
+import NewsletterBlock from '@/components/NewsletterBlock';
 import { products } from '@/lib/data';
 import styles from './Store.module.css';
 
@@ -11,49 +12,62 @@ export default function Store() {
     <>
       <PageHero
         eyebrow="The Shop"
-        title="Shop Alchenny"
-        description="Small-batch desserts, handmade goods, and merch by Alchenny."
+        title="Store"
+        description="Limited cookie drops, seasonal treats, custom cakes, and event tickets — all in one place."
       />
-
-      <section className={styles.bannerSection}>
-        <div className="container">
-          <div className={`${styles.banner} reveal`}>
-            <span aria-hidden="true">🍪</span>
-            <p>
-              <strong>Cookie drops</strong> happen on Hotplate — follow{' '}
-              <a href="https://www.instagram.com/al.chenny/" target="_blank" rel="noreferrer">@alchenny</a>{' '}
-              to catch the next one!
-            </p>
-            <a href="https://www.hotplate.com/alchenny" target="_blank" rel="noreferrer" className={styles.bannerLink}>Visit Hotplate ↗</a>
-          </div>
-        </div>
-      </section>
 
       <section className={styles.section}>
         <div className="container">
+          <div className="reveal">
+            <SectionHeader eyebrow="Products" title="Shop Alchenny" />
+          </div>
           <div className={styles.grid}>
             {products.map((p) => (
-              <article key={p.id} className={`${styles.card} reveal`}>
+              <div key={p.id} className={`${styles.card} reveal`}>
                 <div className={styles.imageWrap}>
-                  <FoodImage tone={p.tone} ratio="square" />
+                  <FoodImage tone={p.tone} ratio="landscape" />
                 </div>
-                <div className={styles.body}>
-                  <h3 className={styles.name}>{p.name}</h3>
-                  <p className={styles.desc}>{p.description}</p>
-                  <div className={styles.row}>
+                <div className={styles.cardBody}>
+                  <h3 className={styles.cardTitle}>{p.name}</h3>
+                  <p className={styles.cardDesc}>{p.description}</p>
+                  <div className={styles.cardFooter}>
                     <span className={styles.price}>{p.price}</span>
                     {p.href ? (
-                      <Button as="a" href={p.href} target="_blank" rel="noreferrer" variant="secondary">{p.cta}</Button>
+                      <a href={p.href} target="_blank" rel="noreferrer" className={styles.ctaBtn}>
+                        {p.cta} <span aria-hidden="true">↗</span>
+                      </a>
                     ) : (
-                      <Button variant="secondary">{p.cta}</Button>
+                      <button className={styles.ctaBtn}>{p.cta}</button>
                     )}
                   </div>
                 </div>
-              </article>
+              </div>
             ))}
           </div>
         </div>
       </section>
+
+      <section className={`${styles.section} ${styles.hotplateSection}`}>
+        <div className="container">
+          <div className={`${styles.hotplateInner} reveal`}>
+            <div className="eyebrow">Cookie Drops</div>
+            <h2 className={styles.hotplateTitle}>Order from Hotplate</h2>
+            <p className={styles.hotplateDesc}>
+              Pre-order limited seasonal cookie drops directly through Hotplate. Shipped fresh from NYC.
+            </p>
+            <a
+              href="https://www.hotplate.com/alchenny"
+              target="_blank"
+              rel="noreferrer"
+              className={styles.hotplateBtn}
+            >
+              Visit Hotplate Store ↗
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <NewsletterBlock />
     </>
   );
 }

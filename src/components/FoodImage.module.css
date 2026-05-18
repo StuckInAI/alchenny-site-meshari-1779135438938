@@ -3,58 +3,26 @@
   width: 100%;
   overflow: hidden;
   border-radius: 4px;
-  background: var(--color-cream-dark);
-  isolation: isolate;
 }
 
-.square { aspect-ratio: 1 / 1; }
-.portrait { aspect-ratio: 4 / 5; }
-.landscape { aspect-ratio: 3 / 2; }
-.tall { aspect-ratio: 3 / 4; }
+.inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-.peach { background: linear-gradient(135deg, #F5D5B8 0%, #E8B894 100%); }
-.caramel { background: linear-gradient(135deg, #E5C19A 0%, #B8895E 100%); }
-.mocha { background: linear-gradient(135deg, #C9A689 0%, #8A6244 100%); }
-.rose { background: linear-gradient(135deg, #F2C7C2 0%, #D89690 100%); }
-.cream { background: linear-gradient(135deg, #F5E9D3 0%, #E0C9A4 100%); }
-.cocoa { background: linear-gradient(135deg, #8A5A3C 0%, #4A2A1A 100%); }
-.pistachio { background: linear-gradient(135deg, #CFD7A8 0%, #9AAB6B 100%); }
-.berry { background: linear-gradient(135deg, #C5A7B8 0%, #7A4A66 100%); }
+.emoji {
+  font-size: clamp(3rem, 8vw, 6rem);
+  filter: saturate(1.2);
+  user-select: none;
+}
 
 .grain {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(rgba(44, 26, 14, 0.06) 1px, transparent 1px);
-  background-size: 4px 4px;
-  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.35;
   pointer-events: none;
-}
-
-.dotA, .dotB {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(20px);
-  opacity: 0.4;
-  pointer-events: none;
-}
-.dotA {
-  width: 50%; height: 50%;
-  top: -10%; left: -10%;
-  background: rgba(255, 252, 245, 0.5);
-}
-.dotB {
-  width: 40%; height: 40%;
-  bottom: -10%; right: -5%;
-  background: rgba(44, 26, 14, 0.18);
-}
-
-.label {
-  position: absolute;
-  bottom: 12px;
-  left: 14px;
-  font-size: 0.7rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgba(44, 26, 14, 0.55);
-  font-weight: 500;
 }

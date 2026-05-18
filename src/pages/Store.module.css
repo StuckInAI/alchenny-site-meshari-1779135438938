@@ -1,0 +1,126 @@
+.section { padding: var(--section-py) 0; }
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+@media (min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-divider);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(44,26,14,0.08);
+}
+
+.imageWrap { overflow: hidden; }
+.imageWrap > div {
+  transition: transform 0.6s var(--ease);
+}
+.card:hover .imageWrap > div { transform: scale(1.04); }
+
+.cardBody {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.cardTitle {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--color-text);
+}
+
+.cardDesc {
+  font-size: 0.875rem;
+  color: var(--color-text-soft);
+  line-height: 1.55;
+  flex: 1;
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--color-divider);
+}
+
+.price {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--color-text-soft);
+}
+
+.ctaBtn {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  font-family: var(--font-sans);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s var(--ease);
+  padding: 0;
+}
+.ctaBtn:hover { color: var(--color-accent-dark); }
+
+.hotplateSection { background: var(--color-bg-alt); }
+
+.hotplateInner {
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.hotplateTitle {
+  font-size: clamp(1.9rem, 4vw, 2.75rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.hotplateDesc {
+  color: var(--color-text-soft);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.hotplateBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 999px;
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: var(--font-sans);
+  transition: background 0.2s var(--ease), transform 0.2s var(--ease);
+  width: fit-content;
+}
+.hotplateBtn:hover {
+  background: var(--color-accent-dark);
+  transform: translateY(-1px);
+}

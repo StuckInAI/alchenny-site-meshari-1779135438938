@@ -1,34 +1,47 @@
 import { Link } from 'react-router-dom';
-import clsx from 'clsx';
 import styles from './Button.module.css';
+import clsx from 'clsx';
 
-type Variant = 'primary' | 'secondary' | 'ghost' | 'light';
-
-type CommonProps = {
+type ButtonBaseProps = {
+  variant?: 'primary' | 'secondary' | 'ghost';
   children: React.ReactNode;
-  variant?: Variant;
   className?: string;
 };
 
-type ButtonAsButton = CommonProps & { as?: 'button'; type?: 'button' | 'submit' | 'reset'; onClick?: () => void };
-type ButtonAsLink = CommonProps & { as: 'link'; to: string };
-type ButtonAsAnchor = CommonProps & { as: 'a'; href: string; target?: string; rel?: string };
+type ButtonAsButton = ButtonBaseProps & {
+  as?: 'button';
+  onClick?: () => void;
+  type?: 'button' | 'submit' | 'reset';
+};
 
-type ButtonProps = ButtonAsButton | ButtonAsLink | ButtonAsAnchor;
+type ButtonAsLink = ButtonBaseProps & {
+  as: 'link';
+  to: string;
+};
+
+type ButtonProps = ButtonAsButton | ButtonAsLink;
 
 export default function Button(props: ButtonProps) {
-  const variant: Variant = props.variant || 'primary';
-  const cls = clsx(styles.btn, styles[variant], props.className);
+  const { variant = 'primary', children, className } = props;
+  const cls = clsx(
+    styles.btn,
+    variant === 'primary' && styles.primary,
+    variant === 'secondary' && styles.secondary,
+    variant === 'ghost' && styles.ghost,
+    className
+  );
 
   if (props.as === 'link') {
-    return <Link to={props.to} className={cls}>{props.children}</Link>;
+    return <Link to={props.to} className={cls}>{children}</Link>;
   }
-  if (props.as === 'a') {
-    return <a href={props.href} target={props.target} rel={props.rel} className={cls}>{props.children}</a>;
-  }
+
   return (
-    <button type={props.type || 'button'} onClick={props.onClick} className={cls}>
-      {props.children}
+    <button
+      type={props.type ?? 'button'}
+      className={cls}
+      onClick={props.onClick}
+    >
+      {children}
     </button>
   );
 }

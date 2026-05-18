@@ -1,75 +1,82 @@
 .section {
-  background: var(--color-text);
-  color: var(--color-bg);
-  padding: var(--section-py) 0;
-  position: relative;
-  overflow: hidden;
+  background: var(--color-accent);
+  padding: clamp(3.5rem, 7vw, 6rem) 0;
 }
 
 .inner {
-  max-width: 720px;
+  max-width: 600px;
   margin: 0 auto;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.25rem;
+  gap: 1rem;
 }
 
 .title {
-  font-size: clamp(2.25rem, 5vw, 3.25rem);
-  color: var(--color-bg);
+  font-family: var(--font-serif);
+  font-size: clamp(1.9rem, 4vw, 2.75rem);
   font-weight: 500;
+  color: #fff;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
 }
 
 .sub {
-  color: rgba(255, 252, 245, 0.78);
-  max-width: 52ch;
-  font-size: 1.05rem;
+  color: rgba(255,252,245,0.85);
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 46ch;
 }
 
 .form {
   display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
   width: 100%;
-  max-width: 480px;
-  gap: 0.75rem;
-  margin-top: 0.75rem;
-  flex-direction: column;
-}
-
-.input {
-  flex: 1;
-  background: rgba(255, 252, 245, 0.08);
-  border: 1px solid rgba(255, 252, 245, 0.22);
-  border-radius: 999px;
-  padding: 0.95rem 1.3rem;
-  color: var(--color-bg);
-  outline: none;
-  transition: border-color 0.25s var(--ease), background-color 0.25s var(--ease);
-}
-.input::placeholder { color: rgba(255, 252, 245, 0.5); }
-.input:focus { border-color: var(--color-accent); background: rgba(255, 252, 245, 0.12); }
-
-.button {
-  padding: 0.95rem 1.6rem;
-  background: var(--color-accent);
-  color: #fff;
-  border-radius: 999px;
-  font-weight: 500;
-  font-size: 0.88rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  transition: background-color 0.25s var(--ease), transform 0.25s var(--ease);
-}
-.button:hover { background: var(--color-accent-dark); transform: translateY(-1px); }
-
-.note {
-  font-size: 0.8rem;
-  color: rgba(255, 252, 245, 0.55);
-  letter-spacing: 0.04em;
   margin-top: 0.5rem;
 }
 
-@media (min-width: 640px) {
-  .form { flex-direction: row; }
+.input {
+  flex: 1 1 220px;
+  padding: 0.75rem 1.25rem;
+  border-radius: 999px;
+  border: none;
+  background: rgba(255,255,255,0.18);
+  color: #fff;
+  font-size: 0.95rem;
+  outline: none;
+  min-width: 0;
+  transition: background 0.2s var(--ease);
+}
+.input::placeholder { color: rgba(255,252,245,0.6); }
+.input:focus { background: rgba(255,255,255,0.28); }
+
+.button {
+  padding: 0.75rem 1.75rem;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--color-accent);
+  font-weight: 500;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  transition: background 0.2s var(--ease), transform 0.2s var(--ease);
+  white-space: nowrap;
+}
+.button:hover {
+  background: var(--color-bg);
+  transform: translateY(-1px);
+}
+
+.note {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,252,245,0.55);
+  margin-top: 0.25rem;
 }

@@ -1,4 +1,5 @@
 import styles from './SectionHeader.module.css';
+import clsx from 'clsx';
 
 type SectionHeaderProps = {
   eyebrow?: string;
@@ -9,10 +10,10 @@ type SectionHeaderProps = {
 
 export default function SectionHeader({ eyebrow, title, description, align = 'left' }: SectionHeaderProps) {
   return (
-    <header className={`${styles.header} ${align === 'center' ? styles.center : ''}`}>
+    <div className={clsx(styles.wrap, align === 'center' && styles.center)}>
       {eyebrow && <div className="eyebrow">{eyebrow}</div>}
       <h2 className={styles.title}>{title}</h2>
       {description && <p className={styles.desc}>{description}</p>}
-    </header>
+    </div>
   );
 }
