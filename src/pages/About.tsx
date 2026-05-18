@@ -2,7 +2,7 @@ import { useReveal } from '@/hooks/useReveal';
 import FoodImage from '@/components/FoodImage';
 import SectionHeader from '@/components/SectionHeader';
 import BrandRow from '@/components/BrandRow';
-import { timeline, funFacts } from '@/lib/data';
+import { timeline, funFacts, ALLISON_PORTRAIT } from '@/lib/data';
 import styles from './About.module.css';
 
 const brands = ['Microsoft', 'Instacart', 'KitchenAid', 'Pique', 'Very Cool Ice Cream', 'Kitsby', 'Brûlée Bars'];
@@ -14,9 +14,17 @@ export default function About() {
       <section className={styles.hero}>
         <div className="container">
           <div className={styles.heroGrid}>
-            <div className="reveal">
-              <FoodImage tone="caramel" ratio="tall" />
+            {/* Photo LEFT */}
+            <div className={`${styles.photoCol} reveal`}>
+              <FoodImage
+                tone="caramel"
+                ratio="tall"
+                src={ALLISON_PORTRAIT}
+                alt="Allison Chen — pastry chef and content creator"
+              />
             </div>
+
+            {/* Bio RIGHT */}
             <div className={`${styles.heroCopy} reveal`}>
               <div className="eyebrow">Meet The Pastry Chef</div>
               <h1 className={styles.name}>Allison Chen</h1>

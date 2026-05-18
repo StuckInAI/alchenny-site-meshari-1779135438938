@@ -8,7 +8,12 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
   return (
     <article className={styles.card}>
       <div className={styles.imageWrap}>
-        <FoodImage tone={recipe.tone} ratio="landscape" />
+        <FoodImage
+          tone={recipe.tone}
+          ratio="landscape"
+          src={recipe.image}
+          alt={recipe.title}
+        />
         <span className={styles.tag}>{recipe.category}</span>
       </div>
       <div className={styles.body}>

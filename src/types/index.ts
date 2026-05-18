@@ -7,6 +7,7 @@ export type Recipe = {
   description: string;
   date: string;
   tone: 'peach' | 'caramel' | 'mocha' | 'rose' | 'cream' | 'cocoa' | 'pistachio' | 'berry';
+  image?: string;
 };
 
 export type Product = {
@@ -17,6 +18,7 @@ export type Product = {
   cta: string;
   href?: string;
   tone: 'peach' | 'caramel' | 'mocha' | 'rose' | 'cream' | 'cocoa' | 'pistachio' | 'berry';
+  image?: string;
 };
 
 export type TimelineEntry = {

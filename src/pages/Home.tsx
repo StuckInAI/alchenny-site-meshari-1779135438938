@@ -1,4 +1,5 @@
 import { useReveal } from '@/hooks/useReveal';
+import { useRef, useEffect } from 'react';
 import Button from '@/components/Button';
 import Divider from '@/components/Divider';
 import RecipeCard from '@/components/RecipeCard';
@@ -6,22 +7,36 @@ import SectionHeader from '@/components/SectionHeader';
 import FoodImage from '@/components/FoodImage';
 import BrandRow from '@/components/BrandRow';
 import NewsletterBlock from '@/components/NewsletterBlock';
-import { featuredRecipes, brandPartners } from '@/lib/data';
+import StatItem from '@/components/StatItem';
+import { featuredRecipes, brandPartners, ALLISON_PORTRAIT } from '@/lib/data';
 import styles from './Home.module.css';
 
 const stats = [
   { icon: '📱', value: '1.5M+', label: 'Total Followers' },
-  { icon: '🎂', value: '584K', label: 'TikTok · 34.4M Likes' },
-  { icon: '📸', value: '542K', label: 'Instagram Followers' },
-  { icon: '📬', value: '14K+', label: 'Substack Subscribers' },
+  { icon: '🎂', value: '584K',  label: 'TikTok · 34.4M Likes' },
+  { icon: '📸', value: '542K',  label: 'Instagram Followers' },
+  { icon: '📬', value: '14K+',  label: 'Substack Subscribers' },
 ];
 
 export default function Home() {
   useReveal();
+
+  // Parallax hero
+  const heroRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const onScroll = () => {
+      if (!heroRef.current) return;
+      const y = window.scrollY;
+      heroRef.current.style.setProperty('--parallax-y', `${y * 0.35}px`);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
     <>
       {/* Hero */}
-      <section className={styles.hero}>
+      <section className={styles.hero} ref={heroRef}>
         <div className={`container ${styles.heroInner}`}>
           <div className={`${styles.heroCopy} reveal`}>
             <div className="eyebrow">Alchenny · NYC · Est. 2022</div>
@@ -46,10 +61,8 @@ export default function Home() {
         <div className="container">
           <div className={styles.statsGrid}>
             {stats.map((s) => (
-              <div key={s.label} className={`${styles.stat} reveal`}>
-                <div className={styles.statIcon}>{s.icon}</div>
-                <div className={styles.statValue}>{s.value}</div>
-                <div className={styles.statLabel}>{s.label}</div>
+              <div key={s.label} className="reveal">
+                <StatItem icon={s.icon} value={s.value} label={s.label} />
               </div>
             ))}
           </div>
@@ -79,8 +92,13 @@ export default function Home() {
       <section className={`${styles.section} ${styles.aboutMini}`}>
         <div className="container">
           <div className={styles.aboutGrid}>
-            <div className="reveal">
-              <FoodImage tone="caramel" ratio="portrait" />
+            <div className={`${styles.aboutImgWrap} reveal`}>
+              <FoodImage
+                tone="caramel"
+                ratio="portrait"
+                src={ALLISON_PORTRAIT}
+                alt="Allison Chen — Alchenny"
+              />
             </div>
             <div className={`${styles.aboutCopy} reveal`}>
               <div className="eyebrow">A Quick Hello</div>
