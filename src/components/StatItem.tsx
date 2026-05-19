@@ -21,10 +21,8 @@ export default function StatItem({ value, suffix = '', label, duration = 2000 }:
 
   return (
     <div ref={ref} className={styles.item}>
-      <div className={styles.value}>
-        {count}{suffix}
-      </div>
-      <div className={styles.label}>{label}</div>
+      <span className={styles.value}>{count}{suffix}</span>
+      <span className={styles.label}>{label}</span>
     </div>
   );
 }
