@@ -3,6 +3,7 @@ import Layout from '@/components/layout/Layout';
 import Home from '@/pages/Home';
 import About from '@/pages/About';
 import Recipes from '@/pages/Recipes';
+import RecipeDetail from '@/pages/RecipeDetail';
 import Store from '@/pages/Store';
 import WorkWithMe from '@/pages/WorkWithMe';
 import CroissantCrew from '@/pages/CroissantCrew';
@@ -17,6 +18,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/recipes" element={<Recipes />} />
+          <Route path="/recipes/:slug" element={<RecipeDetail />} />
           <Route path="/store" element={<Store />} />
           <Route path="/work-with-me" element={<WorkWithMe />} />
           <Route path="/croissant-crew" element={<CroissantCrew />} />

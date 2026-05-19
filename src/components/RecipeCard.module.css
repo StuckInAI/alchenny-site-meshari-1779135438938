@@ -1,10 +1,9 @@
 .card {
   display: flex;
   flex-direction: column;
-  cursor: pointer;
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.card:hover { transform: translateY(-6px); }
+.card[role='button']:hover { transform: translateY(-6px); }
 
 /* ── Image wrapper — fixed aspect ratio ── */
 .imageWrap {
@@ -16,7 +15,7 @@
 }
 
 /* Zoom on hover */
-.card:hover .image {
+.card[role='button']:hover .image {
   transform: scale(1.07);
 }
 
@@ -97,7 +96,7 @@
   transition: color 0.25s var(--ease);
   letter-spacing: -0.015em;
 }
-.card:hover .title { color: var(--color-accent); }
+.card[role='button']:hover .title { color: var(--color-accent); }
 
 .desc {
   color: var(--color-text-soft);
@@ -137,4 +136,13 @@
   transition: transform 0.25s var(--ease);
   display: inline-block;
 }
-.card:hover .link span { transform: translateX(5px); }
+.card[role='button']:hover .link span { transform: translateX(5px); }
+
+.linkMuted {
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--color-text-soft);
+  opacity: 0.6;
+}

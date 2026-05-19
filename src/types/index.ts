@@ -8,6 +8,7 @@ export type Recipe = {
   date: string;
   tone: 'peach' | 'caramel' | 'mocha' | 'rose' | 'cream' | 'cocoa' | 'pistachio' | 'berry';
   image?: string;
+  slug?: string;
 };
 
 export type Product = {
@@ -24,4 +25,23 @@ export type Product = {
 export type TimelineEntry = {
   year: string;
   events: string[];
+};
+
+export type RecipeDetail = {
+  slug: string;
+  title: string;
+  category: RecipeCategory;
+  image: string;
+  prepTime: string;
+  cookTime: string;
+  yield: string;
+  intro: string;
+  sections: {
+    heading: string;
+    ingredients?: string[];
+    steps?: string[];
+    note?: string;
+    tip?: string;
+  }[];
+  notes?: string[];
 };

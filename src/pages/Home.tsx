@@ -17,8 +17,6 @@ const stats = [
   { icon: '📬', value: '14K+',  label: 'Substack Subscribers' },
 ];
 
-const PORTRAIT_FALLBACK = 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80';
-
 export default function Home() {
   useReveal();
 
@@ -35,6 +33,11 @@ export default function Home() {
   }, []);
 
   const [portraitError, setPortraitError] = useState(false);
+
+  // Fallback: if local image 404s, use an Unsplash portrait
+  const portraitSrc = portraitError
+    ? 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80'
+    : ALLISON_PORTRAIT;
 
   return (
     <>
@@ -99,12 +102,14 @@ export default function Home() {
             {/* Portrait photo */}
             <div className={`${styles.aboutImgWrap} reveal`}>
               <img
-                src={portraitError ? PORTRAIT_FALLBACK : ALLISON_PORTRAIT}
-                alt="Allison Chen in her kitchen"
+                src={portraitSrc}
+                alt="Allison Chen smiling in her kitchen wearing a white and orange sweater"
                 className={styles.aboutImg}
                 onError={() => setPortraitError(true)}
                 loading="lazy"
               />
+              {/* Warm overlay vignette */}
+              <div className={styles.portraitOverlay} />
             </div>
 
             <div className={`${styles.aboutCopy} reveal`}>

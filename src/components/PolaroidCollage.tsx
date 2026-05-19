@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styles from './PolaroidCollage.module.css';
 import { POLAROID_PHOTOS } from '@/lib/data';
 
-// Reliable fallback food/chef Unsplash photos
+// Fallback Unsplash photos if local images haven't been uploaded yet
 const FALLBACKS = [
   'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80',
   'https://images.unsplash.com/photo-1607631568010-a87245c0daf8?w=600&q=80',
@@ -28,6 +28,7 @@ function PolaroidPhoto({
   index: number;
 }) {
   const [error, setError] = useState(false);
+  // If local image fails, cascade to fallback
   const src = error ? FALLBACKS[index] : photo.src;
 
   return (
@@ -45,7 +46,6 @@ function PolaroidPhoto({
           className={styles.photo}
           onError={() => setError(true)}
           loading="lazy"
-          crossOrigin="anonymous"
         />
       </div>
       <div className={styles.caption}>

@@ -113,6 +113,7 @@
   overflow: hidden;
   aspect-ratio: 3 / 4;
   background: var(--color-cream-dark);
+  position: relative;
 }
 
 /* Real portrait image — fills the container */
@@ -127,6 +128,17 @@
 }
 .aboutImgWrap:hover .aboutImg {
   transform: scale(1.04);
+}
+
+/* Warm overlay for portrait — soft vignette + cream tint */
+.portraitOverlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  background:
+    radial-gradient(ellipse at center, transparent 40%, rgba(44, 26, 14, 0.18) 100%),
+    linear-gradient(180deg, rgba(196, 96, 42, 0.04) 0%, rgba(196, 96, 42, 0.10) 100%);
+  pointer-events: none;
 }
 
 .aboutCopy {
