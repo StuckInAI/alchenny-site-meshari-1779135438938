@@ -1,31 +1,31 @@
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import styles from './StatItem.module.css';
-import useCountUp from '@/hooks/useCountUp';
+import { useCountUp } from '@/hooks/useCountUp';
+import { useReveal } from '@/hooks/useReveal';
 
 type StatItemProps = {
-  value: number | string;
+  value: number;
   suffix?: string;
   label: string;
+  decimals?: number;
+  duration?: number;
 };
 
-function StatDisplay({ value, suffix }: { value: number | string; suffix?: string }) {
-  const numValue = typeof value === 'number' ? value : parseFloat(value);
-  const isNumeric = !isNaN(numValue);
-  const count = useCountUp(isNumeric ? numValue : 0);
-
-  if (!isNumeric) {
-    return <>{value}{suffix}</>
-  }
-  return <>{count}{suffix}</>;
-}
-
-export default function StatItem({ value, suffix, label }: StatItemProps) {
+export default function StatItem({ value, suffix = '', label, decimals = 0, duration = 2000 }: StatItemProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const revealed = useReveal(ref);
+
+  const display = useCountUp({
+    end: value,
+    duration,
+    decimals,
+    enabled: revealed,
+  });
 
   return (
-    <div className={styles.item} ref={ref}>
+    <div ref={ref} className={styles.item}>
       <div className={styles.value}>
-        <StatDisplay value={value} suffix={suffix} />
+        {display}{suffix}
       </div>
       <div className={styles.label}>{label}</div>
     </div>

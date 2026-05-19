@@ -1,24 +1,30 @@
-import { useEffect } from 'react';
+import { useEffect, useState, RefObject } from 'react';
 
-export function useReveal() {
+export function useReveal(
+  ref: RefObject<Element | null>,
+  options?: IntersectionObserverInit
+): boolean {
+  const [revealed, setRevealed] = useState(false);
+
   useEffect(() => {
-    const els = document.querySelectorAll('.reveal');
-    if (!('IntersectionObserver' in window)) {
-      els.forEach((el) => el.classList.add('is-visible'));
-      return;
-    }
+    const el = ref.current;
+    if (!el) return;
+
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
-          }
-        });
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setRevealed(true);
+          observer.disconnect();
+        }
       },
-      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+      { threshold: 0.15, ...options }
     );
-    els.forEach((el) => observer.observe(el));
+
+    observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+  }, [ref, options]);
+
+  return revealed;
 }
+
+export default useReveal;

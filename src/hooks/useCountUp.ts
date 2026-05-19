@@ -1,53 +1,57 @@
 import { useEffect, useRef, useState } from 'react';
 
-function parseValue(val: string): { num: number; suffix: string; prefix: string } {
-  const prefix = val.startsWith('$') ? '$' : '';
-  const stripped = val.replace(/[$]/g, '');
-  const match = stripped.match(/^([\d.,]+)([A-Za-z+%]*)$/);
-  if (!match) return { num: 0, suffix: val, prefix: '' };
-  const num = parseFloat(match[1].replace(/,/g, ''));
-  const suffix = match[2] || '';
-  return { num, suffix, prefix };
+interface UseCountUpOptions {
+  end: number;
+  duration?: number;
+  start?: number;
+  decimals?: number;
+  enabled?: boolean;
 }
 
-export function useCountUp(target: string, duration = 1800) {
-  const { num, suffix, prefix } = parseValue(target);
-  const [display, setDisplay] = useState(prefix + '0' + suffix);
-  const ref = useRef<HTMLSpanElement>(null);
-  const started = useRef(false);
+export function useCountUp({
+  end,
+  duration = 2000,
+  start = 0,
+  decimals = 0,
+  enabled = true,
+}: UseCountUpOptions): string {
+  const [count, setCount] = useState(start);
+  const frameRef = useRef<number | null>(null);
+  const startTimeRef = useRef<number | null>(null);
 
   useEffect(() => {
-    if (num === 0) { setDisplay(target); return; }
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !started.current) {
-          started.current = true;
-          const start = performance.now();
-          const step = (now: number) => {
-            const progress = Math.min((now - start) / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            const current = eased * num;
-            // Format: if num >= 1000 use K
-            let formatted: string;
-            if (num >= 1000) {
-              formatted = (current / 1000).toFixed(current >= num * 0.99 ? (Number.isInteger(num / 1000) ? 0 : 1) : 1) + 'K';
-            } else if (Number.isInteger(num)) {
-              formatted = Math.round(current).toString();
-            } else {
-              formatted = current.toFixed(1);
-            }
-            setDisplay(prefix + formatted + (num >= 1000 ? '' : suffix));
-            if (progress < 1) requestAnimationFrame(step);
-            else setDisplay(target); // snap to exact final value
-          };
-          requestAnimationFrame(step);
-        }
-      },
-      { threshold: 0.3 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [target, num, suffix, prefix, duration]);
+    if (!enabled) {
+      setCount(start);
+      return;
+    }
 
-  return { display, ref };
+    const animate = (timestamp: number) => {
+      if (startTimeRef.current === null) {
+        startTimeRef.current = timestamp;
+      }
+      const elapsed = timestamp - startTimeRef.current;
+      const progress = Math.min(elapsed / duration, 1);
+      // ease out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = start + (end - start) * eased;
+      setCount(current);
+
+      if (progress < 1) {
+        frameRef.current = requestAnimationFrame(animate);
+      }
+    };
+
+    startTimeRef.current = null;
+    frameRef.current = requestAnimationFrame(animate);
+
+    return () => {
+      if (frameRef.current !== null) {
+        cancelAnimationFrame(frameRef.current);
+      }
+    };
+  }, [end, duration, start, enabled]);
+
+  return count.toFixed(decimals);
 }
+
+export default useCountUp;
