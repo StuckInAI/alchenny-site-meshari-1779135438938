@@ -1,72 +1,58 @@
-import { useMemo, useState } from 'react';
-import { useReveal } from '@/hooks/useReveal';
+import { useState } from 'react';
+import styles from './Recipes.module.css';
 import PageHero from '@/components/PageHero';
 import RecipeCard from '@/components/RecipeCard';
-import Button from '@/components/Button';
-import { allRecipes } from '@/lib/data';
-import type { RecipeCategory } from '@/types';
-import styles from './Recipes.module.css';
+import NewsletterBlock from '@/components/NewsletterBlock';
+import { RECIPES } from '@/lib/data';
+import type { Recipe, RecipeCategory } from '@/types/index';
 
-const categories: ('All' | RecipeCategory)[] = ['All', 'Pastries', 'Cakes', 'Desserts', 'Cookies', 'Basics', 'Savory'];
-const INITIAL_COUNT = 12;
-const STEP = 9;
+const CATEGORIES: ('All' | RecipeCategory)[] = [
+  'All',
+  'Viennoiserie',
+  'Chocolate',
+  'Pastry',
+  'Tarts',
+  'Petit Fours',
+];
 
 export default function Recipes() {
-  useReveal();
   const [active, setActive] = useState<'All' | RecipeCategory>('All');
-  const [visible, setVisible] = useState(INITIAL_COUNT);
 
-  const filtered = useMemo(() => {
-    if (active === 'All') return allRecipes;
-    return allRecipes.filter((r) => r.category === active);
-  }, [active]);
-
-  const shown = filtered.slice(0, visible);
+  const shown: Recipe[] = active === 'All'
+    ? RECIPES
+    : RECIPES.filter((r: Recipe) => r.category === active);
 
   return (
     <>
       <PageHero
-        eyebrow="The Archive"
-        title="Recipes"
-        description="Classic pastry technique made approachable. Inspired by French pastry school and Asian American nostalgia."
+        eyebrow="Recipes"
+        title="From the Archive"
+        description="Every recipe is tested, refined, and written with the home baker in mind. Filter by category or browse everything."
       />
 
-      <section className={styles.section}>
+      <section style={{ padding: 'clamp(2rem, 5vw, 4rem) 0' }}>
         <div className="container">
-          <div className={styles.tabs} role="tablist">
-            {categories.map((c) => (
+          <div className={styles.filters}>
+            {CATEGORIES.map((cat) => (
               <button
-                key={c}
-                role="tab"
-                aria-selected={active === c}
-                className={`${styles.tab} ${active === c ? styles.tabActive : ''}`}
-                onClick={() => { setActive(c); setVisible(INITIAL_COUNT); }}
+                key={cat}
+                className={`${styles.filter} ${active === cat ? styles.filterActive : ''}`}
+                onClick={() => setActive(cat)}
               >
-                {c}
+                {cat}
               </button>
             ))}
           </div>
 
           <div className={styles.grid}>
-            {shown.map((r) => (
-              <div key={r.id} className="reveal">
-                <RecipeCard recipe={r} />
-              </div>
+            {shown.map((r: Recipe) => (
+              <RecipeCard key={r.id} recipe={r} />
             ))}
           </div>
-
-          {shown.length === 0 && (
-            <p className={styles.empty}>No recipes in this category yet. Check back soon.</p>
-          )}
-
-          {visible < filtered.length && (
-            <div className={styles.loadMore}>
-              <Button variant="ghost" onClick={() => setVisible((v) => v + STEP)}>Load More</Button>
-              <p className={styles.count}>Showing {shown.length} of {filtered.length}</p>
-            </div>
-          )}
         </div>
       </section>
+
+      <NewsletterBlock />
     </>
   );
 }

@@ -1,139 +1,105 @@
-import { useReveal } from '@/hooks/useReveal';
-import PolaroidCollage from '@/components/PolaroidCollage';
-import SectionHeader from '@/components/SectionHeader';
-import BrandRow from '@/components/BrandRow';
-import { timeline, funFacts } from '@/lib/data';
 import styles from './About.module.css';
+import PageHero from '@/components/PageHero';
+import FoodImage from '@/components/FoodImage';
+import StatItem from '@/components/StatItem';
+import NewsletterBlock from '@/components/NewsletterBlock';
+import { timeline, funFacts } from '@/lib/data';
+import type { TimelineEntry, FunFact } from '@/types/index';
 
-const brands = ['Microsoft', 'Instacart', 'KitchenAid', 'Pique', 'Very Cool Ice Cream', 'Kitsby', 'Brûlée Bars'];
+const STATS = [
+  { value: 820, suffix: 'K', label: 'YouTube Subscribers' },
+  { value: 14, suffix: 'K+', label: 'Newsletter Readers' },
+  { value: 3000, suffix: '+', label: 'Croissants Made' },
+  { value: 11, suffix: '', label: 'Countries Baked In' },
+];
 
 export default function About() {
-  useReveal();
   return (
     <>
-      {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      <section className={styles.hero}>
+      <PageHero
+        eyebrow="About"
+        title="Hi, I'm Allison."
+        description="Paris-trained pastry chef turned recipe educator. I believe the best baking is honest, technical, and wildly delicious."
+      />
+
+      {/* Portrait + Bio */}
+      <section className={styles.bioSection}>
         <div className="container">
-          <div className={styles.heroGrid}>
-
-            {/* Polaroid collage LEFT */}
-            <div className={`${styles.collageCol} reveal`}>
-              <PolaroidCollage />
+          <div className={styles.bioGrid}>
+            <div className={styles.bioImage}>
+              <FoodImage tone="caramel" ratio="portrait" alt="Allison Chen portrait" />
             </div>
-
-            {/* Bio RIGHT */}
-            <div className={`${styles.heroCopy} reveal`}>
-              <h1 className={styles.heroHeading}>
-                <span className={styles.heroLine1}>Hi, I'm Allison.</span>
-                <span className={styles.heroLine2}>Welcome.</span>
-              </h1>
-
-              <p className={styles.role}>Pastry Chef · Recipe Developer · Content Creator</p>
-              <div className={styles.locTag}>
-                <span aria-hidden="true">📍</span> Based in New York City
-              </div>
-
-              <div className={styles.contactBox}>
-                <div className="eyebrow">Contact</div>
-                <ul>
-                  <li><span>Partnerships</span><a href="mailto:partnerships@alchenny.com">partnerships@alchenny.com</a></li>
-                  <li><span>General</span><a href="mailto:hello@alchenny.com">hello@alchenny.com</a></li>
-                  <li><span>Talent Mgmt</span><a href="mailto:alchenny@palettemgmt.com">alchenny@palettemgmt.com</a></li>
-                </ul>
-              </div>
+            <div className={styles.bioText}>
+              <div className="eyebrow">My Story</div>
+              <h2 className={styles.bioHeading}>From Engineering to Eclairs</h2>
+              <p>
+                I spent three years studying mechanical engineering before I realised the only
+                equations I cared about were butter-to-flour ratios. I quit, enrolled at Le Cordon
+                Bleu Paris, and never looked back.
+              </p>
+              <p>
+                After graduating, I staged at bakeries across Tokyo and Singapore — learning that
+                great pastry is both a science and a cultural conversation. In 2020, I started
+                documenting my process online, and somehow 820,000 people decided they wanted to
+                watch me laminate dough.
+              </p>
+              <p>
+                These days I split my time between recipe development, teaching, and building the
+                Croissant Crew — a community of home bakers who take their craft seriously without
+                taking themselves too seriously.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── BIO ──────────────────────────────────────────────────────────── */}
-      <section className={styles.section}>
+      {/* Stats */}
+      <section className={styles.statsSection}>
         <div className="container">
-          <div className="reveal">
-            <SectionHeader eyebrow="Biography" title="About Allison" />
-          </div>
-          <div className={`${styles.bio} reveal`}>
-            <p>
-              Allison Chen is a pastry chef, recipe developer, and content creator based in New York City.
-              Born August 21, 2002, she grew up in a food-oriented household where cooking and baking with
-              family were a constant. That passion followed her to Duke University, where she began studying in 2020.
-            </p>
-            <p>
-              In 2022, she studied at the National School of Pastry in France — one of the world's most
-              prestigious culinary programs — bringing home techniques in croissants, macarons, choux,
-              croquembouche, and classic French patisserie.
-            </p>
-            <p>
-              While still in college, she co-created <em>[Stage]</em>, a viral apartment tasting menu she
-              ran with friends that took off on social media. She also sold cookies from her parents' home,
-              operated <em>4fold bakery</em>, and launched Alchenny LLC — her official brand and content business.
-            </p>
-            <p>
-              Through Alchenny, she shares original recipes rooted in classic pastry technique, playful
-              storytelling, and an approachable love of dessert. Her content blends her French pastry background
-              with her Asian American upbringing — think macarons alongside mochi-inspired flavors, croissants
-              alongside carrot cake.
-            </p>
-            <p>
-              She is the Chief Baking Officer at{' '}
-              <a href="https://kitsby.com" target="_blank" rel="noreferrer">Kitsby</a>, a baking community
-              and studio in NYC. She also opened a baking studio in 2025 and hosts events, classes, and
-              pop-up drops there.
-            </p>
+          <div className={styles.statsGrid}>
+            {STATS.map((s) => (
+              <StatItem key={s.label} value={s.value} suffix={s.suffix} label={s.label} />
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ── TIMELINE ─────────────────────────────────────────────────────── */}
-      <section className={`${styles.section} ${styles.timelineSection}`}>
+      {/* Timeline */}
+      <section className={styles.timelineSection}>
         <div className="container">
-          <div className="reveal">
-            <SectionHeader eyebrow="Journey" title="The road so far" description="From Duke dorms to a French pastry school to a 1.5M+ following." />
-          </div>
-          <ol className={styles.timeline}>
-            {timeline.map((t) => (
-              <li key={t.year} className={`${styles.tItem} reveal`}>
-                <div className={styles.tYear}>{t.year}</div>
-                <div className={styles.tBody}>
-                  <span className={styles.tDot} aria-hidden="true" />
-                  <ul>
-                    {t.events.map((e) => <li key={e}>{e}</li>)}
+          <div className="eyebrow" style={{ textAlign: 'center', marginBottom: '3rem' }}>Journey</div>
+          <div className={styles.timeline}>
+            {timeline.map((t: TimelineEntry) => (
+              <div key={t.year} className={styles.timelineItem}>
+                <div className={styles.timelineYear}>{t.year}</div>
+                <div className={styles.timelineContent}>
+                  <h3 className={styles.timelineTitle}>{t.title}</h3>
+                  <ul className={styles.timelineEvents}>
+                    {t.events.map((e: string) => <li key={e}>{e}</li>)}
                   </ul>
                 </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      {/* ── FUN FACTS ────────────────────────────────────────────────────── */}
-      <section className={styles.section}>
-        <div className="container">
-          <div className="reveal">
-            <SectionHeader eyebrow="Fun Facts" title="A few things you should know" />
-          </div>
-          <div className={styles.factsGrid}>
-            {funFacts.map((f) => (
-              <div key={f.text} className={`${styles.fact} reveal`}>
-                <div className={styles.factIcon}>{f.icon}</div>
-                <p>{f.text}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── BRAND COLLABS ────────────────────────────────────────────────── */}
-      <section className={`${styles.section} ${styles.brandSection}`}>
+      {/* Fun Facts */}
+      <section className={styles.factsSection}>
         <div className="container">
-          <div className="reveal">
-            <SectionHeader align="center" eyebrow="Past Partnerships" title="Brands I've Worked With" />
-          </div>
-          <div className="reveal">
-            <BrandRow brands={brands} />
+          <div className="eyebrow" style={{ textAlign: 'center', marginBottom: '2rem' }}>Fun Facts</div>
+          <div className={styles.factsGrid}>
+            {funFacts.map((f: FunFact) => (
+              <div key={f.text} className={styles.factCard}>
+                <span className={styles.factEmoji}>{f.emoji}</span>
+                <p className={styles.factText}>{f.text}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
+
+      <NewsletterBlock />
     </>
   );
 }
