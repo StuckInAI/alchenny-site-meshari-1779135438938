@@ -1,19 +1,25 @@
+import { Link } from 'react-router-dom';
 import styles from './SectionHeader.module.css';
-import clsx from 'clsx';
 
-type SectionHeaderProps = {
+export type SectionHeaderProps = {
   eyebrow?: string;
   title: string;
-  description?: string;
-  align?: 'left' | 'center';
+  linkTo?: string;
+  linkLabel?: string;
 };
 
-export default function SectionHeader({ eyebrow, title, description, align = 'left' }: SectionHeaderProps) {
+export default function SectionHeader({ eyebrow, title, linkTo, linkLabel }: SectionHeaderProps) {
   return (
-    <div className={clsx(styles.wrap, align === 'center' && styles.center)}>
-      {eyebrow && <div className="eyebrow">{eyebrow}</div>}
-      <h2 className={styles.title}>{title}</h2>
-      {description && <p className={styles.desc}>{description}</p>}
+    <div className={styles.header}>
+      <div className={styles.left}>
+        {eyebrow && <div className="eyebrow">{eyebrow}</div>}
+        <h2 className={styles.title}>{title}</h2>
+      </div>
+      {linkTo && linkLabel && (
+        <Link to={linkTo} className={styles.link}>
+          {linkLabel} →
+        </Link>
+      )}
     </div>
   );
 }

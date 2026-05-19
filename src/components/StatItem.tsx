@@ -1,18 +1,32 @@
-import { useCountUp } from '@/hooks/useCountUp';
+import { useRef, useEffect } from 'react';
 import styles from './StatItem.module.css';
+import useCountUp from '@/hooks/useCountUp';
 
 type StatItemProps = {
-  icon: string;
-  value: string;
+  value: number | string;
+  suffix?: string;
   label: string;
 };
 
-export default function StatItem({ icon, value, label }: StatItemProps) {
-  const { display, ref } = useCountUp(value);
+function StatDisplay({ value, suffix }: { value: number | string; suffix?: string }) {
+  const numValue = typeof value === 'number' ? value : parseFloat(value);
+  const isNumeric = !isNaN(numValue);
+  const count = useCountUp(isNumeric ? numValue : 0);
+
+  if (!isNumeric) {
+    return <>{value}{suffix}</>
+  }
+  return <>{count}{suffix}</>;
+}
+
+export default function StatItem({ value, suffix, label }: StatItemProps) {
+  const ref = useRef<HTMLDivElement>(null);
+
   return (
-    <div className={styles.stat}>
-      <div className={styles.icon}>{icon}</div>
-      <span ref={ref} className={styles.value}>{display}</span>
+    <div className={styles.item} ref={ref}>
+      <div className={styles.value}>
+        <StatDisplay value={value} suffix={suffix} />
+      </div>
       <div className={styles.label}>{label}</div>
     </div>
   );

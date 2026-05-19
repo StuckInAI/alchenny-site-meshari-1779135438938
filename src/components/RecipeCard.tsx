@@ -1,30 +1,37 @@
 import { Link } from 'react-router-dom';
 import styles from './RecipeCard.module.css';
-import FoodImage from '@/components/FoodImage';
-import { Clock, ChefHat } from 'lucide-react';
-import { RECIPE_DETAILS } from '@/lib/recipeDetails';
-import type { Recipe } from '@/types/index';
+import FoodImage from './FoodImage';
+import clsx from 'clsx';
+import { Recipe } from '@/types';
+
+type Tone = 'peach' | 'caramel' | 'mocha' | 'rose' | 'cream' | 'cocoa' | 'pistachio' | 'berry';
+
+const VALID_TONES: Tone[] = ['peach', 'caramel', 'mocha', 'rose', 'cream', 'cocoa', 'pistachio', 'berry'];
+
+function isTone(value: string | undefined): value is Tone {
+  return VALID_TONES.includes(value as Tone);
+}
 
 type RecipeCardProps = {
   recipe: Recipe;
+  featured?: boolean;
 };
 
-export default function RecipeCard({ recipe }: RecipeCardProps) {
-  const hasDetail = recipe.slug ? RECIPE_DETAILS.some((r: { slug: string }) => r.slug === recipe.slug) : false;
+export default function RecipeCard({ recipe, featured = false }: RecipeCardProps) {
+  const tone = isTone(recipe.tone) ? recipe.tone : undefined;
 
   return (
-    <article className={styles.card}>
+    <Link
+      to={`/recipes/${recipe.slug}`}
+      className={clsx(styles.card, featured && styles.featured)}
+    >
       <div className={styles.imageWrap}>
         <FoodImage
-          tone={recipe.tone}
-          ratio="landscape"
+          tone={tone}
+          ratio={featured ? 'landscape' : 'portrait'}
           src={recipe.image}
           alt={recipe.title}
-          className={styles.image}
         />
-        {recipe.tag && (
-          <span className={styles.tag}>{recipe.tag}</span>
-        )}
       </div>
       <div className={styles.body}>
         {recipe.category && (
@@ -35,25 +42,10 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
           <p className={styles.desc}>{recipe.description}</p>
         )}
         <div className={styles.meta}>
-          {recipe.time && (
-            <span className={styles.metaItem}>
-              <Clock size={13} />
-              {recipe.time}
-            </span>
-          )}
-          {recipe.difficulty && (
-            <span className={styles.metaItem}>
-              <ChefHat size={13} />
-              {recipe.difficulty}
-            </span>
-          )}
+          {recipe.time && <span>{recipe.time}</span>}
+          {recipe.difficulty && <span>{recipe.difficulty}</span>}
         </div>
-        {hasDetail && recipe.slug && (
-          <Link to={`/recipes/${recipe.slug}`} className={styles.link}>
-            View Full Recipe →
-          </Link>
-        )}
       </div>
-    </article>
+    </Link>
   );
 }
