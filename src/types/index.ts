@@ -1,48 +1,43 @@
-export type RecipeCategory =
-  | 'Croissants'
-  | 'Viennoiserie'
-  | 'Chocolate'
-  | 'Pastry'
-  | 'Tarts'
-  | 'Petit Fours'
-  | 'Cakes'
-  | 'Breads';
-
-export interface Recipe {
+export type Recipe = {
   id: string;
   slug: string;
   title: string;
-  category: RecipeCategory;
   description: string;
+  category: string;
+  tags: string[];
   image?: string;
-  imageFallback?: string;
   tone?: string;
-  tag?: string;
   time?: string;
   difficulty?: string;
-}
+  servings?: string;
+};
 
-export interface NavItem {
+export type Stat = {
+  value: number;
   label: string;
-  to: string;
-}
+  suffix?: string;
+  decimals?: number;
+};
 
-export interface Product {
-  id: string;
-  name: string;
-  price: string;
-  description: string;
+export type RecipeDetail = {
+  slug: string;
+  title: string;
+  description?: string;
   image?: string;
   tone?: string;
-}
+  time?: string;
+  difficulty?: string;
+  servings?: string;
+  sections: RecipeSection[];
+  tips?: TipBox[];
+};
 
-export interface TimelineEntry {
-  year: string;
-  title: string;
-  events: string[];
-}
+export type RecipeSection = {
+  heading: string;
+  items: string[];
+};
 
-export interface FunFact {
-  emoji: string;
-  text: string;
-}
+export type TipBox = {
+  title?: string;
+  body: string;
+};

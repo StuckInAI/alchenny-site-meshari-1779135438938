@@ -1,26 +1,26 @@
 import { useRef } from 'react';
 import styles from './StatItem.module.css';
-import { useReveal } from '@/hooks/useReveal';
-import { useCountUp } from '@/hooks/useCountUp';
+import useReveal from '@/hooks/useReveal';
+import useCountUp from '@/hooks/useCountUp';
 
 type StatItemProps = {
   value: number;
-  suffix?: string;
   label: string;
+  suffix?: string;
   decimals?: number;
 };
 
-export default function StatItem({ value, suffix = '', label, decimals = 0 }: StatItemProps) {
+export default function StatItem({ value, label, suffix = '', decimals = 0 }: StatItemProps) {
   const ref = useRef<HTMLDivElement>(null);
   const revealed = useReveal(ref);
   const count = useCountUp({ end: value, decimals, enabled: revealed });
 
   return (
-    <div className={styles.item} ref={ref}>
-      <div className={styles.value}>
+    <div ref={ref} className={styles.item}>
+      <span className={styles.value}>
         {count}{suffix}
-      </div>
-      <div className={styles.label}>{label}</div>
+      </span>
+      <span className={styles.label}>{label}</span>
     </div>
   );
 }
