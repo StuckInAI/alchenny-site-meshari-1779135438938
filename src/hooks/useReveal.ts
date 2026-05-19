@@ -1,28 +1,28 @@
-import { useEffect, useState, type RefObject } from 'react';
+import { useEffect, useRef, useState, RefObject } from 'react';
 
-export default function useReveal(
-  ref: RefObject<HTMLElement | null>,
+export function useReveal(
+  ref?: RefObject<HTMLElement | null>,
   options?: IntersectionObserverInit
 ): [RefObject<HTMLElement | null>, boolean] {
-  const [revealed, setRevealed] = useState(false);
+  const internalRef = useRef<HTMLElement | null>(null);
+  const resolvedRef = ref ?? internalRef;
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const el = ref.current;
+    const el = resolvedRef.current;
     if (!el) return;
-
-    const observer = new IntersectionObserver(
+    const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setRevealed(true);
-          observer.disconnect();
+          setVisible(true);
+          obs.disconnect();
         }
       },
       { threshold: 0.15, ...options }
     );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [resolvedRef, options]);
 
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [ref, options]);
-
-  return [ref, revealed];
+  return [resolvedRef, visible];
 }

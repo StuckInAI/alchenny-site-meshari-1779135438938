@@ -1,201 +1,113 @@
-import type { Recipe } from '@/types/index';
+import type { Recipe } from '@/types';
 
-// ─── Recipe Data ────────────────────────────────────────────────────────────
 export const recipes: Recipe[] = [
   {
-    slug: 'classic-croissants',
-    title: 'Classic Croissants',
-    description: 'Buttery, flaky, and golden — the quintessential French pastry made at home.',
-    image: '',
-    category: 'Pastry',
-    tags: ['french', 'laminated', 'breakfast'],
-    prepTime: '3 hours',
-    cookTime: '25 min',
-    servings: 12,
+    id: '1',
+    slug: 'classic-croissant',
+    title: 'Classic Croissant',
+    description: 'Buttery, flaky layers made with a traditional laminated dough — the cornerstone of French pastry.',
+    category: 'pastry',
+    tone: 'caramel',
+    ratio: 'portrait',
+    time: '3 days',
     difficulty: 'Advanced',
-    date: '2024-01-15',
+    featured: true,
   },
   {
-    slug: 'brown-butter-chocolate-chip-cookies',
-    title: 'Brown Butter Chocolate Chip Cookies',
-    description: 'Nutty brown butter and dark chocolate chips make these the ultimate cookie.',
-    image: '',
-    category: 'Cookies',
-    tags: ['cookies', 'chocolate', 'brown-butter'],
-    prepTime: '20 min',
-    cookTime: '12 min',
-    servings: 24,
-    difficulty: 'Easy',
-    date: '2024-02-10',
+    id: '2',
+    slug: 'pain-au-chocolat',
+    title: 'Pain au Chocolat',
+    description: 'Dark chocolate nestled inside crisp, golden croissant dough. A Parisian staple done right.',
+    category: 'pastry',
+    tone: 'cocoa',
+    ratio: 'portrait',
+    time: '3 days',
+    difficulty: 'Advanced',
+    featured: true,
   },
   {
-    slug: 'lemon-tart',
-    title: 'Classic Lemon Tart',
-    description: 'A bright, silky lemon curd in a buttery pâte sucrée shell.',
-    image: '',
-    category: 'Tarts',
-    tags: ['french', 'citrus', 'tart'],
-    prepTime: '45 min',
-    cookTime: '30 min',
-    servings: 8,
-    difficulty: 'Intermediate',
-    date: '2024-03-05',
-  },
-  {
+    id: '3',
     slug: 'sourdough-boule',
     title: 'Sourdough Boule',
-    description: 'A crackling crust and open crumb — your first sourdough loaf made simple.',
-    image: '',
-    category: 'Bread',
-    tags: ['sourdough', 'bread', 'fermented'],
-    prepTime: '12 hours',
-    cookTime: '45 min',
-    servings: 8,
+    description: 'A chewy, open-crumb loaf with a blistered crust — fermented low and slow for full flavor.',
+    category: 'bread',
+    tone: 'mocha',
+    ratio: 'square',
+    time: '24 hrs',
     difficulty: 'Intermediate',
-    date: '2024-03-20',
+    featured: true,
   },
   {
-    slug: 'opera-cake',
-    title: 'Opéra Cake',
-    description: 'Layers of almond joconde, coffee buttercream, and ganache — pure elegance.',
-    image: '',
-    category: 'Cakes',
-    tags: ['french', 'coffee', 'chocolate', 'cake'],
-    prepTime: '2 hours',
-    cookTime: '15 min',
-    servings: 12,
-    difficulty: 'Advanced',
-    date: '2024-04-01',
+    id: '4',
+    slug: 'lemon-tart',
+    title: 'Lemon Tart',
+    description: 'Silky lemon curd in a crisp, buttery shell with a torched meringue crown.',
+    category: 'pastry',
+    tone: 'cream',
+    ratio: 'landscape',
+    time: '2 hrs',
+    difficulty: 'Intermediate',
+    featured: false,
   },
   {
-    slug: 'matcha-financiers',
-    title: 'Matcha Financiers',
-    description: 'Brown butter almond cakes with a vivid matcha twist — crisp edges, tender center.',
-    image: '',
-    category: 'Petit Fours',
-    tags: ['matcha', 'almond', 'brown-butter'],
-    prepTime: '15 min',
-    cookTime: '14 min',
-    servings: 16,
+    id: '5',
+    slug: 'financiers',
+    title: 'Brown Butter Financiers',
+    description: 'Mini almond cakes with a golden crust, tender crumb, and deep nutty flavour.',
+    category: 'cake',
+    tone: 'peach',
+    ratio: 'landscape',
+    time: '45 min',
     difficulty: 'Easy',
-    date: '2024-04-18',
+    featured: false,
+  },
+  {
+    id: '6',
+    slug: 'kouign-amann',
+    title: 'Kouign-Amann',
+    description: 'The Breton caramelised pastry — layers of buttery dough folded with sugar and baked until crisp.',
+    category: 'pastry',
+    tone: 'caramel',
+    ratio: 'square',
+    time: '4 hrs',
+    difficulty: 'Intermediate',
+    featured: false,
+  },
+  {
+    id: '7',
+    slug: 'chocolate-fondant',
+    title: 'Chocolate Fondant',
+    description: 'A molten-centred chocolate cake that sets up in minutes and impresses every time.',
+    category: 'cake',
+    tone: 'cocoa',
+    ratio: 'portrait',
+    time: '30 min',
+    difficulty: 'Easy',
+    featured: false,
+  },
+  {
+    id: '8',
+    slug: 'earl-grey-shortbread',
+    title: 'Earl Grey Shortbread',
+    description: 'Crisp, melt-in-your-mouth shortbread infused with bergamot and black tea.',
+    category: 'cookies',
+    tone: 'cream',
+    ratio: 'landscape',
+    time: '1 hr',
+    difficulty: 'Easy',
+    featured: false,
   },
 ];
 
-// ─── Products ───────────────────────────────────────────────────────────────
-export const products: Product[] = [
-  {
-    id: 'p1',
-    name: 'The Croissant Blueprint',
-    description: 'A comprehensive 60-page PDF guide to mastering laminated dough at home.',
-    price: 18,
-    category: 'Digital Guides',
-    image: '',
-    badge: 'Bestseller',
-  },
-  {
-    id: 'p2',
-    name: 'Pastry Fundamentals Course',
-    description: '8-week video course covering every foundational pastry technique.',
-    price: 129,
-    category: 'Courses',
-    image: '',
-    badge: 'Most Popular',
-  },
-  {
-    id: 'p3',
-    name: 'Flavor Pairing Workbook',
-    description: 'A printable workbook for building intuitive flavor intuition.',
-    price: 12,
-    category: 'Digital Guides',
-    image: '',
-  },
-  {
-    id: 'p4',
-    name: 'Bread Baking Bootcamp',
-    description: 'A 4-week deep dive into sourdough, enriched breads, and artisan loaves.',
-    price: 89,
-    category: 'Courses',
-    image: '',
-  },
-  {
-    id: 'p5',
-    name: 'Pastry Toolkit Checklist',
-    description: 'The exact tools every home baker needs, organized by skill level.',
-    price: 0,
-    category: 'Freebies',
-    image: '',
-    badge: 'Free',
-  },
-];
-
-export type Product = {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  category: string;
-  image: string;
-  badge?: string;
+export type StatItem = {
+  value: number;
+  suffix?: string;
+  label: string;
 };
 
-// ─── About Page Data ─────────────────────────────────────────────────────────
-export type TimelineEntry = {
-  year: string;
-  title: string;
-  body: string;
-};
-
-export const timeline: TimelineEntry[] = [
-  {
-    year: '2016',
-    title: 'First Croissant (Disaster)',
-    body: 'Attempted a croissant from a YouTube tutorial. It was a buttery, flat, delicious disaster. I was hooked.',
-  },
-  {
-    year: '2018',
-    title: 'Pastry School, Paris',
-    body: 'Enrolled in a professional pastry program in Paris. Learned lamination, sugar work, and the French art of mise en place.',
-  },
-  {
-    year: '2020',
-    title: 'Started the Blog',
-    body: 'Launched alchenny.com during the pandemic to share recipes and techniques with home bakers stuck at home.',
-  },
-  {
-    year: '2022',
-    title: 'Croissant Crew Newsletter',
-    body: 'Launched a Substack newsletter that grew to 14,000 subscribers in its first year.',
-  },
-  {
-    year: '2024',
-    title: 'First Digital Course',
-    body: 'Released the Pastry Fundamentals Course — an 8-week video series that sold out in 48 hours.',
-  },
-];
-
-export const funFacts: string[] = [
-  'I own 4 different types of rolling pins',
-  'I have a ranking spreadsheet of every croissant I\'ve eaten (127 and counting)',
-  'My sourdough starter is named Gerald',
-  'I will always choose a plain croissant over a filled one',
-  'Coffee is a non-negotiable part of my baking process',
-];
-
-export const ALLISON_PORTRAIT = '';
-export const ALLISON_PORTRAIT_FALLBACK = '';
-
-// ─── Polaroid Photos ─────────────────────────────────────────────────────────
-export type PolaroidPhoto = {
-  src: string;
-  caption: string;
-  rotate: number;
-  z: number;
-};
-
-export const POLAROID_PHOTOS: PolaroidPhoto[] = [
-  { src: '', caption: 'paris, 2018', rotate: -6, z: 1 },
-  { src: '', caption: 'first lamination', rotate: 3, z: 2 },
-  { src: '', caption: 'croissant #127', rotate: -2, z: 3 },
-  { src: '', caption: 'pastry school', rotate: 5, z: 4 },
+export const stats: StatItem[] = [
+  { value: 14, suffix: 'k+', label: 'Newsletter subscribers' },
+  { value: 2, suffix: ' yrs', label: 'Pastry school trained' },
+  { value: 120, suffix: '+', label: 'Published recipes' },
+  { value: 8, suffix: '', label: 'Brand partnerships' },
 ];

@@ -1,29 +1,34 @@
 export type Recipe = {
+  id: string;
   slug: string;
   title: string;
   description: string;
+  category: RecipeCategory;
+  tone: string;
+  ratio: string;
+  time?: string;
+  difficulty?: string;
+  featured?: boolean;
   image?: string;
-  category: string;
-  tags: string[];
-  prepTime: string;
-  cookTime: string;
-  servings: number;
-  difficulty: 'Easy' | 'Intermediate' | 'Advanced';
-  date: string;
 };
 
-export type TimelineEntry = {
-  year: string;
+export type RecipeCategory = 'pastry' | 'bread' | 'cake' | 'cookies' | 'savory' | 'drinks' | 'other';
+
+export type RecipeDetail = {
+  slug: string;
   title: string;
-  body: string;
+  description: string;
+  sections: RecipeSection[];
+  tips?: TipBox[];
 };
 
-export type Product = {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  category: string;
-  image: string;
-  badge?: string;
+export type RecipeSection = {
+  heading?: string;
+  body: string;
+  items?: string[];
+};
+
+export type TipBox = {
+  title?: string;
+  body: string;
 };
