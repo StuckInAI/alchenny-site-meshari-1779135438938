@@ -1,41 +1,29 @@
-export type Tone = 'peach' | 'caramel' | 'mocha' | 'rose' | 'cream' | 'cocoa' | 'pistachio' | 'berry';
-
-export interface Recipe {
+export type Recipe = {
   slug: string;
   title: string;
   description: string;
-  category: RecipeCategory;
-  tone: Tone;
-  time: string;
-  difficulty: string;
   image?: string;
-  featured?: boolean;
-}
+  category: string;
+  tags: string[];
+  prepTime: string;
+  cookTime: string;
+  servings: number;
+  difficulty: 'Easy' | 'Intermediate' | 'Advanced';
+  date: string;
+};
 
-export type RecipeCategory = 'pastry' | 'bread' | 'cake' | 'cookie' | 'tart' | 'savory' | 'cream' | 'other';
-
-export interface RecipeSection {
-  heading: string;
-  items: string[];
-}
-
-export interface TipBox {
+export type TimelineEntry = {
+  year: string;
   title: string;
-  tips: string[];
-}
+  body: string;
+};
 
-export interface RecipeDetail extends Recipe {
-  sections: RecipeSection[];
-  tips?: TipBox;
-  prepTime?: string;
-  cookTime?: string;
-  servings?: string;
-  ingredients?: string[];
-  instructions?: string[];
-}
-
-export interface Stat {
-  value: number;
-  suffix?: string;
-  label: string;
-}
+export type Product = {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  category: string;
+  image: string;
+  badge?: string;
+};

@@ -1,78 +1,61 @@
 import styles from './About.module.css';
 import PageHero from '@/components/PageHero';
-import PolaroidCollage from '@/components/PolaroidCollage';
-import NewsletterBlock from '@/components/NewsletterBlock';
-import CdnImage from '@/components/CdnImage';
 import { timeline, funFacts, ALLISON_PORTRAIT, ALLISON_PORTRAIT_FALLBACK } from '@/lib/data';
 import type { TimelineEntry } from '@/types/index';
+import PolaroidCollage from '@/components/PolaroidCollage';
 
 export default function About() {
   return (
-    <>
+    <main>
       <PageHero
         eyebrow="About"
-        title="Hi, I'm Allison"
-        description="Pastry chef, recipe developer, and the voice behind alchenny. I write about baking, butter, and everything in between."
+        title="Hey, I'm Allison"
+        description="Pastry-obsessed baker, self-taught turned school-trained, and the person behind every recipe on this site."
       />
 
-      {/* Portrait + intro */}
-      <section className={styles.introSection}>
+      <section className={styles.intro}>
         <div className="container">
           <div className={styles.introGrid}>
             <div className={styles.portraitWrap}>
-              <CdnImage
-                src={ALLISON_PORTRAIT}
-                fallbackSrc={ALLISON_PORTRAIT_FALLBACK}
-                alt="Allison Chen"
-                className={styles.portrait}
-              />
+              {ALLISON_PORTRAIT ? (
+                <img
+                  src={ALLISON_PORTRAIT}
+                  alt="Allison Chen"
+                  className={styles.portrait}
+                  onError={(e) => {
+                    if (ALLISON_PORTRAIT_FALLBACK) {
+                      (e.target as HTMLImageElement).src = ALLISON_PORTRAIT_FALLBACK;
+                    }
+                  }}
+                />
+              ) : (
+                <div className={styles.portraitPlaceholder}>👩‍🍳</div>
+              )}
             </div>
             <div className={styles.introText}>
-              <div className="eyebrow">My Story</div>
-              <h2 className={styles.introHeading}>From Culinary School to Your Kitchen</h2>
-              <p>
-                I trained at Le Cordon Bleu in Paris before staging at a two-star Michelin restaurant
-                in Lyon. When the world slowed down in 2020, I started this blog to share everything
-                I'd learned — the techniques, the failures, the obsessive recipe testing.
-              </p>
-              <p>
-                Today alchenny reaches over 150,000 readers a month. The newsletter, The Croissant
-                Crew, has 14,000+ subscribers who get my best work before anyone else.
-              </p>
-              <p>
-                I believe good pastry is about patience, not perfection. You don't need a professional
-                kitchen — just a willingness to try again.
-              </p>
+              <h2 className={styles.introHeading}>From burnt cookies to Paris pastry school</h2>
+              <p>I started baking in my college apartment with a hand-me-down mixer and absolutely no idea what I was doing. My first croissant attempt was a flat, greasy disaster — and I loved every bite of it.</p>
+              <p>After a few years of obsessive home baking, I enrolled in a professional pastry program in Paris. It changed everything. I came back with callused hands, a French rolling pin, and a deep conviction that good technique is what separates a good bake from a great one.</p>
+              <p>This site is my attempt to pass those techniques on — without the $30,000 tuition.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Fun facts */}
-      <section className={styles.factsSection}>
+      <section className={styles.collageSection}>
         <div className="container">
-          <div className="eyebrow" style={{ textAlign: 'center', marginBottom: '2rem' }}>Quick Facts</div>
-          <ul className={styles.factsList}>
-            {funFacts.map((fact, i) => (
-              <li key={i} className={styles.factItem}>
-                <span className={styles.factIcon}>✦</span>
-                <span>{fact}</span>
-              </li>
-            ))}
-          </ul>
+          <PolaroidCollage />
         </div>
       </section>
 
-      {/* Timeline */}
       <section className={styles.timelineSection}>
         <div className="container">
-          <div className="eyebrow" style={{ marginBottom: '2.5rem' }}>Journey</div>
-          <h2 className={styles.timelineHeading}>How I Got Here</h2>
+          <div className="eyebrow">My Story</div>
+          <h2 className={styles.sectionTitle}>A (brief) timeline</h2>
           <div className={styles.timeline}>
             {timeline.map((entry: TimelineEntry) => (
-              <div key={entry.year} className={styles.timelineItem}>
+              <div key={entry.year} className={styles.timelineEntry}>
                 <div className={styles.timelineYear}>{entry.year}</div>
-                <div className={styles.timelineDot} />
                 <div className={styles.timelineContent}>
                   <h3 className={styles.timelineTitle}>{entry.title}</h3>
                   <p className={styles.timelineBody}>{entry.body}</p>
@@ -83,15 +66,20 @@ export default function About() {
         </div>
       </section>
 
-      {/* Polaroid collage */}
-      <section className={styles.collageSection}>
+      <section className={styles.funFactsSection}>
         <div className="container">
-          <div className="eyebrow" style={{ textAlign: 'center', marginBottom: '1rem' }}>Snapshots</div>
+          <div className="eyebrow">Random Facts</div>
+          <h2 className={styles.sectionTitle}>A few things about me</h2>
+          <ul className={styles.funFacts}>
+            {funFacts.map((fact: string, i: number) => (
+              <li key={i} className={styles.funFact}>
+                <span className={styles.funFactIcon}>✦</span>
+                {fact}
+              </li>
+            ))}
+          </ul>
         </div>
-        <PolaroidCollage />
       </section>
-
-      <NewsletterBlock />
-    </>
+    </main>
   );
 }

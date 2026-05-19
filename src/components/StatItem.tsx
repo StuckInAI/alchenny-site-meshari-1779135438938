@@ -12,12 +12,12 @@ type StatItemProps = {
 
 export default function StatItem({ value, suffix = '', label, decimals = 0 }: StatItemProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const revealed = useReveal(ref);
+  const [, revealed] = useReveal(ref);
   const count = useCountUp({ end: value, decimals, enabled: revealed });
 
   return (
     <div ref={ref} className={styles.item}>
-      <div className={styles.value}>
+      <div className={styles.number}>
         {count}{suffix}
       </div>
       <div className={styles.label}>{label}</div>
