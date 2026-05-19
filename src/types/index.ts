@@ -1,67 +1,65 @@
-export type RecipeCategory =
-  | 'Bread'
-  | 'Pastry'
-  | 'Cake'
-  | 'Cookie'
-  | 'Viennoiserie'
-  | 'Petit Fours'
-  | 'Chocolate'
-  | 'Tarts';
+export type RecipeCategory = 'Bread' | 'Cake' | 'Pastry' | 'Cookie' | 'Savory' | 'Drink';
 
 export interface Recipe {
-  id: string;
   slug: string;
   title: string;
   category: RecipeCategory;
-  difficulty: 'Easy' | 'Medium' | 'Hard';
   time: string;
+  difficulty: 'Easy' | 'Medium' | 'Hard';
   description: string;
-  image?: string;
-  tone?: 'caramel' | 'cream' | 'mocha' | 'peach';
+  imageSrc?: string;
+  tone?: string;
   featured?: boolean;
-}
-
-export interface Product {
-  id: string;
-  name: string;
-  price: string;
-  description: string;
-  tone?: 'caramel' | 'cream' | 'mocha' | 'peach';
 }
 
 export interface TimelineEntry {
   year: string;
   title: string;
-  description: string;
+  description?: string;
   events: string[];
 }
 
-export interface FunFact {
-  emoji: string;
-  text: string;
+export interface StatItem {
+  value: number;
+  suffix?: string;
+  label: string;
+}
+
+export interface PolaroidPhoto {
+  src: string;
+  caption: string;
+  rotate: number;
+  z: number;
 }
 
 export interface RecipeSection {
-  heading: string;
-  steps: string[];
+  title: string;
+  content?: string;
+  items?: string[];
 }
 
 export interface TipBox {
   title: string;
-  tips: string[];
+  content?: string;
+  body?: string;
 }
 
 export interface RecipeDetail {
   slug: string;
   title: string;
   category: RecipeCategory;
-  difficulty: 'Easy' | 'Medium' | 'Hard';
   time: string;
+  difficulty: 'Easy' | 'Medium' | 'Hard';
   description: string;
-  image?: string;
-  tone?: 'caramel' | 'cream' | 'mocha' | 'peach';
-  ingredients: string[];
+  imageSrc?: string;
+  servings?: string;
   sections: RecipeSection[];
-  tipBox?: TipBox;
-  yield?: string;
+  tips?: TipBox[];
+}
+
+export interface SectionHeaderProps {
+  eyebrow?: string;
+  title: string;
+  linkTo?: string;
+  linkLabel?: string;
 }

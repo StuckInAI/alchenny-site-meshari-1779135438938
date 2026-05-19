@@ -1,58 +1,53 @@
 import { useState } from 'react';
-import styles from './Recipes.module.css';
 import PageHero from '@/components/PageHero';
 import RecipeCard from '@/components/RecipeCard';
-import NewsletterBlock from '@/components/NewsletterBlock';
-import { RECIPES } from '@/lib/data';
-import type { Recipe, RecipeCategory } from '@/types/index';
+import { recipes } from '@/lib/data';
+import type { RecipeCategory } from '@/types';
+import styles from './Recipes.module.css';
 
-const CATEGORIES: ('All' | RecipeCategory)[] = [
+const CATEGORIES: Array<RecipeCategory | 'All'> = [
   'All',
-  'Viennoiserie',
-  'Cakes',
-  'Petit Fours',
-  'Chocolate',
-  'Tarts',
+  'Bread',
+  'Cake',
+  'Pastry',
+  'Cookie',
+  'Savory',
+  'Drink',
 ];
 
 export default function Recipes() {
-  const [active, setActive] = useState<'All' | RecipeCategory>('All');
+  const [active, setActive] = useState<RecipeCategory | 'All'>('All');
 
-  const shown: Recipe[] = active === 'All'
-    ? RECIPES
-    : RECIPES.filter((r: Recipe) => r.category === active);
+  const filtered =
+    active === 'All' ? recipes : recipes.filter((r) => r.category === active);
 
   return (
     <>
       <PageHero
         eyebrow="Recipes"
-        title="From the Archive"
-        description="Every recipe is tested, refined, and written with the home baker in mind. Filter by category or browse everything."
+        title="From the Kitchen"
+        description="Tested recipes with the home baker in mind — organised by category."
       />
-
-      <section style={{ padding: 'clamp(2rem, 5vw, 4rem) 0' }}>
+      <section className={styles.section}>
         <div className="container">
           <div className={styles.filters}>
             {CATEGORIES.map((cat) => (
               <button
                 key={cat}
-                className={`${styles.filter} ${active === cat ? styles.filterActive : ''}`}
+                className={`${styles.pill} ${active === cat ? styles.active : ''}`}
                 onClick={() => setActive(cat)}
               >
                 {cat}
               </button>
             ))}
           </div>
-
           <div className={styles.grid}>
-            {shown.map((r: Recipe) => (
-              <RecipeCard key={r.id} recipe={r} />
+            {filtered.map((recipe) => (
+              <RecipeCard key={recipe.slug} recipe={recipe} />
             ))}
           </div>
         </div>
       </section>
-
-      <NewsletterBlock />
     </>
   );
 }

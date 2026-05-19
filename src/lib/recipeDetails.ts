@@ -1,165 +1,156 @@
-import { RecipeDetail } from '../types';
+import type { RecipeDetail } from '@/types';
 
 export const recipeDetails: RecipeDetail[] = [
   {
-    slug: 'classic-croissant',
-    title: 'Classic Croissant',
-    description: 'A step-by-step guide to buttery, flaky croissants made entirely from scratch.',
-    tone: 'caramel',
-    time: '3 days',
-    difficulty: 'Advanced',
-    servings: '12 croissants',
+    slug: 'classic-sourdough',
+    title: 'Classic Sourdough Loaf',
+    category: 'Bread',
+    time: '24 hr',
+    difficulty: 'Hard',
+    description: 'A beautifully tangy, open-crumb sourdough with a crackling crust.',
+    servings: '1 large loaf',
     sections: [
       {
-        heading: 'Ingredients',
-        items: [
-          '500g bread flour',
-          '10g salt',
-          '80g sugar',
-          '10g instant yeast',
-          '300ml whole milk, cold',
-          '280g unsalted butter (block), cold',
-        ],
-      },
-      {
-        heading: 'Détrempe (Dough)',
-        items: [
-          'Combine flour, salt, sugar, and yeast in a bowl.',
-          'Add cold milk and mix until a shaggy dough forms.',
-          'Knead briefly — do not overdevelop the gluten.',
-          'Flatten into a rectangle, wrap, and refrigerate overnight.',
-        ],
-      },
-      {
-        heading: 'Lamination',
-        items: [
-          'Beat butter into a flat 7-inch square.',
-          'Encase butter in dough and roll out to a long rectangle.',
-          'Perform a letter fold (3 layers). Chill 30 min.',
-          'Repeat the fold 2 more times for 27 layers total.',
-        ],
-      },
-      {
-        heading: 'Shaping & Baking',
-        items: [
-          'Roll dough to 4mm thickness and cut long triangles.',
-          'Roll triangles from base to tip to form a crescent.',
-          'Proof at room temperature for 2–3 hours until jiggling.',
-          'Egg-wash and bake at 200°C (390°F) for 18–22 minutes.',
-        ],
-      },
-    ],
-    tips: [
-      {
-        title: 'Keep Everything Cold',
-        body: 'If at any point the butter feels greasy or the dough is warm, refrigerate for 30 minutes before continuing.',
-      },
-      {
-        title: 'The Jiggle Test',
-        body: 'Properly proofed croissants will jiggle like jelly when the tray is gently shaken. Under-proofed croissants will explode.',
-      },
-    ],
-  },
-  {
-    slug: 'sourdough-boule',
-    title: 'Sourdough Boule',
-    description: 'A crackling crust and open crumb achieved through long cold fermentation.',
-    tone: 'mocha',
-    time: '2 days',
-    difficulty: 'Intermediate',
-    servings: '1 loaf',
-    sections: [
-      {
-        heading: 'Ingredients',
+        title: 'Ingredients',
         items: [
           '450g bread flour',
-          '50g whole wheat flour',
-          '375g water (80°F)',
-          '100g active starter (100% hydration)',
-          '10g salt',
+          '325g water (75% hydration)',
+          '90g active starter',
+          '9g fine sea salt',
         ],
       },
       {
-        heading: 'Autolyse & Mix',
+        title: 'Levain',
         items: [
-          'Mix flours and 350g water. Rest 1 hour (autolyse).',
-          'Add starter and remaining water; squeeze through dough.',
-          'Add salt and mix fully. Rest 30 minutes.',
+          'Mix starter with equal parts flour and water',
+          'Ferment 4–6 hours at room temperature until doubled',
         ],
       },
       {
-        heading: 'Bulk Fermentation',
+        title: 'Autolyse & Mix',
         items: [
-          'Perform 4 sets of stretch-and-folds over 2 hours.',
-          'Bulk ferment at room temperature until 50–75% rise.',
+          'Combine flour and water; rest 1 hour',
+          'Add levain, mix thoroughly',
+          'Add salt with a splash of water; incorporate fully',
         ],
       },
       {
-        heading: 'Shape & Bake',
+        title: 'Bulk Fermentation',
         items: [
-          'Pre-shape into a round. Rest 20 minutes.',
-          'Final shape and place seam-up in a floured banneton.',
-          'Cold retard overnight in the fridge.',
-          'Preheat Dutch oven at 250°C (480°F). Score and bake covered 20 min, uncovered 25 min.',
+          '4 sets of stretch & folds every 30 minutes',
+          'Continue bulk for 4–5 hours total at 24–26°C',
+          'Dough should be domed, jiggly, and ~50% risen',
         ],
       },
     ],
     tips: [
       {
         title: 'Starter Readiness',
-        body: 'Your starter is ready when it doubles in 4–8 hours, smells pleasantly sour, and passes the float test.',
+        body: 'Use your starter at peak — when it has doubled and shows a domed top. A float test can help, but peak activity is the best indicator.',
+      },
+      {
+        title: 'Temperature Matters',
+        body: 'Bulk fermentation times vary significantly with temperature. Cooler kitchens mean longer fermentation. Use a probe thermometer.',
       },
     ],
   },
   {
-    slug: 'paris-brest',
-    title: 'Paris-Brest',
-    description: 'Choux pastry ring filled with hazelnut praline cream — a French classic.',
-    tone: 'cream',
-    time: '4 hours',
-    difficulty: 'Advanced',
-    servings: '8 servings',
+    slug: 'croissants',
+    title: 'Buttery Croissants',
+    category: 'Pastry',
+    time: '3 days',
+    difficulty: 'Hard',
+    description: 'Flaky, laminated croissants with honeyed layers and a glossy finish.',
+    servings: '12 croissants',
     sections: [
       {
-        heading: 'Choux Pastry',
+        title: 'Détrempe (Dough)',
         items: [
-          '250ml water',
-          '100g unsalted butter',
-          '150g plain flour',
-          '4 eggs',
-          'Pinch of salt & sugar',
+          '500g bread flour',
+          '10g fine salt',
+          '80g sugar',
+          '10g instant yeast',
+          '300ml whole milk, cold',
+          '50g unsalted butter, softened',
         ],
       },
       {
-        heading: 'Praline Cream',
+        title: 'Beurrage (Butter Block)',
         items: [
-          '200g hazelnuts, toasted',
-          '200g caster sugar',
-          '500ml whole milk',
-          '6 egg yolks',
-          '50g cornstarch',
-          '200g unsalted butter, softened',
+          '280g European-style butter (84%+ fat)',
+          'Beat to a pliable 19cm square',
         ],
       },
       {
-        heading: 'Method',
+        title: 'Lamination',
         items: [
-          'Make choux: boil water and butter, beat in flour, add eggs one by one.',
-          'Pipe a ring onto baking paper. Sprinkle flaked almonds.',
-          'Bake at 200°C for 25 minutes, then 15 minutes at 170°C.',
-          'Make praline by caramelising sugar over hazelnuts. Blitz to a paste.',
-          'Make pastry cream, cool, then beat in butter and praline.',
-          'Slice ring, fill generously with praline cream, dust with icing sugar.',
+          'Lock butter into dough',
+          'Give 3 letter folds with 1-hour rests in fridge between each',
+          'Final overnight rest in fridge',
+        ],
+      },
+      {
+        title: 'Shaping & Proofing',
+        items: [
+          'Roll dough to 4mm thickness',
+          'Cut triangles, roll tightly from base to tip',
+          'Proof at 24°C for 2–3 hours until jiggly',
+        ],
+      },
+      {
+        title: 'Baking',
+        items: [
+          'Egg wash twice (before proof and just before baking)',
+          'Bake at 190°C fan for 16–18 minutes',
+          'Cool on wire rack for at least 15 minutes',
         ],
       },
     ],
     tips: [
       {
-        title: 'Dry Out the Panade',
-        body: 'After adding flour, stir the dough over heat until it pulls away from the pan and forms a film on the bottom. This removes excess water for better lift.',
+        title: 'Butter Temperature',
+        body: 'Both dough and butter should be at a similar cool temperature (around 15°C) during lamination. Warm butter will absorb into the dough instead of forming layers.',
+      },
+    ],
+  },
+  {
+    slug: 'burnt-basque-cheesecake',
+    title: 'Burnt Basque Cheesecake',
+    category: 'Cake',
+    time: '1.5 hr',
+    difficulty: 'Easy',
+    description: 'Crustless, creamy Basque cheesecake with a caramelised top.',
+    servings: '8–10 slices',
+    sections: [
+      {
+        title: 'Ingredients',
+        items: [
+          '900g full-fat cream cheese, room temperature',
+          '300g caster sugar',
+          '5 large eggs',
+          '500ml heavy cream',
+          '1 tsp vanilla extract',
+          '30g plain flour',
+          '1/2 tsp fine salt',
+        ],
+      },
+      {
+        title: 'Method',
+        items: [
+          'Preheat oven to 220°C fan. Line a 24cm springform tin with overlapping sheets of parchment.',
+          'Beat cream cheese and sugar until smooth.',
+          'Add eggs one at a time, mixing well.',
+          'Stream in cream, vanilla, flour, and salt; mix until silky.',
+          'Pour into tin; bake 50–55 minutes until deeply golden on top but still jiggly in the centre.',
+          'Cool completely at room temperature, then refrigerate overnight.',
+        ],
+      },
+    ],
+    tips: [
+      {
+        title: 'The Wobble',
+        body: 'The cake should look alarmingly underdone when you pull it from the oven — a large, jiggly centre is what you want. It firms up beautifully as it cools.',
       },
     ],
   },
 ];
-
-export const RECIPE_DETAILS = recipeDetails;
