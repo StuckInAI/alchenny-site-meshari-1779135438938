@@ -4,31 +4,38 @@ export interface Recipe {
   slug: string;
   title: string;
   description: string;
-  category: string;
+  category: RecipeCategory;
+  tone: Tone;
   time: string;
-  difficulty: 'Easy' | 'Medium' | 'Hard';
-  servings: number;
-  tags: string[];
-  tone: Tone;
+  difficulty: string;
   image?: string;
-  imageFallback?: string;
+  featured?: boolean;
 }
 
-export interface TimelineEntry {
-  year: string;
+export type RecipeCategory = 'pastry' | 'bread' | 'cake' | 'cookie' | 'tart' | 'savory' | 'cream' | 'other';
+
+export interface RecipeSection {
+  heading: string;
+  items: string[];
+}
+
+export interface TipBox {
   title: string;
-  body: string;
+  tips: string[];
 }
 
-export interface FunFact {
-  text: string;
+export interface RecipeDetail extends Recipe {
+  sections: RecipeSection[];
+  tips?: TipBox;
+  prepTime?: string;
+  cookTime?: string;
+  servings?: string;
+  ingredients?: string[];
+  instructions?: string[];
 }
 
-export interface Product {
-  id: string;
-  name: string;
-  description: string;
-  price: string;
-  tag: string;
-  tone: Tone;
+export interface Stat {
+  value: number;
+  suffix?: string;
+  label: string;
 }

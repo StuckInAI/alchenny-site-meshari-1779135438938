@@ -1,91 +1,96 @@
-import useReveal from '@/hooks/useReveal';
+import React from 'react';
 import styles from './WorkWithMe.module.css';
 import PageHero from '@/components/PageHero';
-import Button from '@/components/Button';
-import SectionHeader from '@/components/SectionHeader';
+import BrandRow from '@/components/BrandRow';
 import NewsletterBlock from '@/components/NewsletterBlock';
+import Button from '@/components/Button';
+import useReveal from '@/hooks/useReveal';
+import clsx from 'clsx';
 
-const SERVICES = [
+const services = [
   {
     emoji: '📸',
     title: 'Food Photography',
-    desc: 'Beautiful, editorial-quality food photography for brands, cookbooks, and editorial features. Shot in natural light with a warm, inviting aesthetic.',
+    desc: 'High-end styled food photography for cookbooks, menus, packaging, and social campaigns. Natural light, editorial aesthetic.',
     price: 'From $800 / half day',
   },
   {
-    emoji: '🎨',
-    title: 'Recipe Development',
-    desc: 'Original recipe creation tested to perfection, with full write-ups, ingredient lists, and styled photography. Ideal for food brands and publications.',
-    price: 'From $400 / recipe',
-  },
-  {
     emoji: '✍️',
-    title: 'Content & Copywriting',
-    desc: 'Engaging food content, blog posts, newsletters, and social captions that reflect your brand voice and connect with your audience.',
-    price: 'From $250 / piece',
+    title: 'Recipe Development',
+    desc: 'Original, tested recipes developed to brief — for brands, publications, or product launches. Full write-up and headnote included.',
+    price: 'From $350 / recipe',
   },
   {
-    emoji: '🤝',
+    emoji: '🎬',
+    title: 'Video Content',
+    desc: 'Short-form recipe videos for Instagram Reels, TikTok, or YouTube. Scripting, filming, and light editing handled in-house.',
+    price: 'From $600 / video',
+  },
+  {
+    emoji: '📣',
     title: 'Brand Partnerships',
-    desc: 'Long-term ambassador relationships with food, kitchen, and lifestyle brands. Includes social content, newsletter features, and event appearances.',
-    price: 'Packages from $2,000',
+    desc: 'Long-form sponsored content, newsletter integrations, and product features — crafted to fit my audience, not interrupt it.',
+    price: 'Enquire for rates',
   },
   {
     emoji: '🎓',
-    title: 'Workshops & Classes',
-    desc: 'Private and group pastry workshops, corporate team events, and online masterclasses. Tailored to skill level and hosted at your location or online.',
-    price: 'From $150 / person',
+    title: 'Workshops & Events',
+    desc: 'Private and corporate baking workshops, pop-up masterclasses, and culinary event appearances.',
+    price: 'Enquire for rates',
   },
   {
-    emoji: '📱',
-    title: 'Social Media Consulting',
-    desc: 'Strategy, content planning, and hands-on coaching for food brands and creators looking to grow their social presence authentically.',
-    price: 'From $500 / month',
+    emoji: '📖',
+    title: 'Writing & Editing',
+    desc: 'Food writing for magazines, brand copy, and cookbook editing. Precise, voice-led work that meets editorial standards.',
+    price: 'From $200 / 1000 words',
   },
 ];
 
-const BRANDS = [
-  'Le Creuset', 'KitchenAid', 'Whole Foods', 'Williams Sonoma',
-  'Sur La Table', 'Food52', 'Bon Appétit', 'NYT Cooking',
+const brands = [
+  'Le Creuset', 'Valrhona', 'KitchenAid', 'Thermomix',
+  'Lurpak', 'Borough Market', 'Ottolenghi', 'Waitrose',
 ];
 
-const FAQS = [
+const faqs = [
   {
     q: 'What is your typical turnaround time?',
-    a: 'For recipe development and photography, I typically deliver within 2–3 weeks of project start. Rush timelines can be accommodated for an additional fee.',
+    a: 'Recipe development takes 1–2 weeks per recipe. Photography bookings are typically scheduled 3–4 weeks out. Video content takes 2–3 weeks from brief to delivery.',
   },
   {
     q: 'Do you work with international brands?',
-    a: 'Absolutely. I work with brands globally and can accommodate remote projects, video calls across time zones, and international shipping for product features.',
+    a: 'Absolutely. I work with clients across Europe, North America, and Australia. Remote briefings and digital delivery make collaboration seamless.',
   },
   {
-    q: 'Can you handle both recipe development and photography?',
-    a: 'Yes — full-service packages that include recipe creation, testing, styling, and photography are my most popular offering.',
+    q: 'Can I see a portfolio or media kit?',
+    a: 'Yes — email me at hello@alchenny.com and I will send over my full portfolio and media kit within 24 hours.',
   },
   {
-    q: 'What information do you need to provide a quote?',
-    a: 'A brief overview of the project scope, timeline, usage rights needed, and budget range helps me put together an accurate proposal.',
+    q: 'Do you offer package deals?',
+    a: 'Yes. Combining recipe development with photography or video attracts a bundled rate. Get in touch to discuss your project scope.',
   },
 ];
 
 export default function WorkWithMe() {
-  const ref = useReveal();
+  const [ref, visible] = useReveal();
 
   return (
     <main ref={ref as React.RefObject<HTMLElement>}>
       <PageHero
-        eyebrow="Collaborate"
-        title="Work With Me"
-        description="Bringing brands and stories to life through the lens of food. Let's create something beautiful together."
+        eyebrow="Work With Me"
+        title="Let's make something delicious"
+        description="Available for food photography, recipe development, video content, brand partnerships, and editorial work."
       />
 
       {/* Services */}
       <section className={styles.servicesSection}>
         <div className="container">
-          <SectionHeader eyebrow="Services" title="What I Offer" />
+          <div className={clsx('reveal', visible && 'is-visible')}>
+            <div className="eyebrow" style={{ textAlign: 'center', marginBottom: '1rem' }}>Services</div>
+            <h2 className={styles.sectionTitle}>What I offer</h2>
+          </div>
           <div className={styles.servicesGrid}>
-            {SERVICES.map((s) => (
-              <div key={s.title} className={`${styles.serviceCard} reveal`}>
+            {services.map((s) => (
+              <div key={s.title} className={styles.serviceCard}>
                 <div className={styles.serviceEmoji}>{s.emoji}</div>
                 <h3 className={styles.serviceTitle}>{s.title}</h3>
                 <p className={styles.serviceDesc}>{s.desc}</p>
@@ -96,44 +101,39 @@ export default function WorkWithMe() {
         </div>
       </section>
 
-      {/* Past Brands */}
+      {/* Brands */}
       <section className={styles.brandsSection}>
         <div className="container">
-          <SectionHeader eyebrow="Past Collaborations" title="Brands I've Worked With" centered />
-          <div className={styles.brandsGrid}>
-            {BRANDS.map((b) => (
-              <div key={b} className={`${styles.brandChip} reveal`}>{b}</div>
-            ))}
-          </div>
+          <div className="eyebrow" style={{ textAlign: 'center', marginBottom: '0.5rem' }}>Past collaborations</div>
+          <BrandRow brands={brands} />
         </div>
       </section>
 
       {/* FAQ */}
       <section className={styles.faqSection}>
         <div className="container">
-          <SectionHeader eyebrow="FAQ" title="Common Questions" />
+          <div className="eyebrow" style={{ marginBottom: '1rem' }}>FAQ</div>
+          <h2 className={styles.sectionTitle}>Common questions</h2>
           <div className={styles.faqList}>
-            {FAQS.map((f) => (
-              <div key={f.q} className={`${styles.faqItem} reveal`}>
-                <h4 className={styles.faqQ}>{f.q}</h4>
-                <p className={styles.faqA}>{f.a}</p>
+            {faqs.map((item) => (
+              <div key={item.q} className={styles.faqItem}>
+                <h3 className={styles.faqQ}>{item.q}</h3>
+                <p className={styles.faqA}>{item.a}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Contact CTA */}
-      <section className={styles.contactSection}>
+      {/* CTA */}
+      <section className={styles.ctaSection}>
         <div className="container">
-          <div className={`${styles.contactInner} reveal`}>
-            <h2 className={styles.contactTitle}>Let's Start a Conversation</h2>
-            <p className={styles.contactDesc}>
-              Have a project in mind? I'd love to hear about it. Send me a message and
-              I'll get back to you within 48 hours.
-            </p>
-            <Button as="link" to="mailto:hello@alchenny.com" variant="primary">
-              Get In Touch
+          <div className={styles.ctaInner}>
+            <div className="eyebrow" style={{ color: 'rgba(255,252,245,0.7)' }}>Get in touch</div>
+            <h2 className={styles.ctaTitle}>Ready to collaborate?</h2>
+            <p className={styles.ctaSub}>Send me a brief and I'll respond within 48 hours with availability and rates.</p>
+            <Button as="link" to="mailto:hello@alchenny.com" variant="secondary">
+              hello@alchenny.com
             </Button>
           </div>
         </div>
