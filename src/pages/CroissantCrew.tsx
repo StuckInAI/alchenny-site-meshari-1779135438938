@@ -1,125 +1,144 @@
-import { useReveal } from '@/hooks/useReveal';
-import PageHero from '@/components/PageHero';
-import SectionHeader from '@/components/SectionHeader';
-import FoodImage from '@/components/FoodImage';
-import NewsletterBlock from '@/components/NewsletterBlock';
+import useReveal from '@/hooks/useReveal';
 import styles from './CroissantCrew.module.css';
+import PageHero from '@/components/PageHero';
+import NewsletterBlock from '@/components/NewsletterBlock';
+import SectionHeader from '@/components/SectionHeader';
+import Button from '@/components/Button';
 
-const perks = [
-  { icon: '🥐', title: 'Free Tier', items: ['Weekly recipe posts', 'Behind-the-scenes baking', 'NYC food recs & notes'] },
-  { icon: '✨', title: 'Paid Tier', items: ['Full step-by-step recipe archives', 'Technique deep-dives from pastry school', 'Early access to drops & events', 'Monthly subscriber Q&As', 'Exclusive Kitsby event discounts'] },
+const PERKS = [
+  {
+    emoji: '🥐',
+    title: 'Weekly Recipes',
+    desc: 'Tested, detailed, and beautifully photographed recipes delivered every week.',
+  },
+  {
+    emoji: '🎓',
+    title: 'Technique Deep-Dives',
+    desc: 'In-depth guides on pastry techniques, from lamination to tempering chocolate.',
+  },
+  {
+    emoji: '📦',
+    title: 'Ingredient Sourcing',
+    desc: 'Where to find the best ingredients, tools, and equipment for your kitchen.',
+  },
+  {
+    emoji: '🌍',
+    title: 'Travel & Inspiration',
+    desc: 'Bakery visits, food market finds, and pastry inspiration from around the world.',
+  },
+  {
+    emoji: '💬',
+    title: 'Community Access',
+    desc: 'Join a growing community of passionate bakers sharing tips and creations.',
+  },
+  {
+    emoji: '🎁',
+    title: 'Exclusive Content',
+    desc: 'Paid subscribers get access to recipe archives, video tutorials, and more.',
+  },
 ];
 
-const posts = [
-  { title: 'How to Make a Proper Croissant (From My Notes at École)', emoji: '🥐', tag: 'Technique' },
-  { title: 'The Macaron Method I Use Every Single Time', emoji: '🫧', tag: 'Technique' },
-  { title: 'My Go-To Ganache Ratios (And Why They Work)', emoji: '🍫', tag: 'Basics' },
-  { title: 'Paris Food Diary: What I Ate at École', emoji: '🗼', tag: 'Diary' },
-  { title: 'NYC Bakeries I Keep Coming Back To', emoji: '🗽', tag: 'Guide' },
-  { title: 'Building a Tasting Menu in a College Apartment', emoji: '🎭', tag: 'Story' },
+const STATS = [
+  { value: '14,000+', label: 'Subscribers' },
+  { value: '200+', label: 'Issues Published' },
+  { value: '4.8/5', label: 'Average Rating' },
+  { value: '62%', label: 'Open Rate' },
+];
+
+const TESTIMONIALS = [
+  {
+    quote: "Alice's newsletter completely changed how I approach pastry. The technique breakdowns are unlike anything else out there.",
+    name: 'Sarah M.',
+    role: 'Home Baker',
+  },
+  {
+    quote: 'I look forward to Tuesday mornings because of The Croissant Crew. Worth every penny of the paid subscription.',
+    name: 'James T.',
+    role: 'Pastry Enthusiast',
+  },
+  {
+    quote: 'Finally, a newsletter that treats readers as intelligent adults who actually want to learn the craft.',
+    name: 'Priya K.',
+    role: 'Professional Chef',
+  },
 ];
 
 export default function CroissantCrew() {
-  useReveal();
+  const ref = useReveal();
+
   return (
-    <>
+    <main ref={ref as React.RefObject<HTMLElement>}>
       <PageHero
-        eyebrow="The Croissant Crew"
-        title="Join the Newsletter"
-        description="Baking guides from French pastry school, recipe archives, NYC food notes, and life updates — straight to your inbox."
+        eyebrow="Newsletter"
+        title="The Croissant Crew"
+        description="A weekly newsletter for people who take baking seriously — and have fun doing it. Join 14,000+ subscribers."
       />
 
-      {/* Tiers */}
-      <section className={styles.section}>
+      {/* Stats */}
+      <section className={styles.statsSection}>
         <div className="container">
-          <div className="reveal">
-            <SectionHeader eyebrow="Membership" title="What You Get" />
-          </div>
-          <div className={styles.tiersGrid}>
-            {perks.map((tier) => (
-              <div key={tier.title} className={`${styles.tierCard} reveal`}>
-                <div className={styles.tierIcon}>{tier.icon}</div>
-                <h3 className={styles.tierTitle}>{tier.title}</h3>
-                <ul className={styles.tierList}>
-                  {tier.items.map((item) => (
-                    <li key={item}>
-                      <span aria-hidden="true">—</span> {item}
-                    </li>
-                  ))}
-                </ul>
-                <a
-                  href="https://alchenny.substack.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className={styles.tierCta}
-                >
-                  {tier.title === 'Free Tier' ? 'Subscribe Free ↗' : 'Go Paid ↗'}
-                </a>
+          <div className={styles.statsGrid}>
+            {STATS.map((s) => (
+              <div key={s.label} className={`${styles.statCard} reveal`}>
+                <div className={styles.statValue}>{s.value}</div>
+                <div className={styles.statLabel}>{s.label}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Sample Posts */}
-      <section className={`${styles.section} ${styles.postsSection}`}>
+      {/* Perks */}
+      <section className={styles.perksSection}>
         <div className="container">
-          <div className="reveal">
-            <SectionHeader eyebrow="From The Archive" title="Recent Posts" />
-          </div>
-          <div className={styles.postsGrid}>
-            {posts.map((p) => (
-              <a
-                key={p.title}
-                href="https://alchenny.substack.com"
-                target="_blank"
-                rel="noreferrer"
-                className={`${styles.postCard} reveal`}
-              >
-                <span className={styles.postEmoji} aria-hidden="true">{p.emoji}</span>
-                <div className={styles.postBody}>
-                  <span className={styles.postTag}>{p.tag}</span>
-                  <h3 className={styles.postTitle}>{p.title}</h3>
-                  <span className={styles.postLink}>Read on Substack ↗</span>
-                </div>
-              </a>
+          <SectionHeader eyebrow="What You Get" title="Everything Inside The Crew" centered />
+          <div className={styles.perksGrid}>
+            {PERKS.map((p) => (
+              <div key={p.title} className={`${styles.perkCard} reveal`}>
+                <div className={styles.perkEmoji}>{p.emoji}</div>
+                <h3 className={styles.perkTitle}>{p.title}</h3>
+                <p className={styles.perkDesc}>{p.desc}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section className={styles.section}>
+      {/* Testimonials */}
+      <section className={styles.testimonialsSection}>
         <div className="container">
-          <div className={styles.aboutGrid}>
-            <div className="reveal">
-              <FoodImage tone="caramel" ratio="portrait" />
-            </div>
-            <div className={`${styles.aboutCopy} reveal`}>
-              <div className="eyebrow">About The Newsletter</div>
-              <h2 className={styles.aboutTitle}>Written by Allison, for bakers</h2>
-              <p>
-                The Croissant Crew started as a way to share what I learned at French pastry school
-                with everyone who couldn't be there. Now it's a home for recipes, technique breakdowns,
-                NYC food guides, and honest notes on life as a pastry creator.
-              </p>
-              <p>
-                14,000+ subscribers and growing. Free to start. Upgrade anytime.
-              </p>
-              <a
-                href="https://alchenny.substack.com"
-                target="_blank"
-                rel="noreferrer"
-                className={styles.substackBtn}
-              >
-                Open on Substack ↗
-              </a>
-            </div>
+          <SectionHeader eyebrow="Readers Say" title="From The Community" centered />
+          <div className={styles.testimonialsGrid}>
+            {TESTIMONIALS.map((t) => (
+              <div key={t.name} className={`${styles.testimonialCard} reveal`}>
+                <blockquote className={styles.quote}>"{t.quote}"</blockquote>
+                <div className={styles.testimonialAuthor}>
+                  <strong>{t.name}</strong>
+                  <span>{t.role}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className={styles.ctaSection}>
+        <div className="container">
+          <div className={`${styles.ctaInner} reveal`}>
+            <h2 className={styles.ctaTitle}>Ready to Level Up Your Baking?</h2>
+            <p className={styles.ctaDesc}>
+              Join thousands of bakers getting weekly recipes, techniques, and inspiration.
+              Free to start — upgrade anytime.
+            </p>
+            <Button as="link" to="https://substack.com" variant="primary">
+              Subscribe on Substack
+            </Button>
           </div>
         </div>
       </section>
 
       <NewsletterBlock />
-    </>
+    </main>
   );
 }

@@ -1,43 +1,40 @@
 export type Recipe = {
-  id: string;
   slug: string;
+  title: string;
+  category: RecipeCategory;
+  description: string;
+  image?: string;
+  imageFallback?: string;
+  time: string;
+  difficulty: 'Easy' | 'Medium' | 'Hard';
+  tags?: string[];
+};
+
+export type RecipeCategory = 'Pastry' | 'Bread' | 'Cakes' | 'Cookies' | 'Confectionery' | 'Seasonal';
+
+export type NavItem = {
+  label: string;
+  href: string;
+};
+
+export type Product = {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  image?: string;
+  category: string;
+  link?: string;
+};
+
+export type TimelineEntry = {
+  year: string;
   title: string;
   description: string;
-  category: string;
-  tags: string[];
-  image?: string;
-  tone?: string;
-  time?: string;
-  difficulty?: string;
-  servings?: string;
 };
 
-export type Stat = {
-  value: number;
+export type FunFact = {
+  emoji: string;
   label: string;
-  suffix?: string;
-  decimals?: number;
-};
-
-export type RecipeDetail = {
-  slug: string;
-  title: string;
-  description?: string;
-  image?: string;
-  tone?: string;
-  time?: string;
-  difficulty?: string;
-  servings?: string;
-  sections: RecipeSection[];
-  tips?: TipBox[];
-};
-
-export type RecipeSection = {
-  heading: string;
-  items: string[];
-};
-
-export type TipBox = {
-  title?: string;
-  body: string;
+  value: string;
 };

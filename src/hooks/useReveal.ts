@@ -1,28 +1,34 @@
-import { useEffect, useState, RefObject } from 'react';
+import { useEffect, useRef } from 'react';
 
-export default function useReveal(ref: RefObject<HTMLElement | null>): boolean {
-  const [revealed, setRevealed] = useState(false);
+/**
+ * useReveal — attaches an IntersectionObserver to add the `revealed` class
+ * to all `.reveal` children inside the observed container.
+ */
+export default function useReveal() {
+  const ref = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
+    const container = ref.current;
+    if (!container) return;
 
-    if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver(
-        ([entry]) => {
+    const targets = Array.from(container.querySelectorAll<HTMLElement>('.reveal'));
+    if (targets.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setRevealed(true);
-            observer.disconnect();
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
           }
-        },
-        { threshold: 0.15 }
-      );
-      observer.observe(el);
-      return () => observer.disconnect();
-    } else {
-      setRevealed(true);
-    }
-  }, [ref]);
+        });
+      },
+      { threshold: 0.12 }
+    );
 
-  return revealed;
+    targets.forEach((t) => observer.observe(t));
+    return () => observer.disconnect();
+  }, []);
+
+  return ref;
 }
