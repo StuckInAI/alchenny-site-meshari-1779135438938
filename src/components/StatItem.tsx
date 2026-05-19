@@ -16,9 +16,11 @@ export default function StatItem({ value, suffix = '', label, decimals = 0 }: St
   const count = useCountUp({ end: value, decimals, enabled: revealed });
 
   return (
-    <div ref={ref} className={styles.item}>
-      <span className={styles.value}>{count}{suffix}</span>
-      <span className={styles.label}>{label}</span>
+    <div className={styles.item} ref={ref}>
+      <div className={styles.value}>
+        {count}{suffix}
+      </div>
+      <div className={styles.label}>{label}</div>
     </div>
   );
 }
