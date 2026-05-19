@@ -7,17 +7,13 @@ type StatItemProps = {
   value: number;
   suffix?: string;
   label: string;
-  duration?: number;
+  decimals?: number;
 };
 
-export default function StatItem({ value, suffix = '', label, duration = 2000 }: StatItemProps) {
+export default function StatItem({ value, suffix = '', label, decimals = 0 }: StatItemProps) {
   const ref = useRef<HTMLDivElement>(null);
   const revealed = useReveal(ref);
-  const count = useCountUp({
-    end: value,
-    duration,
-    enabled: revealed,
-  });
+  const count = useCountUp({ end: value, decimals, enabled: revealed });
 
   return (
     <div ref={ref} className={styles.item}>
