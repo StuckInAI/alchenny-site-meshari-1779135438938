@@ -1,13 +1,13 @@
+import { useState } from 'react';
 import styles from './Home.module.css';
 import Button from '@/components/Button';
 import RecipeCard from '@/components/RecipeCard';
-import FoodImage from '@/components/FoodImage';
 import BrandRow from '@/components/BrandRow';
 import NewsletterBlock from '@/components/NewsletterBlock';
 import PolaroidCollage from '@/components/PolaroidCollage';
 import SectionHeader from '@/components/SectionHeader';
 import StatItem from '@/components/StatItem';
-import { featuredRecipes, brandPartners, ALLISON_PORTRAIT } from '@/lib/data';
+import { featuredRecipes, brandPartners, ALLISON_PORTRAIT, ALLISON_PORTRAIT_FALLBACK } from '@/lib/data';
 import type { Recipe } from '@/types/index';
 
 const STATS = [
@@ -80,12 +80,7 @@ export default function Home() {
         <div className="container">
           <div className={styles.aboutGrid}>
             <div className={styles.aboutImage}>
-              <FoodImage
-                tone="caramel"
-                ratio="portrait"
-                src={ALLISON_PORTRAIT || undefined}
-                alt="Allison Chen in the kitchen"
-              />
+              <AllisonPortrait />
             </div>
             <div className={styles.aboutText}>
               <div className="eyebrow">About Allison</div>
@@ -117,5 +112,36 @@ export default function Home() {
 
       <NewsletterBlock />
     </>
+  );
+}
+
+function AllisonPortrait() {
+  const [src, setSrc] = useState<string>(ALLISON_PORTRAIT);
+  const [usedFallback, setUsedFallback] = useState<boolean>(false);
+
+  function handleError() {
+    if (!usedFallback && src !== ALLISON_PORTRAIT_FALLBACK) {
+      setSrc(ALLISON_PORTRAIT_FALLBACK);
+      setUsedFallback(true);
+    }
+  }
+
+  return (
+    <div className={styles.portraitWrap}>
+      {src ? (
+        <img
+          src={src}
+          alt="Allison Chen in the kitchen"
+          className={styles.portraitImg}
+          onError={handleError}
+          referrerPolicy="no-referrer-when-downgrade"
+          crossOrigin="anonymous"
+          loading="lazy"
+        />
+      ) : (
+        <div className={styles.portraitPlaceholder} />
+      )}
+      <div className={styles.portraitOverlay} />
+    </div>
   );
 }

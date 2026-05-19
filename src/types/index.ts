@@ -15,6 +15,7 @@ export interface Recipe {
   category: RecipeCategory;
   description: string;
   image?: string;
+  imageFallback?: string;
   tone?: string;
   tag?: string;
   time?: string;

@@ -1,158 +1,222 @@
 .hero {
-  padding: clamp(5rem, 10vw, 8rem) 0 clamp(3rem, 7vw, 5rem);
-  position: relative;
-  overflow: hidden;
+  padding: clamp(4rem, 8vw, 7rem) 0 clamp(3rem, 6vw, 5rem);
+  background: var(--color-bg);
 }
 
-/* subtle parallax radial glow */
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: -20%;
-  background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(196,96,42,0.07) 0%, transparent 70%);
-  transform: translateY(var(--parallax-y, 0px));
-  pointer-events: none;
-  will-change: transform;
-}
-
-.heroInner { display: flex; }
-
-.heroCopy {
-  max-width: 900px;
-  margin: 0 auto;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
+.heroInner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
   align-items: center;
-  gap: 1.25rem;
-  position: relative;
-  z-index: 1;
 }
 
-.headline {
-  font-size: clamp(2.4rem, 7vw, 5rem);
-  font-weight: 500;
-  line-height: 1.02;
-  letter-spacing: -0.02em;
+.heroText {
+  max-width: 560px;
 }
-.headline em {
-  font-style: italic;
+
+.heroTitle {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--color-text);
+  margin: 0.75rem 0 1.25rem;
+}
+
+.accent {
   color: var(--color-accent);
-  font-weight: 400;
+  font-style: italic;
 }
 
-.sub {
-  color: var(--color-text-soft);
-  font-size: clamp(1rem, 1.5vw, 1.2rem);
-  max-width: 56ch;
-  line-height: 1.6;
+.heroSub {
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  max-width: 440px;
+  margin-bottom: 2rem;
 }
 
-.ctas {
+.heroCtas {
   display: flex;
+  gap: 1rem;
   flex-wrap: wrap;
-  gap: 0.85rem;
-  justify-content: center;
-  margin-top: 0.5rem;
 }
 
-/* ── Stats ── */
-.statsBar {
-  background: var(--color-bg-alt);
-  border-top: 1px solid var(--color-divider);
-  border-bottom: 1px solid var(--color-divider);
-  padding: 2.5rem 0;
+.heroVisual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+/* Stats */
+.statsSection {
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  padding: clamp(2rem, 4vw, 3rem) 0;
+}
+
 .statsGrid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem 1rem;
-}
-@media (min-width: 760px) {
-  .statsGrid { grid-template-columns: repeat(4, 1fr); }
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
 }
 
+/* Featured Recipes */
 .section {
-  padding: var(--section-py) 0;
+  padding: clamp(3rem, 6vw, 5rem) 0;
 }
 
-/* Recipe grid: 1 col mobile → 2 tablet → 3 desktop */
 .recipeGrid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 2.5rem 2rem;
-}
-@media (min-width: 600px) {
-  .recipeGrid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (min-width: 1024px) {
-  .recipeGrid { grid-template-columns: repeat(3, 1fr); }
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
 }
 
-.viewAll {
-  display: flex;
-  justify-content: center;
-  margin-top: 3.5rem;
+/* About snippet */
+.aboutSection {
+  padding: clamp(3rem, 6vw, 5rem) 0;
+  background: var(--color-surface);
 }
-
-/* ── About mini ── */
-.aboutMini { background: var(--color-bg-alt); }
 
 .aboutGrid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 2.5rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
   align-items: center;
 }
-@media (min-width: 880px) {
-  .aboutGrid { grid-template-columns: 0.85fr 1fr; gap: 4rem; }
-}
 
-.aboutImgWrap {
-  border-radius: 10px;
-  overflow: hidden;
-  aspect-ratio: 3 / 4;
-  background: var(--color-cream-dark);
+.aboutImage {
   position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 4/5;
 }
 
-/* Real portrait image — fills the container */
-.aboutImg {
+/* Portrait image within about section */
+.portraitWrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #e8ddd0;
+}
+
+.portraitImg {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
+  object-position: top center;
   display: block;
-  border-radius: 10px;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.aboutImgWrap:hover .aboutImg {
-  transform: scale(1.04);
+  transition: transform 0.5s ease;
 }
 
-/* Warm overlay for portrait — soft vignette + cream tint */
+.portraitWrap:hover .portraitImg {
+  transform: scale(1.03);
+}
+
 .portraitOverlay {
   position: absolute;
   inset: 0;
-  border-radius: 10px;
-  background:
-    radial-gradient(ellipse at center, transparent 40%, rgba(44, 26, 14, 0.18) 100%),
-    linear-gradient(180deg, rgba(196, 96, 42, 0.04) 0%, rgba(196, 96, 42, 0.10) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(196, 140, 70, 0.08) 0%,
+    rgba(0, 0, 0, 0) 60%
+  );
   pointer-events: none;
 }
 
-.aboutCopy {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-  align-items: flex-start;
+.portraitPlaceholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #d4a96a 0%, #e8c9a0 100%);
+  min-height: 400px;
 }
-.aboutCopy p {
-  color: var(--color-text-soft);
-  font-size: 1.05rem;
-  line-height: 1.7;
+
+.aboutText {
+  max-width: 480px;
 }
-.aboutTitle {
-  font-size: clamp(2rem, 4.5vw, 3rem);
-  font-weight: 500;
+
+.aboutHeading {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 700;
+  margin: 0.5rem 0 1.25rem;
+  color: var(--color-text);
+  line-height: 1.2;
+}
+
+.aboutCta {
+  margin-top: 2rem;
+}
+
+/* Brand partners */
+.brandsSection {
+  padding: clamp(2rem, 4vw, 3rem) 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.brandsLabel {
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 1.5rem;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .heroInner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .heroText {
+    max-width: 100%;
+  }
+
+  .heroSub {
+    max-width: 100%;
+    margin-inline: auto;
+  }
+
+  .heroCtas {
+    justify-content: center;
+  }
+
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .recipeGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .aboutGrid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .aboutImage {
+    aspect-ratio: 16/9;
+    max-height: 400px;
+  }
+
+  .aboutText {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .recipeGrid {
+    grid-template-columns: 1fr;
+  }
 }

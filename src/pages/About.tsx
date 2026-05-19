@@ -1,9 +1,10 @@
+import { useState } from 'react';
 import styles from './About.module.css';
 import PageHero from '@/components/PageHero';
-import FoodImage from '@/components/FoodImage';
 import StatItem from '@/components/StatItem';
 import NewsletterBlock from '@/components/NewsletterBlock';
-import { timeline, funFacts } from '@/lib/data';
+import PolaroidCollage from '@/components/PolaroidCollage';
+import { timeline, funFacts, ALLISON_PORTRAIT, ALLISON_PORTRAIT_FALLBACK } from '@/lib/data';
 import type { TimelineEntry, FunFact } from '@/types/index';
 
 const STATS = [
@@ -16,18 +17,32 @@ const STATS = [
 export default function About() {
   return (
     <>
-      <PageHero
-        eyebrow="About"
-        title="Hi, I'm Allison."
-        description="Paris-trained pastry chef turned recipe educator. I believe the best baking is honest, technical, and wildly delicious."
-      />
+      {/* Hero with polaroid collage */}
+      <section className={styles.heroSection}>
+        <div className="container">
+          <div className={styles.heroInner}>
+            <div className={styles.heroText}>
+              <div className="eyebrow">About</div>
+              <h1 className={styles.heroTitle}>Hi, I'm Allison.</h1>
+              <p className={styles.heroItalic}><em>Welcome.</em></p>
+              <p className={styles.heroDesc}>
+                Paris-trained pastry chef turned recipe educator. I believe the best baking
+                is honest, technical, and wildly delicious.
+              </p>
+            </div>
+            <div className={styles.heroPolaroids}>
+              <PolaroidCollage />
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Portrait + Bio */}
       <section className={styles.bioSection}>
         <div className="container">
           <div className={styles.bioGrid}>
             <div className={styles.bioImage}>
-              <FoodImage tone="caramel" ratio="portrait" alt="Allison Chen portrait" />
+              <AllisonPortrait />
             </div>
             <div className={styles.bioText}>
               <div className="eyebrow">My Story</div>
@@ -101,5 +116,36 @@ export default function About() {
 
       <NewsletterBlock />
     </>
+  );
+}
+
+function AllisonPortrait() {
+  const [src, setSrc] = useState<string>(ALLISON_PORTRAIT);
+  const [usedFallback, setUsedFallback] = useState<boolean>(false);
+
+  function handleError() {
+    if (!usedFallback && src !== ALLISON_PORTRAIT_FALLBACK) {
+      setSrc(ALLISON_PORTRAIT_FALLBACK);
+      setUsedFallback(true);
+    }
+  }
+
+  return (
+    <div className={styles.portraitWrap}>
+      {src ? (
+        <img
+          src={src}
+          alt="Allison Chen smiling in the kitchen"
+          className={styles.portraitImg}
+          onError={handleError}
+          referrerPolicy="no-referrer-when-downgrade"
+          crossOrigin="anonymous"
+          loading="lazy"
+        />
+      ) : (
+        <div className={styles.portraitPlaceholder} />
+      )}
+      <div className={styles.portraitOverlay} />
+    </div>
   );
 }

@@ -1,16 +1,8 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './RecipeCard.module.css';
-import FoodImage from './FoodImage';
 import clsx from 'clsx';
-import { Recipe } from '@/types';
-
-type Tone = 'peach' | 'caramel' | 'mocha' | 'rose' | 'cream' | 'cocoa' | 'pistachio' | 'berry';
-
-const VALID_TONES: Tone[] = ['peach', 'caramel', 'mocha', 'rose', 'cream', 'cocoa', 'pistachio', 'berry'];
-
-function isTone(value: string | undefined): value is Tone {
-  return VALID_TONES.includes(value as Tone);
-}
+import type { Recipe } from '@/types';
 
 type RecipeCardProps = {
   recipe: Recipe;
@@ -18,7 +10,9 @@ type RecipeCardProps = {
 };
 
 export default function RecipeCard({ recipe, featured = false }: RecipeCardProps) {
-  const tone = isTone(recipe.tone) ? recipe.tone : undefined;
+  const [imgError, setImgError] = useState<boolean>(false);
+
+  const showImage = !imgError && !!recipe.image;
 
   return (
     <Link
@@ -26,12 +20,30 @@ export default function RecipeCard({ recipe, featured = false }: RecipeCardProps
       className={clsx(styles.card, featured && styles.featured)}
     >
       <div className={styles.imageWrap}>
-        <FoodImage
-          tone={tone}
-          ratio={featured ? 'landscape' : 'portrait'}
-          src={recipe.image}
-          alt={recipe.title}
-        />
+        {showImage ? (
+          <img
+            src={imgError ? (recipe.imageFallback ?? '') : (recipe.image ?? '')}
+            alt={recipe.title}
+            className={styles.cardImg}
+            onError={() => {
+              if (!imgError && recipe.imageFallback) {
+                setImgError(true);
+              }
+            }}
+            referrerPolicy="no-referrer-when-downgrade"
+            crossOrigin="anonymous"
+            loading="lazy"
+          />
+        ) : recipe.imageFallback ? (
+          <img
+            src={recipe.imageFallback}
+            alt={recipe.title}
+            className={styles.cardImg}
+            loading="lazy"
+          />
+        ) : (
+          <div className={clsx(styles.placeholder, recipe.tone && styles[`tone-${recipe.tone}`])} />
+        )}
       </div>
       <div className={styles.body}>
         {recipe.category && (

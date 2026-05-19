@@ -1,14 +1,6 @@
 import { useState } from 'react';
 import styles from './PolaroidCollage.module.css';
-import { POLAROID_PHOTOS } from '@/lib/data';
-
-// Fallback Unsplash photos if local images haven't been uploaded yet
-const FALLBACKS = [
-  'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80',
-  'https://images.unsplash.com/photo-1607631568010-a87245c0daf8?w=600&q=80',
-  'https://images.unsplash.com/photo-1595273670150-bd0c3c392e46?w=600&q=80',
-  'https://images.unsplash.com/photo-1581299894007-aaa50297cf16?w=600&q=80',
-];
+import { POLAROID_PHOTOS, POLAROID_FALLBACKS } from '@/lib/data';
 
 export default function PolaroidCollage() {
   return (
@@ -27,9 +19,21 @@ function PolaroidPhoto({
   photo: { src: string; alt: string; rotate: string; zIndex: number };
   index: number;
 }) {
-  const [error, setError] = useState(false);
-  // If local image fails, cascade to fallback
-  const src = error ? FALLBACKS[index] : photo.src;
+  const [triedCdn, setTriedCdn] = useState<boolean>(false);
+  const [triedFallback, setTriedFallback] = useState<boolean>(false);
+
+  function getCurrentSrc(): string {
+    if (triedCdn) return POLAROID_FALLBACKS[index] ?? '';
+    return photo.src;
+  }
+
+  function handleError() {
+    if (!triedCdn) {
+      setTriedCdn(true);
+    } else if (!triedFallback) {
+      setTriedFallback(true);
+    }
+  }
 
   return (
     <div
@@ -41,10 +45,12 @@ function PolaroidPhoto({
     >
       <div className={styles.photoWrap}>
         <img
-          src={src}
+          src={getCurrentSrc()}
           alt={photo.alt}
           className={styles.photo}
-          onError={() => setError(true)}
+          onError={handleError}
+          referrerPolicy="no-referrer-when-downgrade"
+          crossOrigin="anonymous"
           loading="lazy"
         />
       </div>

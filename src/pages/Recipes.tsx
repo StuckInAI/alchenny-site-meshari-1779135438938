@@ -9,10 +9,10 @@ import type { Recipe, RecipeCategory } from '@/types/index';
 const CATEGORIES: ('All' | RecipeCategory)[] = [
   'All',
   'Viennoiserie',
-  'Chocolate',
-  'Pastry',
-  'Tarts',
+  'Cakes',
   'Petit Fours',
+  'Chocolate',
+  'Tarts',
 ];
 
 export default function Recipes() {
