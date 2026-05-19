@@ -1,97 +1,81 @@
-import { useState } from 'react';
 import styles from './About.module.css';
 import PageHero from '@/components/PageHero';
-import StatItem from '@/components/StatItem';
-import NewsletterBlock from '@/components/NewsletterBlock';
 import PolaroidCollage from '@/components/PolaroidCollage';
+import NewsletterBlock from '@/components/NewsletterBlock';
+import CdnImage from '@/components/CdnImage';
 import { timeline, funFacts, ALLISON_PORTRAIT, ALLISON_PORTRAIT_FALLBACK } from '@/lib/data';
-import type { TimelineEntry, FunFact } from '@/types/index';
-
-const STATS = [
-  { value: 820, suffix: 'K', label: 'YouTube Subscribers' },
-  { value: 14, suffix: 'K+', label: 'Newsletter Readers' },
-  { value: 3000, suffix: '+', label: 'Croissants Made' },
-  { value: 11, suffix: '', label: 'Countries Baked In' },
-];
+import type { TimelineEntry } from '@/types/index';
 
 export default function About() {
   return (
     <>
-      {/* Hero with polaroid collage */}
-      <section className={styles.heroSection}>
-        <div className="container">
-          <div className={styles.heroInner}>
-            <div className={styles.heroText}>
-              <div className="eyebrow">About</div>
-              <h1 className={styles.heroTitle}>Hi, I'm Allison.</h1>
-              <p className={styles.heroItalic}><em>Welcome.</em></p>
-              <p className={styles.heroDesc}>
-                Paris-trained pastry chef turned recipe educator. I believe the best baking
-                is honest, technical, and wildly delicious.
-              </p>
-            </div>
-            <div className={styles.heroPolaroids}>
-              <PolaroidCollage />
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="About"
+        title="Hi, I'm Allison"
+        description="Pastry chef, recipe developer, and the voice behind alchenny. I write about baking, butter, and everything in between."
+      />
 
-      {/* Portrait + Bio */}
-      <section className={styles.bioSection}>
+      {/* Portrait + intro */}
+      <section className={styles.introSection}>
         <div className="container">
-          <div className={styles.bioGrid}>
-            <div className={styles.bioImage}>
-              <AllisonPortrait />
+          <div className={styles.introGrid}>
+            <div className={styles.portraitWrap}>
+              <CdnImage
+                src={ALLISON_PORTRAIT}
+                fallbackSrc={ALLISON_PORTRAIT_FALLBACK}
+                alt="Allison Chen"
+                className={styles.portrait}
+              />
             </div>
-            <div className={styles.bioText}>
+            <div className={styles.introText}>
               <div className="eyebrow">My Story</div>
-              <h2 className={styles.bioHeading}>From Engineering to Eclairs</h2>
+              <h2 className={styles.introHeading}>From Culinary School to Your Kitchen</h2>
               <p>
-                I spent three years studying mechanical engineering before I realised the only
-                equations I cared about were butter-to-flour ratios. I quit, enrolled at Le Cordon
-                Bleu Paris, and never looked back.
+                I trained at Le Cordon Bleu in Paris before staging at a two-star Michelin restaurant
+                in Lyon. When the world slowed down in 2020, I started this blog to share everything
+                I'd learned — the techniques, the failures, the obsessive recipe testing.
               </p>
               <p>
-                After graduating, I staged at bakeries across Tokyo and Singapore — learning that
-                great pastry is both a science and a cultural conversation. In 2020, I started
-                documenting my process online, and somehow 820,000 people decided they wanted to
-                watch me laminate dough.
+                Today alchenny reaches over 150,000 readers a month. The newsletter, The Croissant
+                Crew, has 14,000+ subscribers who get my best work before anyone else.
               </p>
               <p>
-                These days I split my time between recipe development, teaching, and building the
-                Croissant Crew — a community of home bakers who take their craft seriously without
-                taking themselves too seriously.
+                I believe good pastry is about patience, not perfection. You don't need a professional
+                kitchen — just a willingness to try again.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Stats */}
-      <section className={styles.statsSection}>
+      {/* Fun facts */}
+      <section className={styles.factsSection}>
         <div className="container">
-          <div className={styles.statsGrid}>
-            {STATS.map((s) => (
-              <StatItem key={s.label} value={s.value} suffix={s.suffix} label={s.label} />
+          <div className="eyebrow" style={{ textAlign: 'center', marginBottom: '2rem' }}>Quick Facts</div>
+          <ul className={styles.factsList}>
+            {funFacts.map((fact, i) => (
+              <li key={i} className={styles.factItem}>
+                <span className={styles.factIcon}>✦</span>
+                <span>{fact}</span>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
       {/* Timeline */}
       <section className={styles.timelineSection}>
         <div className="container">
-          <div className="eyebrow" style={{ textAlign: 'center', marginBottom: '3rem' }}>Journey</div>
+          <div className="eyebrow" style={{ marginBottom: '2.5rem' }}>Journey</div>
+          <h2 className={styles.timelineHeading}>How I Got Here</h2>
           <div className={styles.timeline}>
-            {timeline.map((t: TimelineEntry) => (
-              <div key={t.year} className={styles.timelineItem}>
-                <div className={styles.timelineYear}>{t.year}</div>
+            {timeline.map((entry: TimelineEntry) => (
+              <div key={entry.year} className={styles.timelineItem}>
+                <div className={styles.timelineYear}>{entry.year}</div>
+                <div className={styles.timelineDot} />
                 <div className={styles.timelineContent}>
-                  <h3 className={styles.timelineTitle}>{t.title}</h3>
-                  <ul className={styles.timelineEvents}>
-                    {t.events.map((e: string) => <li key={e}>{e}</li>)}
-                  </ul>
+                  <h3 className={styles.timelineTitle}>{entry.title}</h3>
+                  <p className={styles.timelineBody}>{entry.body}</p>
                 </div>
               </div>
             ))}
@@ -99,53 +83,15 @@ export default function About() {
         </div>
       </section>
 
-      {/* Fun Facts */}
-      <section className={styles.factsSection}>
+      {/* Polaroid collage */}
+      <section className={styles.collageSection}>
         <div className="container">
-          <div className="eyebrow" style={{ textAlign: 'center', marginBottom: '2rem' }}>Fun Facts</div>
-          <div className={styles.factsGrid}>
-            {funFacts.map((f: FunFact) => (
-              <div key={f.text} className={styles.factCard}>
-                <span className={styles.factEmoji}>{f.emoji}</span>
-                <p className={styles.factText}>{f.text}</p>
-              </div>
-            ))}
-          </div>
+          <div className="eyebrow" style={{ textAlign: 'center', marginBottom: '1rem' }}>Snapshots</div>
         </div>
+        <PolaroidCollage />
       </section>
 
       <NewsletterBlock />
     </>
-  );
-}
-
-function AllisonPortrait() {
-  const [src, setSrc] = useState<string>(ALLISON_PORTRAIT);
-  const [usedFallback, setUsedFallback] = useState<boolean>(false);
-
-  function handleError() {
-    if (!usedFallback && src !== ALLISON_PORTRAIT_FALLBACK) {
-      setSrc(ALLISON_PORTRAIT_FALLBACK);
-      setUsedFallback(true);
-    }
-  }
-
-  return (
-    <div className={styles.portraitWrap}>
-      {src ? (
-        <img
-          src={src}
-          alt="Allison Chen smiling in the kitchen"
-          className={styles.portraitImg}
-          onError={handleError}
-          referrerPolicy="no-referrer-when-downgrade"
-          crossOrigin="anonymous"
-          loading="lazy"
-        />
-      ) : (
-        <div className={styles.portraitPlaceholder} />
-      )}
-      <div className={styles.portraitOverlay} />
-    </div>
   );
 }

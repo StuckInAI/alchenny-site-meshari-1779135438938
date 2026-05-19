@@ -1,17 +1,21 @@
-import { Link } from 'react-router-dom';
 import styles from './SectionHeader.module.css';
-import type { SectionHeaderProps } from '@/types';
+import Divider from './Divider';
+import clsx from 'clsx';
 
-export default function SectionHeader({ eyebrow, title, linkTo, linkLabel }: SectionHeaderProps) {
+export type SectionHeaderProps = {
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  centered?: boolean;
+};
+
+export default function SectionHeader({ eyebrow, title, description, centered }: SectionHeaderProps) {
   return (
-    <div className={styles.header}>
-      <div className={styles.left}>
-        {eyebrow && <div className="eyebrow">{eyebrow}</div>}
-        <h2 className={styles.title}>{title}</h2>
-      </div>
-      {linkTo && linkLabel && (
-        <Link to={linkTo} className={styles.link}>{linkLabel}</Link>
-      )}
+    <div className={clsx(styles.header, centered && styles.centered)}>
+      {eyebrow && <div className="eyebrow">{eyebrow}</div>}
+      <Divider />
+      <h2 className={styles.title}>{title}</h2>
+      {description && <p className={styles.desc}>{description}</p>}
     </div>
   );
 }

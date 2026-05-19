@@ -1,61 +1,61 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './RecipeCard.module.css';
-import clsx from 'clsx';
-import type { Recipe } from '@/types';
+import FoodImage from './FoodImage';
+import type { Recipe } from '@/types/index';
 
 type RecipeCardProps = {
   recipe: Recipe;
-  featured?: boolean;
 };
 
-export default function RecipeCard({ recipe, featured = false }: RecipeCardProps) {
-  const [imgError, setImgError] = useState<boolean>(false);
-
+export default function RecipeCard({ recipe }: RecipeCardProps) {
+  const [imgError, setImgError] = useState(false);
   const showImage = !imgError && !!recipe.image;
 
   return (
-    <Link
-      to={`/recipes/${recipe.slug}`}
-      className={clsx(styles.card, featured && styles.featured)}
-    >
+    <Link to={`/recipes/${recipe.slug}`} className={styles.card}>
       <div className={styles.imageWrap}>
         {showImage ? (
           <img
+            className={styles.image}
             src={imgError ? (recipe.imageFallback ?? '') : (recipe.image ?? '')}
             alt={recipe.title}
-            className={styles.cardImg}
             onError={() => {
               if (!imgError && recipe.imageFallback) {
                 setImgError(true);
+              } else {
+                setImgError(true);
               }
             }}
-            referrerPolicy="no-referrer-when-downgrade"
-            crossOrigin="anonymous"
             loading="lazy"
           />
         ) : recipe.imageFallback ? (
           <img
+            className={styles.image}
             src={recipe.imageFallback}
             alt={recipe.title}
-            className={styles.cardImg}
             loading="lazy"
           />
         ) : (
-          <div className={clsx(styles.placeholder, recipe.tone && styles[`tone-${recipe.tone}`])} />
+          <FoodImage
+            tone={recipe.tone}
+            ratio="landscape"
+            alt={recipe.title}
+          />
         )}
       </div>
       <div className={styles.body}>
-        {recipe.category && (
-          <div className={styles.category}>{recipe.category}</div>
-        )}
-        <h3 className={styles.title}>{recipe.title}</h3>
-        {recipe.description && (
-          <p className={styles.desc}>{recipe.description}</p>
-        )}
         <div className={styles.meta}>
-          {recipe.time && <span>{recipe.time}</span>}
-          {recipe.difficulty && <span>{recipe.difficulty}</span>}
+          <span className={styles.category}>{recipe.category}</span>
+          <span className={styles.difficulty} data-level={recipe.difficulty.toLowerCase()}>
+            {recipe.difficulty}
+          </span>
+        </div>
+        <h3 className={styles.title}>{recipe.title}</h3>
+        <p className={styles.desc}>{recipe.description}</p>
+        <div className={styles.stats}>
+          <span>⏱ {recipe.time}</span>
+          <span>🍽 {recipe.servings} servings</span>
         </div>
       </div>
     </Link>
