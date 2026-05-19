@@ -1,100 +1,68 @@
-import React from 'react';
 import styles from './WorkWithMe.module.css';
 import PageHero from '@/components/PageHero';
 import BrandRow from '@/components/BrandRow';
-import NewsletterBlock from '@/components/NewsletterBlock';
 import Button from '@/components/Button';
-import useReveal from '@/hooks/useReveal';
-import clsx from 'clsx';
+import NewsletterBlock from '@/components/NewsletterBlock';
+import { useReveal } from '@/hooks/useReveal';
+
+const brands = [
+  'KitchenAid', 'Le Creuset', 'Valrhona', 'Nordic Ware',
+  'OXO', 'Staub', 'Bob\'s Red Mill', 'King Arthur Flour',
+];
 
 const services = [
   {
-    emoji: '📸',
-    title: 'Food Photography',
-    desc: 'High-end styled food photography for cookbooks, menus, packaging, and social campaigns. Natural light, editorial aesthetic.',
-    price: 'From $800 / half day',
-  },
-  {
-    emoji: '✍️',
     title: 'Recipe Development',
-    desc: 'Original, tested recipes developed to brief — for brands, publications, or product launches. Full write-up and headnote included.',
-    price: 'From $350 / recipe',
+    desc: 'Tested, refined recipes tailored to your brand voice, dietary needs, and production requirements.',
+    icon: '📋',
   },
   {
-    emoji: '🎬',
-    title: 'Video Content',
-    desc: 'Short-form recipe videos for Instagram Reels, TikTok, or YouTube. Scripting, filming, and light editing handled in-house.',
-    price: 'From $600 / video',
+    title: 'Food Photography',
+    desc: 'Natural-light food photography styled to match your brand — ideal for packaging, menus, and social media.',
+    icon: '📷',
   },
   {
-    emoji: '📣',
     title: 'Brand Partnerships',
-    desc: 'Long-form sponsored content, newsletter integrations, and product features — crafted to fit my audience, not interrupt it.',
-    price: 'Enquire for rates',
+    desc: 'Long-form and short-form sponsored content across Instagram, YouTube, and this site — 80k+ combined reach.',
+    icon: '🤝',
   },
   {
-    emoji: '🎓',
     title: 'Workshops & Events',
-    desc: 'Private and corporate baking workshops, pop-up masterclasses, and culinary event appearances.',
-    price: 'Enquire for rates',
+    desc: 'In-person and virtual baking workshops for brands, corporates, and private groups.',
+    icon: '🎓',
   },
-  {
-    emoji: '📖',
-    title: 'Writing & Editing',
-    desc: 'Food writing for magazines, brand copy, and cookbook editing. Precise, voice-led work that meets editorial standards.',
-    price: 'From $200 / 1000 words',
-  },
-];
-
-const brands = [
-  'Le Creuset', 'Valrhona', 'KitchenAid', 'Thermomix',
-  'Lurpak', 'Borough Market', 'Ottolenghi', 'Waitrose',
 ];
 
 const faqs = [
-  {
-    q: 'What is your typical turnaround time?',
-    a: 'Recipe development takes 1–2 weeks per recipe. Photography bookings are typically scheduled 3–4 weeks out. Video content takes 2–3 weeks from brief to delivery.',
-  },
-  {
-    q: 'Do you work with international brands?',
-    a: 'Absolutely. I work with clients across Europe, North America, and Australia. Remote briefings and digital delivery make collaboration seamless.',
-  },
-  {
-    q: 'Can I see a portfolio or media kit?',
-    a: 'Yes — email me at hello@alchenny.com and I will send over my full portfolio and media kit within 24 hours.',
-  },
-  {
-    q: 'Do you offer package deals?',
-    a: 'Yes. Combining recipe development with photography or video attracts a bundled rate. Get in touch to discuss your project scope.',
-  },
+  { q: 'What\'s your typical turnaround time?', a: 'Recipe development projects usually take 2–3 weeks from brief to delivery. Photography turnaround is 1–2 weeks after shoot day.' },
+  { q: 'Do you work with international brands?', a: 'Absolutely — the majority of my partnerships are remote. I ship or source locally where needed.' },
+  { q: 'Do you offer usage rights for content?', a: 'Yes. All packages include standard web/social usage. Extended or exclusive rights are available at an additional cost.' },
+  { q: 'What\'s the best way to get started?', a: 'Send me an email with a brief overview of your project and I\'ll respond within 48 hours to schedule a discovery call.' },
 ];
 
 export default function WorkWithMe() {
-  const [ref, visible] = useReveal();
+  const servicesRef = useReveal();
+  const brandsRef = useReveal();
+  const faqRef = useReveal();
 
   return (
-    <main ref={ref as React.RefObject<HTMLElement>}>
+    <>
       <PageHero
-        eyebrow="Work With Me"
-        title="Let's make something delicious"
-        description="Available for food photography, recipe development, video content, brand partnerships, and editorial work."
+        eyebrow="Collaborate"
+        title="Work With Me"
+        description="Recipe development, food photography, and brand partnerships — let's make something delicious together."
       />
 
       {/* Services */}
-      <section className={styles.servicesSection}>
+      <section ref={servicesRef as React.RefObject<HTMLElement>} className={styles.services}>
         <div className="container">
-          <div className={clsx('reveal', visible && 'is-visible')}>
-            <div className="eyebrow" style={{ textAlign: 'center', marginBottom: '1rem' }}>Services</div>
-            <h2 className={styles.sectionTitle}>What I offer</h2>
-          </div>
-          <div className={styles.servicesGrid}>
+          <div className="eyebrow" style={{ marginBottom: '2rem' }}>What I Offer</div>
+          <div className={styles.grid}>
             {services.map((s) => (
-              <div key={s.title} className={styles.serviceCard}>
-                <div className={styles.serviceEmoji}>{s.emoji}</div>
-                <h3 className={styles.serviceTitle}>{s.title}</h3>
-                <p className={styles.serviceDesc}>{s.desc}</p>
-                <div className={styles.servicePrice}>{s.price}</div>
+              <div key={s.title} className={styles.card}>
+                <span className={styles.icon}>{s.icon}</span>
+                <h3 className={styles.cardTitle}>{s.title}</h3>
+                <p className={styles.cardDesc}>{s.desc}</p>
               </div>
             ))}
           </div>
@@ -102,23 +70,25 @@ export default function WorkWithMe() {
       </section>
 
       {/* Brands */}
-      <section className={styles.brandsSection}>
+      <section ref={brandsRef as React.RefObject<HTMLElement>} className={styles.brandsSection}>
         <div className="container">
-          <div className="eyebrow" style={{ textAlign: 'center', marginBottom: '0.5rem' }}>Past collaborations</div>
+          <div className={styles.brandHeader}>
+            <div className="eyebrow">Trusted by</div>
+            <h2 className={styles.brandTitle}>Brands I've Worked With</h2>
+          </div>
           <BrandRow brands={brands} />
         </div>
       </section>
 
       {/* FAQ */}
-      <section className={styles.faqSection}>
+      <section ref={faqRef as React.RefObject<HTMLElement>} className={styles.faq}>
         <div className="container">
-          <div className="eyebrow" style={{ marginBottom: '1rem' }}>FAQ</div>
-          <h2 className={styles.sectionTitle}>Common questions</h2>
-          <div className={styles.faqList}>
-            {faqs.map((item) => (
-              <div key={item.q} className={styles.faqItem}>
-                <h3 className={styles.faqQ}>{item.q}</h3>
-                <p className={styles.faqA}>{item.a}</p>
+          <div className="eyebrow" style={{ marginBottom: '2rem' }}>FAQs</div>
+          <div className={styles.faqGrid}>
+            {faqs.map((f) => (
+              <div key={f.q} className={styles.faqItem}>
+                <h3 className={styles.faqQ}>{f.q}</h3>
+                <p className={styles.faqA}>{f.a}</p>
               </div>
             ))}
           </div>
@@ -126,20 +96,18 @@ export default function WorkWithMe() {
       </section>
 
       {/* CTA */}
-      <section className={styles.ctaSection}>
+      <section className={styles.cta}>
         <div className="container">
           <div className={styles.ctaInner}>
-            <div className="eyebrow" style={{ color: 'rgba(255,252,245,0.7)' }}>Get in touch</div>
+            <div className="eyebrow">Let's Talk</div>
             <h2 className={styles.ctaTitle}>Ready to collaborate?</h2>
-            <p className={styles.ctaSub}>Send me a brief and I'll respond within 48 hours with availability and rates.</p>
-            <Button as="link" to="mailto:hello@alchenny.com" variant="secondary">
-              hello@alchenny.com
-            </Button>
+            <p className={styles.ctaDesc}>Drop me an email and let's make something great together.</p>
+            <Button as="link" to="mailto:hello@alchenny.com" variant="primary">Get in Touch</Button>
           </div>
         </div>
       </section>
 
       <NewsletterBlock />
-    </main>
+    </>
   );
 }

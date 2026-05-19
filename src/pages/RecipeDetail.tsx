@@ -1,34 +1,24 @@
-import { useParams } from 'react-router-dom';
-import type { TipBox, RecipeSection } from '@/types';
-import recipeDetails from '@/lib/recipeDetails';
+import { useParams, Navigate } from 'react-router-dom';
+import { recipeDetails } from '@/lib/recipeDetails';
+import styles from './RecipeDetail.module.css';
 import PageHero from '@/components/PageHero';
 import FoodImage from '@/components/FoodImage';
-import styles from './RecipeDetail.module.css';
+import type { RecipeDetail as RecipeDetailType, TipBox } from '@/types/index';
 
 export default function RecipeDetail() {
   const { slug } = useParams<{ slug: string }>();
-  const recipe = slug ? recipeDetails[slug] : null;
+  const recipe: RecipeDetailType | undefined = recipeDetails.find((r) => r.slug === slug);
 
-  if (!recipe) {
-    return (
-      <main>
-        <PageHero title="Recipe not found" />
-        <div className="container" style={{ padding: '4rem 0' }}>
-          <p>Sorry, we couldn't find that recipe.</p>
-        </div>
-      </main>
-    );
-  }
+  if (!recipe) return <Navigate to="/recipes" replace />;
 
   return (
-    <main>
+    <>
       <PageHero
         eyebrow={recipe.category}
         title={recipe.title}
-        description={recipe.description}
       />
-      <div className="container">
-        <div className={styles.layout}>
+      <section className={styles.section}>
+        <div className={`container ${styles.layout}`}>
           <aside className={styles.sidebar}>
             <FoodImage tone={recipe.tone} ratio="square" alt={recipe.title} />
             <div className={styles.meta}>
@@ -38,30 +28,37 @@ export default function RecipeDetail() {
               <div className={styles.metaItem}><span>Difficulty</span><strong>{recipe.difficulty}</strong></div>
             </div>
           </aside>
-          <div className={styles.content}>
-            {recipe.sections.map((section: RecipeSection, i: number) => (
+          <article className={styles.content}>
+            {recipe.intro && <p className={styles.intro}>{recipe.intro}</p>}
+            {recipe.sections && recipe.sections.map((section, i) => (
               <div key={i} className={styles.section}>
                 <h2 className={styles.sectionHeading}>{section.heading}</h2>
-                <ul className={styles.list}>
-                  {section.items.map((item: string, j: number) => (
-                    <li key={j}>{item}</li>
-                  ))}
-                </ul>
+                {section.body && <p>{section.body}</p>}
+                {section.items && (
+                  <ul className={styles.list}>
+                    {section.items.map((item: string, j: number) => (
+                      <li key={j}>{item}</li>
+                    ))}
+                  </ul>
+                )}
               </div>
             ))}
-            {recipe.tips && (
-              <div className={styles.tipBox}>
-                <h3 className={styles.tipTitle}>{(recipe.tips as TipBox).title}</h3>
-                <ul className={styles.list}>
-                  {(recipe.tips as TipBox).tips.map((tip: string, i: number) => (
-                    <li key={i}>{tip}</li>
-                  ))}
-                </ul>
+            {recipe.tips && Array.isArray(recipe.tips) && recipe.tips.map((tip: TipBox, i: number) => (
+              <div key={i} className={styles.tipBox}>
+                <h3 className={styles.tipTitle}>{tip.title}</h3>
+                <p>{tip.body}</p>
+                {tip.tips && (
+                  <ul className={styles.list}>
+                    {tip.tips.map((t: string, j: number) => (
+                      <li key={j}>{t}</li>
+                    ))}
+                  </ul>
+                )}
               </div>
-            )}
-          </div>
+            ))}
+          </article>
         </div>
-      </div>
-    </main>
+      </section>
+    </>
   );
 }

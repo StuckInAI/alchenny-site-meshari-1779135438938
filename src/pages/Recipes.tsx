@@ -1,18 +1,18 @@
 import { useState } from 'react';
-import type { RecipeCategory } from '@/types';
-import { recipes } from '@/lib/data';
+import styles from './Recipes.module.css';
 import PageHero from '@/components/PageHero';
 import RecipeCard from '@/components/RecipeCard';
-import styles from './Recipes.module.css';
+import { recipes } from '@/lib/data';
+import type { RecipeCategory } from '@/types/index';
 
 const categories: { label: string; value: RecipeCategory | 'all' }[] = [
   { label: 'All', value: 'all' },
   { label: 'Pastry', value: 'pastry' },
   { label: 'Bread', value: 'bread' },
   { label: 'Cake', value: 'cake' },
-  { label: 'Tart', value: 'tart' },
-  { label: 'Cookie', value: 'cookie' },
+  { label: 'Cookies', value: 'cookies' },
   { label: 'Savory', value: 'savory' },
+  { label: 'Drinks', value: 'drinks' },
 ];
 
 export default function Recipes() {
@@ -20,19 +20,19 @@ export default function Recipes() {
   const filtered = active === 'all' ? recipes : recipes.filter((r) => r.category === active);
 
   return (
-    <main>
+    <>
       <PageHero
-        eyebrow="Recipes"
-        title="All recipes"
-        description="From beginner-friendly bakes to advanced pastry techniques."
+        eyebrow="Archive"
+        title="All Recipes"
+        description="From flaky laminated pastries to crusty sourdough — every recipe tested, refined, and worth your time."
       />
-      <section>
+      <section className={styles.section}>
         <div className="container">
           <div className={styles.filters}>
             {categories.map((c) => (
               <button
                 key={c.value}
-                className={`${styles.filterBtn} ${active === c.value ? styles.active : ''}`}
+                className={`${styles.filter} ${active === c.value ? styles.active : ''}`}
                 onClick={() => setActive(c.value)}
               >
                 {c.label}
@@ -46,6 +46,6 @@ export default function Recipes() {
           </div>
         </div>
       </section>
-    </main>
+    </>
   );
 }

@@ -1,142 +1,139 @@
-import type { RecipeDetail } from '@/types';
+import type { RecipeDetail } from '@/types/index';
 
-const recipeDetails: Record<string, RecipeDetail> = {
-  'classic-croissant': {
+export const recipeDetails: RecipeDetail[] = [
+  {
     slug: 'classic-croissant',
     title: 'Classic Croissant',
-    description: 'The perfect laminated dough croissant with 27 layers of buttery goodness.',
+    description: 'Buttery, flaky, golden — the croissant that started it all.',
     category: 'pastry',
     tone: 'caramel',
-    time: '3 hours',
-    difficulty: 'Advanced',
     featured: true,
-    prepTime: '45 min',
-    cookTime: '20 min',
+    prepTime: '3 hours',
+    cookTime: '20 minutes',
     servings: '8 croissants',
-    sections: [
-      {
-        heading: 'Ingredients — Détrempe (base dough)',
-        items: [
-          '500 g bread flour (plus extra for dusting)',
-          '10 g fine sea salt',
-          '80 g caster sugar',
-          '10 g instant yeast',
-          '300 ml whole milk (lukewarm)',
-          '40 g unsalted butter (softened)',
-        ],
-      },
-      {
-        heading: 'Ingredients — Beurrage (butter block)',
-        items: [
-          '280 g European-style unsalted butter (84%+ fat), cold',
-        ],
-      },
-      {
-        heading: 'Method',
-        items: [
-          'Combine flour, salt, sugar, and yeast. Add milk and softened butter; mix to a smooth dough. Do not over-knead.',
-          'Shape into a rectangle, wrap, and refrigerate overnight (12–16 h).',
-          'Pound cold butter into a 20 × 20 cm square between parchment sheets.',
-          'Enclose butter in dough and complete three double turns (book folds), chilling 30 min between each.',
-          'Roll dough to 4 mm thick. Cut triangles and roll into croissants.',
-          'Prove at 24–26 °C for 2–3 h until jiggly and visibly grown.',
-          'Brush with egg wash and bake at 200 °C for 16–20 min until deep mahogany.',
-        ],
-      },
-    ],
-    tips: {
-      title: 'Chef Tips',
-      tips: [
-        'Temperature is everything — butter should flex, not crack or smear.',
-        'A slow cold prove overnight develops far more flavour than a fast room-temp prove.',
-        'Under-proving is the #1 beginner mistake; look for wobble, not just size.',
-      ],
-    },
-  },
-  'pain-au-chocolat': {
-    slug: 'pain-au-chocolat',
-    title: 'Pain au Chocolat',
-    description: 'Flaky pastry wrapped around rich dark chocolate. A French bakery staple.',
-    category: 'pastry',
-    tone: 'mocha',
-    time: '3 hours',
     difficulty: 'Advanced',
-    featured: true,
-    prepTime: '45 min',
-    cookTime: '20 min',
-    servings: '10 pieces',
+    intro: 'The classic croissant is a labour of love — but the result is worth every fold.',
     sections: [
       {
         heading: 'Ingredients',
         items: [
-          '1 batch croissant dough (see Classic Croissant)',
-          '200 g dark chocolate batons (70% cocoa)',
-          '1 egg + 1 tbsp milk (egg wash)',
+          '500g strong white flour',
+          '10g salt',
+          '80g sugar',
+          '10g instant yeast',
+          '300ml cold whole milk',
+          '280g unsalted butter (for lamination)',
         ],
       },
       {
         heading: 'Method',
         items: [
-          'Roll laminated dough to 5 mm thick. Cut 10 × 15 cm rectangles.',
-          'Place one chocolate baton at the base of each rectangle. Roll up tightly.',
-          'Place seam-side down on lined trays.',
-          'Prove at 24–26 °C for 2–3 h until puffy.',
-          'Egg wash and bake at 200 °C for 16–18 min.',
+          'Combine flour, salt, sugar, and yeast in a bowl.',
+          'Add cold milk and mix to a shaggy dough.',
+          'Knead briefly and refrigerate overnight.',
+          'Flatten butter into a 20cm square.',
+          'Enclose butter in dough and perform 3 letter folds.',
+          'Shape, proof, and bake at 200°C for 18–20 minutes.',
         ],
       },
     ],
-    tips: {
-      title: 'Chef Tips',
-      tips: [
-        'Use chocolate batons rather than chips — they melt more evenly.',
-        'Two batons per pastry give a better chocolate-to-dough ratio.',
-      ],
-    },
+    tips: [
+      {
+        title: 'Baker\'s Tips',
+        body: 'Keep everything cold. Warm butter breaks through the dough and ruins the layers.',
+        tips: [
+          'Rest the dough in the fridge between folds.',
+          'Use a sharp knife or bench scraper for clean cuts.',
+        ],
+      },
+    ],
   },
-  'sourdough-boule': {
-    slug: 'sourdough-boule',
-    title: 'Sourdough Boule',
-    description: 'A rustic round loaf with a crisp crust and open, chewy crumb.',
+  {
+    slug: 'sourdough-loaf',
+    title: 'Sourdough Loaf',
+    description: 'A tangy, open-crumb sourdough baked in a Dutch oven.',
     category: 'bread',
-    tone: 'peach',
-    time: '24 hours',
-    difficulty: 'Intermediate',
+    tone: 'mocha',
     featured: true,
-    prepTime: '30 min active',
-    cookTime: '45 min',
-    servings: '1 large loaf',
+    prepTime: '24 hours',
+    cookTime: '45 minutes',
+    servings: '1 loaf',
+    difficulty: 'Intermediate',
+    intro: 'Good sourdough takes time — but the hands-on work is minimal.',
     sections: [
       {
         heading: 'Ingredients',
         items: [
-          '450 g bread flour',
-          '50 g whole-wheat flour',
-          '375 g water (75% hydration)',
-          '100 g active starter (100% hydration)',
-          '10 g fine sea salt',
+          '450g bread flour',
+          '50g whole wheat flour',
+          '375g water',
+          '100g active starter',
+          '10g salt',
         ],
       },
       {
         heading: 'Method',
         items: [
-          'Mix flour and water; autolyse 30–60 min.',
-          'Add starter and salt; incorporate by hand.',
-          'Bulk ferment at room temperature (4–6 h), performing stretch-and-folds every 30 min for the first 2 h.',
-          'Pre-shape, bench rest 20 min, final shape into a boule.',
-          'Retard in the fridge overnight (8–12 h).',
-          'Preheat oven with a Dutch oven to 250 °C. Score and bake covered 20 min, then uncovered 25 min at 230 °C.',
+          'Mix flour and water, autolyse 1 hour.',
+          'Add starter and salt, mix well.',
+          'Perform 4 sets of stretch and folds over 2 hours.',
+          'Bulk ferment at room temperature 4–5 hours.',
+          'Shape, place in banneton, cold proof overnight.',
+          'Bake in Dutch oven at 250°C: 20 min lid on, 25 min lid off.',
         ],
       },
     ],
-    tips: {
-      title: 'Chef Tips',
-      tips: [
-        'Your starter should pass the float test before use.',
-        'A cold retard gives a more sour, complex flavour.',
-        'Steam (trapped by Dutch oven lid) is essential for crust spring.',
-      ],
-    },
+    tips: [
+      {
+        title: 'Starter Tips',
+        body: 'Your starter should be bubbly and active — feed it 4–6 hours before use.',
+        tips: [
+          'Use the float test: a spoonful of starter should float in water.',
+          'Whole wheat flour gives a more complex flavour.',
+        ],
+      },
+    ],
   },
-};
-
-export default recipeDetails;
+  {
+    slug: 'brown-butter-cake',
+    title: 'Brown Butter Cake',
+    description: 'Nutty brown butter folded into a tender vanilla sponge.',
+    category: 'cake',
+    tone: 'peach',
+    featured: true,
+    prepTime: '25 minutes',
+    cookTime: '35 minutes',
+    servings: '8 slices',
+    difficulty: 'Easy',
+    intro: 'Brown butter transforms an ordinary sponge into something extraordinary.',
+    sections: [
+      {
+        heading: 'Ingredients',
+        items: [
+          '200g unsalted butter',
+          '200g caster sugar',
+          '3 large eggs',
+          '200g self-raising flour',
+          '1 tsp vanilla extract',
+          '2 tbsp whole milk',
+        ],
+      },
+      {
+        heading: 'Method',
+        items: [
+          'Brown butter in a saucepan until nutty and amber.',
+          'Cool completely, then beat with sugar.',
+          'Add eggs one at a time.',
+          'Fold in flour, vanilla, and milk.',
+          'Bake at 180°C for 30–35 minutes.',
+        ],
+      },
+    ],
+    tips: [
+      {
+        title: 'Pro Tips',
+        body: 'Don\'t rush the browning — the milk solids need to caramelise fully for maximum flavour.',
+      },
+    ],
+  },
+];
