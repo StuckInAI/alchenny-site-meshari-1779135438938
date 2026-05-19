@@ -17,7 +17,6 @@ const stats = [
   { icon: '📬', value: '14K+',  label: 'Substack Subscribers' },
 ];
 
-// Fallback portrait image using a public food/chef Unsplash photo
 const PORTRAIT_FALLBACK = 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80';
 
 export default function Home() {
@@ -97,7 +96,7 @@ export default function Home() {
         <div className="container">
           <div className={styles.aboutGrid}>
 
-            {/* Real photo — denim kitchen portrait */}
+            {/* Portrait photo */}
             <div className={`${styles.aboutImgWrap} reveal`}>
               <img
                 src={portraitError ? PORTRAIT_FALLBACK : ALLISON_PORTRAIT}

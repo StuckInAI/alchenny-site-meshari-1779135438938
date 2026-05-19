@@ -7,7 +7,6 @@ type RecipeCardProps = { recipe: Recipe };
 export default function RecipeCard({ recipe }: RecipeCardProps) {
   const [imgError, setImgError] = useState(false);
 
-  // Tone-based fallback colors
   const toneBg: Record<string, string> = {
     peach:     '#F9E4D4',
     caramel:   '#F2DDB3',
@@ -29,7 +28,10 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
 
   return (
     <article className={styles.card}>
-      <div className={styles.imageWrap} style={showImage ? {} : { background: bg }}>
+      <div
+        className={styles.imageWrap}
+        style={showImage ? {} : { background: bg }}
+      >
         {showImage ? (
           <img
             src={recipe.image}

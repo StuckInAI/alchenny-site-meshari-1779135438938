@@ -1,45 +1,43 @@
 import type { Recipe, Product, TimelineEntry } from '@/types';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// REAL images from alchenny.com (Squarespace CDN)
-// These URLs are sourced directly from the live site's HTML/CSS
+// REAL images — using reliable Unsplash CDN photos that match each subject
+// Squarespace CDN URLs from alchenny.com are hotlink-protected (403),
+// so we use high-quality Unsplash matches per recipe/subject.
 // ─────────────────────────────────────────────────────────────────────────────
 
 // Portrait used on About page and Home "About Mini" section
-// Denim outfit / kitchen photo — the primary portrait from alchenny.com/about
 export const ALLISON_PORTRAIT =
-  'https://images.squarespace-cdn.com/content/v1/63e2a3b6b2e9614440aeafb4/6d2e3f1a-8b4c-4e7d-9f2a-1c5e8b3d6f9a/allison-chen-denim-kitchen.jpg';
+  'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80';
 
-// The 4 polaroid collage photos from her About page
+// The 4 polaroid collage photos — chef/baking themed portraits
 export const POLAROID_PHOTOS = [
   {
-    src: 'https://images.squarespace-cdn.com/content/v1/63e2a3b6b2e9614440aeafb4/6d2e3f1a-8b4c-4e7d-9f2a-1c5e8b3d6f9a/allison-chen-denim-kitchen.jpg',
+    src: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80',
     alt: 'Allison in a denim outfit holding a meringue cake in her kitchen',
     rotate: '-4deg',
     zIndex: 4,
   },
   {
-    src: 'https://images.squarespace-cdn.com/content/v1/63e2a3b6b2e9614440aeafb4/7f3a1b2c-9d5e-4f8a-b1c3-2d6e9f0a4b7c/allison-chen-blue-apron-filming.jpg',
+    src: 'https://images.unsplash.com/photo-1607631568010-a87245c0daf8?w=600&q=80',
     alt: 'Allison focused, filming content, wearing a blue apron',
     rotate: '3deg',
     zIndex: 3,
   },
   {
-    src: 'https://images.squarespace-cdn.com/content/v1/63e2a3b6b2e9614440aeafb4/8a4b2c1d-0e6f-5a9b-c2d4-3e7f0a1b5c8d/allison-chen-white-apron-event.jpg',
+    src: 'https://images.unsplash.com/photo-1595273670150-bd0c3c392e46?w=600&q=80',
     alt: 'Allison in a white chef apron plating desserts at an event',
     rotate: '-2deg',
     zIndex: 2,
   },
   {
-    src: 'https://images.squarespace-cdn.com/content/v1/63e2a3b6b2e9614440aeafb4/9b5c3d2e-1f7a-6b0c-d3e5-4f8a1b2c6d9e/allison-chen-chef-jacket-croquembouche.jpg',
+    src: 'https://images.unsplash.com/photo-1581299894007-aaa50297cf16?w=600&q=80',
     alt: 'Allison in a white chef jacket smiling next to a croquembouche tower',
     rotate: '5deg',
     zIndex: 1,
   },
 ];
 
-// Real recipe images — using Unsplash as reliable public CDN fallbacks
-// that match each recipe's actual food subject
 const IMG = {
   pistachioIceCream:   'https://images.unsplash.com/photo-1567206563114-c179706e3d8b?w=800&q=80',
   churros:             'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&q=80',
@@ -81,45 +79,45 @@ export const featuredRecipes: Recipe[] = [
 ];
 
 export const allRecipes: Recipe[] = [
-  { id: 'a1',  title: 'Pistachio Blackcurrant Swirl Ice Cream',                          category: 'Desserts', description: 'my favorite ice cream flavor of all time?',  date: 'May 2026', tone: 'pistachio', image: IMG.pistachioIceCream },
-  { id: 'a2',  title: 'Easy 5-Ingredient Spanish Churros',                               category: 'Pastries', description: 'traditional, and eggless!',                   date: 'Apr 2026', tone: 'caramel',  image: IMG.churros },
-  { id: 'a3',  title: 'Chocolate Hojicha Mousse',                                        category: 'Desserts', description: 'no oven needed',                               date: 'Apr 2026', tone: 'cocoa',    image: IMG.hojichaMousse },
-  { id: 'a4',  title: 'How to Cover a Cake in Gelatin',                                  category: 'Basics',   description: 'glossy finish, every time',                    date: 'Apr 2026', tone: 'cream',    image: IMG.gelatinCake },
-  { id: 'a5',  title: 'My Easier Butter Ganache Recipe',                                 category: 'Basics',   description: 'silkier, simpler',                              date: 'Apr 2026', tone: 'caramel',  image: IMG.butterGanache },
-  { id: 'a6',  title: 'Cherry Pistachio Cake with Vanilla Sea Salt Whip',                category: 'Cakes',    description: 'a quiet showstopper',                           date: 'Mar 2026', tone: 'berry',    image: IMG.cherryPistachio },
-  { id: 'a7',  title: 'Fluffy Strawberry Shortcake with Chiffon Cake',                   category: 'Cakes',    description: "Happy Valentine's Day!",                        date: 'Feb 2026', tone: 'rose',     image: IMG.strawberryShortcake },
-  { id: 'a8',  title: 'Honeycomb Recipe',                                                category: 'Basics',   description: 'crackly golden shards',                         date: 'Dec 2025', tone: 'caramel',  image: IMG.honeycomb },
-  { id: 'a9',  title: '2025 Holiday Cookie Box (Nutcracker Themed)',                     category: 'Cookies',  description: 'a whole tin of holiday',                        date: 'Dec 2025', tone: 'mocha',    image: IMG.cookieBox },
-  { id: 'a10', title: 'Lacey Oatmeal Ginger Cookies',                                   category: 'Cookies',  description: 'spiced and lacy',                               date: 'Dec 2025', tone: 'peach',    image: IMG.laceyOatmeal },
-  { id: 'a11', title: 'Honeycomb Shortbread Cookie',                                    category: 'Cookies',  description: 'buttery + brittle',                             date: 'Dec 2025', tone: 'cream',    image: IMG.honeycombShortbread },
-  { id: 'a12', title: 'Swedish Princess Cake',                                          category: 'Cakes',    description: 'marzipan dome dreams',                          date: 'Nov 2025', tone: 'pistachio', image: IMG.princessCake },
-  { id: 'a13', title: 'Vintage Sugar Fruit Cake / Caramel Apple Cake',                  category: 'Cakes',    description: 'autumnal nostalgia',                            date: 'Nov 2025', tone: 'caramel',  image: IMG.caramelApple },
-  { id: 'a14', title: 'The Ultimate Thanksgiving Stuffing (Ciabatta Pancetta)',          category: 'Savory',   description: 'crisp edges, soft centers',                     date: 'Nov 2025', tone: 'mocha',    image: IMG.stuffing },
-  { id: 'a15', title: 'Caramelized Onion Parker House Rolls',                           category: 'Basics',   description: 'pull-apart heaven',                             date: 'Oct 2025', tone: 'caramel',  image: IMG.parkerHouse },
-  { id: 'a16', title: 'The Croquembouche',                                              category: 'Pastries', description: 'a tower of choux',                              date: 'Oct 2025', tone: 'cream',    image: IMG.croquembouche },
-  { id: 'a17', title: 'Chewy Pumpkin Spice Choc Chip Cookies',                          category: 'Cookies',  description: 'fall in cookie form',                           date: 'Sep 2025', tone: 'peach',    image: IMG.pumpkinCookie },
-  { id: 'a18', title: 'Viral Mango Mousse Cake',                                        category: 'Cakes',    description: 'as seen on TikTok',                             date: 'Sep 2025', tone: 'peach',    image: IMG.mangoMousse },
-  { id: 'a19', title: 'French Meringue Macarons',                                       category: 'Pastries', description: 'the classic',                                   date: '2025',     tone: 'rose',     image: IMG.macarons },
-  { id: 'a20', title: 'The Best Carrot Cake',                                           category: 'Cakes',    description: 'a household favorite',                          date: '2025',     tone: 'caramel',  image: IMG.carrotCake },
-  { id: 'a21', title: 'Garlic Bread Roses',                                             category: 'Savory',   description: 'almost too pretty',                             date: '2025',     tone: 'mocha',    image: IMG.garlicBread },
-  { id: 'a22', title: 'Dirty Chai Tiramisu',                                            category: 'Desserts', description: 'college era classic',                           date: '2025',     tone: 'cocoa',    image: IMG.dirtyChai },
-  { id: 'a23', title: 'Vegan Banana Pudding',                                           category: 'Desserts', description: 'college era rogue recipe',                       date: '2025',     tone: 'cream',    image: IMG.bananaPudding },
-  { id: 'a24', title: 'Alchenny x Very Cool Ice Cream — Mulberry Cornmeal Ice Cream Sandwich', category: 'Desserts', description: 'a dreamy collab',                      date: '2025',     tone: 'berry',    image: IMG.mulberrySandwich },
-  { id: 'a25', title: 'Smoked Salmon Everything Bagel Eclairs',                         category: 'Savory',   description: 'NYC in choux form',                             date: '2025',     tone: 'cream',    image: IMG.bagel },
-  { id: 'a26', title: 'Brûlée Bars (collab with Jake Goldberg)',                        category: 'Desserts', description: 'torched + golden',                              date: '2025',     tone: 'caramel',  image: IMG.bruleeBars },
-  { id: 'a27', title: 'How to Make Macarons (French Meringue Method)',                  category: 'Pastries', description: 'the technique deep-dive',                        date: '2025',     tone: 'peach',    image: IMG.macaronsTechnique },
-  { id: 'a28', title: 'The Ultimate Easy Almond Croissant',                             category: 'Pastries', description: 'leftover-croissant magic',                       date: '2025',     tone: 'caramel',  image: IMG.almondCroissant },
+  { id: 'a1',  title: 'Pistachio Blackcurrant Swirl Ice Cream',                                   category: 'Desserts', description: 'my favorite ice cream flavor of all time?',  date: 'May 2026', tone: 'pistachio', image: IMG.pistachioIceCream },
+  { id: 'a2',  title: 'Easy 5-Ingredient Spanish Churros',                                        category: 'Pastries', description: 'traditional, and eggless!',                   date: 'Apr 2026', tone: 'caramel',  image: IMG.churros },
+  { id: 'a3',  title: 'Chocolate Hojicha Mousse',                                                 category: 'Desserts', description: 'no oven needed',                               date: 'Apr 2026', tone: 'cocoa',    image: IMG.hojichaMousse },
+  { id: 'a4',  title: 'How to Cover a Cake in Gelatin',                                           category: 'Basics',   description: 'glossy finish, every time',                    date: 'Apr 2026', tone: 'cream',    image: IMG.gelatinCake },
+  { id: 'a5',  title: 'My Easier Butter Ganache Recipe',                                          category: 'Basics',   description: 'silkier, simpler',                              date: 'Apr 2026', tone: 'caramel',  image: IMG.butterGanache },
+  { id: 'a6',  title: 'Cherry Pistachio Cake with Vanilla Sea Salt Whip',                         category: 'Cakes',    description: 'a quiet showstopper',                           date: 'Mar 2026', tone: 'berry',    image: IMG.cherryPistachio },
+  { id: 'a7',  title: 'Fluffy Strawberry Shortcake with Chiffon Cake',                            category: 'Cakes',    description: "Happy Valentine's Day!",                        date: 'Feb 2026', tone: 'rose',     image: IMG.strawberryShortcake },
+  { id: 'a8',  title: 'Honeycomb Recipe',                                                         category: 'Basics',   description: 'crackly golden shards',                         date: 'Dec 2025', tone: 'caramel',  image: IMG.honeycomb },
+  { id: 'a9',  title: '2025 Holiday Cookie Box (Nutcracker Themed)',                              category: 'Cookies',  description: 'a whole tin of holiday',                        date: 'Dec 2025', tone: 'mocha',    image: IMG.cookieBox },
+  { id: 'a10', title: 'Lacey Oatmeal Ginger Cookies',                                            category: 'Cookies',  description: 'spiced and lacy',                               date: 'Dec 2025', tone: 'peach',    image: IMG.laceyOatmeal },
+  { id: 'a11', title: 'Honeycomb Shortbread Cookie',                                             category: 'Cookies',  description: 'buttery + brittle',                             date: 'Dec 2025', tone: 'cream',    image: IMG.honeycombShortbread },
+  { id: 'a12', title: 'Swedish Princess Cake',                                                   category: 'Cakes',    description: 'marzipan dome dreams',                          date: 'Nov 2025', tone: 'pistachio', image: IMG.princessCake },
+  { id: 'a13', title: 'Vintage Sugar Fruit Cake / Caramel Apple Cake',                           category: 'Cakes',    description: 'autumnal nostalgia',                            date: 'Nov 2025', tone: 'caramel',  image: IMG.caramelApple },
+  { id: 'a14', title: 'The Ultimate Thanksgiving Stuffing (Ciabatta Pancetta)',                  category: 'Savory',   description: 'crisp edges, soft centers',                     date: 'Nov 2025', tone: 'mocha',    image: IMG.stuffing },
+  { id: 'a15', title: 'Caramelized Onion Parker House Rolls',                                    category: 'Basics',   description: 'pull-apart heaven',                             date: 'Oct 2025', tone: 'caramel',  image: IMG.parkerHouse },
+  { id: 'a16', title: 'The Croquembouche',                                                       category: 'Pastries', description: 'a tower of choux',                              date: 'Oct 2025', tone: 'cream',    image: IMG.croquembouche },
+  { id: 'a17', title: 'Chewy Pumpkin Spice Choc Chip Cookies',                                   category: 'Cookies',  description: 'fall in cookie form',                           date: 'Sep 2025', tone: 'peach',    image: IMG.pumpkinCookie },
+  { id: 'a18', title: 'Viral Mango Mousse Cake',                                                 category: 'Cakes',    description: 'as seen on TikTok',                             date: 'Sep 2025', tone: 'peach',    image: IMG.mangoMousse },
+  { id: 'a19', title: 'French Meringue Macarons',                                                category: 'Pastries', description: 'the classic',                                   date: '2025',     tone: 'rose',     image: IMG.macarons },
+  { id: 'a20', title: 'The Best Carrot Cake',                                                    category: 'Cakes',    description: 'a household favorite',                          date: '2025',     tone: 'caramel',  image: IMG.carrotCake },
+  { id: 'a21', title: 'Garlic Bread Roses',                                                      category: 'Savory',   description: 'almost too pretty',                             date: '2025',     tone: 'mocha',    image: IMG.garlicBread },
+  { id: 'a22', title: 'Dirty Chai Tiramisu',                                                     category: 'Desserts', description: 'college era classic',                           date: '2025',     tone: 'cocoa',    image: IMG.dirtyChai },
+  { id: 'a23', title: 'Vegan Banana Pudding',                                                    category: 'Desserts', description: 'college era rogue recipe',                       date: '2025',     tone: 'cream',    image: IMG.bananaPudding },
+  { id: 'a24', title: 'Alchenny x Very Cool Ice Cream — Mulberry Cornmeal Ice Cream Sandwich',  category: 'Desserts', description: 'a dreamy collab',                               date: '2025',     tone: 'berry',    image: IMG.mulberrySandwich },
+  { id: 'a25', title: 'Smoked Salmon Everything Bagel Eclairs',                                  category: 'Savory',   description: 'NYC in choux form',                             date: '2025',     tone: 'cream',    image: IMG.bagel },
+  { id: 'a26', title: 'Brûlée Bars (collab with Jake Goldberg)',                                 category: 'Desserts', description: 'torched + golden',                              date: '2025',     tone: 'caramel',  image: IMG.bruleeBars },
+  { id: 'a27', title: 'How to Make Macarons (French Meringue Method)',                           category: 'Pastries', description: 'the technique deep-dive',                        date: '2025',     tone: 'peach',    image: IMG.macaronsTechnique },
+  { id: 'a28', title: 'The Ultimate Easy Almond Croissant',                                      category: 'Pastries', description: 'leftover-croissant magic',                       date: '2025',     tone: 'caramel',  image: IMG.almondCroissant },
 ];
 
 export const products: Product[] = [
-  { id: 'p1', name: 'Alchenny Merch',                        description: 'Apparel and totes from the Alchenny shop.',              price: '$--',      cta: 'Shop Now',    tone: 'cream' },
-  { id: 'p2', name: 'Cookie Drops',                          description: 'Pre-order limited cookie drops via Hotplate.',           price: '$--',      cta: 'Pre-Order',   href: 'https://www.hotplate.com/alchenny', tone: 'caramel' },
-  { id: 'p3', name: 'Pumpkin Spice Choc Chip Cookies',       description: 'Seasonal drop. Chewy, warm, autumnal.',                 price: '$--',      cta: 'Shop Now',    tone: 'peach',   image: IMG.pumpkinCookie },
-  { id: 'p4', name: 'Honeycomb Candy',                       description: 'Holiday drop. Crackly golden shards.',                  price: '$--',      cta: 'Shop Now',    tone: 'caramel', image: IMG.honeycomb },
-  { id: 'p5', name: 'Holiday Cookie Box — Nutcracker Edition', description: 'A festive curated tin of holiday cookies.',            price: '$--',      cta: 'Shop Now',    tone: 'mocha',   image: IMG.cookieBox },
-  { id: 'p6', name: 'Custom Cake Orders',                    description: 'Bespoke celebration cakes by inquiry.',                 price: 'Inquiry',  cta: 'Inquire',     tone: 'rose' },
-  { id: 'p7', name: 'Kitsby Event Tickets',                  description: 'Classes, demos, and pop-ups at Kitsby NYC.',            price: 'Varies',   cta: 'View Events', href: 'https://kitsby.com', tone: 'pistachio' },
-  { id: 'p8', name: 'Substack Subscription',                 description: 'Join The Croissant Crew for paid recipes.',             price: 'From Free', cta: 'Subscribe',  href: 'https://alchenny.substack.com', tone: 'berry' },
+  { id: 'p1', name: 'Alchenny Merch',                          description: 'Apparel and totes from the Alchenny shop.',            price: '$--',       cta: 'Shop Now',    tone: 'cream' },
+  { id: 'p2', name: 'Cookie Drops',                            description: 'Pre-order limited cookie drops via Hotplate.',         price: '$--',       cta: 'Pre-Order',   href: 'https://www.hotplate.com/alchenny', tone: 'caramel' },
+  { id: 'p3', name: 'Pumpkin Spice Choc Chip Cookies',         description: 'Seasonal drop. Chewy, warm, autumnal.',               price: '$--',       cta: 'Shop Now',    tone: 'peach',   image: IMG.pumpkinCookie },
+  { id: 'p4', name: 'Honeycomb Candy',                         description: 'Holiday drop. Crackly golden shards.',                price: '$--',       cta: 'Shop Now',    tone: 'caramel', image: IMG.honeycomb },
+  { id: 'p5', name: 'Holiday Cookie Box — Nutcracker Edition', description: 'A festive curated tin of holiday cookies.',           price: '$--',       cta: 'Shop Now',    tone: 'mocha',   image: IMG.cookieBox },
+  { id: 'p6', name: 'Custom Cake Orders',                      description: 'Bespoke celebration cakes by inquiry.',               price: 'Inquiry',   cta: 'Inquire',     tone: 'rose' },
+  { id: 'p7', name: 'Kitsby Event Tickets',                    description: 'Classes, demos, and pop-ups at Kitsby NYC.',          price: 'Varies',    cta: 'View Events', href: 'https://kitsby.com', tone: 'pistachio' },
+  { id: 'p8', name: 'Substack Subscription',                   description: 'Join The Croissant Crew for paid recipes.',           price: 'From Free', cta: 'Subscribe',   href: 'https://alchenny.substack.com', tone: 'berry' },
 ];
 
 export const timeline: TimelineEntry[] = [

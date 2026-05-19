@@ -23,8 +23,9 @@
 
 /* Collage column */
 .collageCol {
-  /* on mobile, full width above text */
   width: 100%;
+  /* Give enough room for the overlapping polaroids */
+  min-height: 360px;
 }
 @media (min-width: 880px) {
   .collageCol {
@@ -40,7 +41,7 @@
   gap: 0.85rem;
 }
 
-/* ── HEADING MATCHING HER REAL SITE ── */
+/* ── HEADING ── */
 .heroHeading {
   display: flex;
   flex-direction: column;
@@ -56,6 +57,7 @@
   letter-spacing: -0.025em;
   line-height: 1.05;
   font-style: normal;
+  display: block;
 }
 
 .heroLine2 {
@@ -66,6 +68,7 @@
   font-style: italic;
   line-height: 1.1;
   letter-spacing: 0.01em;
+  display: block;
 }
 
 .role {

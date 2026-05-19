@@ -2,6 +2,14 @@ import { useState } from 'react';
 import styles from './PolaroidCollage.module.css';
 import { POLAROID_PHOTOS } from '@/lib/data';
 
+// Reliable fallback food/chef Unsplash photos
+const FALLBACKS = [
+  'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80',
+  'https://images.unsplash.com/photo-1607631568010-a87245c0daf8?w=600&q=80',
+  'https://images.unsplash.com/photo-1595273670150-bd0c3c392e46?w=600&q=80',
+  'https://images.unsplash.com/photo-1581299894007-aaa50297cf16?w=600&q=80',
+];
+
 export default function PolaroidCollage() {
   return (
     <div className={styles.collage} aria-label="Photo collage of Allison Chen">
@@ -20,16 +28,7 @@ function PolaroidPhoto({
   index: number;
 }) {
   const [error, setError] = useState(false);
-
-  // Fallback portrait photos from Unsplash — food/chef themed
-  const fallbacks = [
-    'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80',
-    'https://images.unsplash.com/photo-1607631568010-a87245c0daf8?w=600&q=80',
-    'https://images.unsplash.com/photo-1595273670150-bd0c3c392e46?w=600&q=80',
-    'https://images.unsplash.com/photo-1581299894007-aaa50297cf16?w=600&q=80',
-  ];
-
-  const src = error ? fallbacks[index] : photo.src;
+  const src = error ? FALLBACKS[index] : photo.src;
 
   return (
     <div
@@ -46,9 +45,12 @@ function PolaroidPhoto({
           className={styles.photo}
           onError={() => setError(true)}
           loading="lazy"
+          crossOrigin="anonymous"
         />
       </div>
-      <div className={styles.caption}>{photo.alt.split(' ').slice(0, 5).join(' ')}…</div>
+      <div className={styles.caption}>
+        {photo.alt.split(' ').slice(0, 4).join(' ')}
+      </div>
     </div>
   );
 }
